@@ -25,3 +25,9 @@ These compact dummy-data exercises reproduce the chapters' key calculations. The
 Chapters 04 and 22 calculate probabilities with a fixed model after training. Training-period probabilities are not presented as OOS results available at that historical time. Leakage tests keep the model fixed and alter future observations, then verify that past features and filtering results remain unchanged.
 
 GitHub Actions installs dependencies on Python 3.12 and runs `python verify.py`. This command blocks Python socket connections while running the examples and tests. See `VALIDATION.json` for the recorded checks.
+
+## Current manuscript verification
+
+The revised Korean, English, and Japanese manuscripts each contain 34 marked blocks, including two copies of the shared HMM helper. All 34 blocks match the reviewed public source by AST. The 32 distinct chapter exercise scripts (excluding the appendix file-list guide) ran successfully for every edition: 96 script runs and 69 regression tests in total. Another seven isolated architecture checks per edition cover Kelly sizing, zero gates, CVaR tail mass, metadata, risk calculations, full-covariance filtering, and invalid order requests. Architecture excerpts are not standalone production applications. See `BOOK_VALIDATION.json`.
+
+The book now includes the optional repository URL, complete helper definitions, local MLflow verification, and corrected source-review behavior. Reading and running the printed exercises does not require downloading this repository.

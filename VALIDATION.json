@@ -26,16 +26,16 @@
     "gitleaks_version": "8.30.1",
     "gitleaks_findings": 0,
     "privacy_pattern_findings": 0,
-    "files_reviewed": 51,
+    "files_reviewed": 52,
     "scope": "allowlisted examples, documentation, requirements, tests and CI only"
   },
   "sha256": {
-    "REVIEW.md": "0f91d3490bc00f61daad6eb8a158dc71a48fa95ac2ae2b399f85c232f1d135bd",
-    "tests/test_review.py": "fb639017ad8a769283769773118522f50fee3d91e2e20c6f143d1ec1e890fa6e",
+    "BOOK_VALIDATION.json": "75b8341ac6a9d3c66102068d7f51d722294131c1638bfcf9ee1fb5f058974d5d",
     ".github/workflows/verify.yml": "2c30804b7c907b766e8833149ab209852f64a87f89bc032789cbb7298aaca7dd",
     ".gitignore": "233c505d739e92e844d121eeb725259218059be5cc22c1ff4c6849617f363528",
-    "BOOK_COVERAGE.md": "d482c78628a0ad69d126db8ae5bf9ba5fece9cf5458dd6a6baa904384c6c6017",
+    "BOOK_COVERAGE.md": "f74d4e2052ae3a12b96bfe76e87a3bdc645f4b2499310742d8a1be7dd04b2b55",
     "README.md": "47969d48cee008b4fcd422cea9ff51a8038379eae01d4571d306c63a718fc914",
+    "REVIEW.md": "6f089ac8486ae86712f3db2e53c1afcd9f4c37aa70e19de709ab2307faedd6c6",
     "ch00_practice.py": "b29a9ef6c3bec3b413c5084901b94f1d69dc7e95ca8de646ee7926cde4f1a84e",
     "ch01_pipeline.py": "3d95cc6bed9c90fcd3ea0a67f77717d7f325ec5304f2d5cdc54cb107333f7e38",
     "ch02_features.py": "efe73f534fc0504ec28f2f6eca95bf3813d76a9eaaf2c7eda8b2a074eacf72ad",
@@ -78,6 +78,7 @@
     "run.py": "b43d881b6f5e79c4d783a5006bf3133ee70f4a59a8e29163043fb7f07e7d8f79",
     "tests/offline/sitecustomize.py": "856cd0b4bdf958531a797a2dc63688565d844f3a4b25285e4cd3183d8f635224",
     "tests/test_examples.py": "f03f9e6c1ef092137004c5e7455cd862edcbbcc4eea6a1ab4dfc83475a06574c",
+    "tests/test_review.py": "fb639017ad8a769283769773118522f50fee3d91e2e20c6f143d1ec1e890fa6e",
     "tiny_env.py": "ab88addb0b462ed0ae50db631966b96fb4bf502c3eb2598d6034f9511068bdb5",
     "verify.py": "17e78cada4ab36d8b009d7a7f5da4df9409f5e6cffbc829da4c8c00a078c29b5"
   },

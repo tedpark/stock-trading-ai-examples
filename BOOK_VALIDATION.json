@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-12",
+  "source_commit": "3acabfe0c47deb710edc5ad3df0aad0fd01530d6",
+  "editions": [
+    {
+      "language": "ko",
+      "python_blocks_parsed": 107,
+      "runnable_blocks": 34,
+      "unique_scripts_run": 32,
+      "regression_tests": 23,
+      "tests_exit_code": 0,
+      "repository_ast_matches": 34
+    },
+    {
+      "language": "en",
+      "python_blocks_parsed": 107,
+      "runnable_blocks": 34,
+      "unique_scripts_run": 32,
+      "regression_tests": 23,
+      "tests_exit_code": 0,
+      "repository_ast_matches": 34
+    },
+    {
+      "language": "ja",
+      "python_blocks_parsed": 107,
+      "runnable_blocks": 34,
+      "unique_scripts_run": 32,
+      "regression_tests": 23,
+      "tests_exit_code": 0,
+      "repository_ast_matches": 34
+    }
+  ],
+  "architecture_checks_per_edition": 7,
+  "notes": "Runnable code was extracted from each manuscript into temporary files, compared by AST with this source revision, and executed with Python socket connections blocked. Regression tests ran against extracted code. Selected architecture calculations were tested in isolation with dummy collaborators; broker/server excerpts were not executed live. Book manuscripts and PDFs are not included here."
+}
