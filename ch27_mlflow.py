@@ -1,0 +1,25 @@
+"""27장 학습 예제 — 더미 데이터 전용. 원문: 27-mlflow-serving.md"""
+import mlflow
+
+from pathlib import Path
+from tempfile import TemporaryDirectory
+
+# 로컬 임시 SQLite와 artifact만 사용. 서버/계정이 필요하지 않다.
+workspace = TemporaryDirectory(prefix="book-mlflow-")
+base = Path(workspace.name)
+mlflow.set_tracking_uri("sqlite:///" + str(base / "tracking.db"))
+experiment_id = mlflow.create_experiment(
+    "book-example", artifact_location=(base / "artifacts").as_uri())
+mlflow.set_experiment("book-example")
+with mlflow.start_run() as run:
+    mlflow.log_param("fee_bps", 10)
+    mlflow.log_metric("mdd", 0.2)
+    mlflow.log_dict({"prices": [100, 80, 100]}, "input.json")
+    print("run_id", run.info.run_id)
+
+record = mlflow.get_run(run.info.run_id)
+assert record.data.params['fee_bps'] == '10'
+assert record.data.metrics['mdd'] == 0.2
+assert mlflow.MlflowClient().list_artifacts(run.info.run_id)[0].path == 'input.json'
+print("local parameter / metric / artifact checks passed")
+workspace.cleanup()

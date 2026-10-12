@@ -1,0 +1,42 @@
+"""01장 학습 예제 — 더미 데이터 전용. 원문: 01-architecture.md"""
+from math import isfinite
+
+
+def backtest(prices, targets, fee_bps=10):
+    if len(prices) != len(targets) + 1:
+        raise ValueError("one target per price interval required")
+    if any(not isfinite(p) or p <= 0 for p in prices):
+        raise ValueError("positive finite prices required")
+    if not 0 <= fee_bps < 10000:
+        raise ValueError("invalid fee")
+    equity, position, curve, fills = 1000.0, 0, [1000.0], 0
+    fee = fee_bps / 10000
+    for t, target in enumerate(targets):
+        if target not in (0, 1):
+            raise ValueError("long-only targets must be 0 or 1")
+        turnover = abs(target - position)
+        equity *= 1 - turnover * fee
+        equity *= 1 + target * (prices[t + 1] / prices[t] - 1)
+        fills += turnover
+        position = target
+        curve.append(equity)
+    if position:
+        equity *= 1 - fee
+        curve[-1] = equity
+        fills += 1
+    peak, mdd = curve[0], 0.0
+    for value in curve:
+        peak = max(peak, value)
+        mdd = max(mdd, 1 - value / peak)
+    return round(equity, 2), round(mdd, 4), fills
+
+
+prices = [100, 100, 80, 100]
+strategies = {
+    "hold": [1, 1, 1],
+    "cash": [0, 0, 0],
+}
+print(list(strategies))
+for name, targets in strategies.items():
+    print(name, backtest(prices, targets))
+assert backtest(prices, strategies["hold"], 0) == (1000.0, 0.2, 2)

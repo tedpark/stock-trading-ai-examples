@@ -1,0 +1,82 @@
+{
+  "verified_at": "2026-10-12T00:20:15.697490+00:00",
+  "python": "3.12.7",
+  "installation": "new virtual environment; requirements-full.txt; dependency check passed",
+  "example_scripts": 33,
+  "additional_tests": 12,
+  "checks": [
+    {
+      "command": "python verify.py",
+      "exit_code": 0
+    }
+  ],
+  "network": "Python socket outbound connections blocked while running examples and tests",
+  "book_comparison": {
+    "editions": [
+      "ko",
+      "en",
+      "ja"
+    ],
+    "marked_examples": 72,
+    "unchanged_ast_statements": 69,
+    "local_mlflow_adaptations": 3,
+    "notes": "See BOOK_COVERAGE.md for unmarked examples and simplifications."
+  },
+  "publication_audit": {
+    "gitleaks_version": "8.30.1",
+    "gitleaks_findings": 0,
+    "privacy_pattern_findings": 0,
+    "files_reviewed": 48,
+    "scope": "allowlisted examples, documentation, requirements, tests and CI only"
+  },
+  "sha256": {
+    ".github/workflows/verify.yml": "2c30804b7c907b766e8833149ab209852f64a87f89bc032789cbb7298aaca7dd",
+    ".gitignore": "233c505d739e92e844d121eeb725259218059be5cc22c1ff4c6849617f363528",
+    "BOOK_COVERAGE.md": "9f744b8050493d744de72562d0b7d58770c0d352eedd4e14a98e90bf35086bfe",
+    "README.md": "e2a7b22eb1ed4b3f4c481a216b8bc26bd557e8537547deee33a7087460148e08",
+    "ch00_practice.py": "f16ea26311a9bdac2fdb3932bcfcbb681ec5209bd3d213da9c852ad61829a791",
+    "ch01_pipeline.py": "0a403f9f12d04669c7b01e0b8ddca97053183c54470a5cb229a37e1006f1db4a",
+    "ch02_features.py": "61ac7b1f12b2f833258b12dcfab3fef08760cf5b800fad1a50ebb5f6b10fe858",
+    "ch03_dsr.py": "1f84be6a2fc45dd92a767c34cc5bbfd80aa5d407f463e9253e00eb25ec2effbf",
+    "ch03_metrics.py": "fdc50fad40dcea4e7e3f9a2c7bea521559b3f1d84f0ff951593e986e2c555d97",
+    "ch03_practice.py": "bf52cf630dcce09e1da9b9bed356d8950721b2b742d6e134c17a26a280e90d09",
+    "ch04_hmm.py": "4923e27db3e55ff96a3d83aa02ece9d1b4c2d58c2e858d61a15770429d3d56af",
+    "ch05_forward.py": "e4df1fc59b6e578d437f746f1375cb1fd196a9da66e8ccc1958a4c514c651589",
+    "ch06_kalman.py": "34246c2b4a00454bf9e515ca0cbd91f06e43cc839f833724263016d21b1688f4",
+    "ch07_practice.py": "e0928b3cefe00d8341dc21553e0a64dafab636b2f6062f1641ede53602c61c27",
+    "ch08_ensemble.py": "01525ca2b8851f6019e87d0048ff09e2d7b2d6808b17eaffec93d70082e0d684",
+    "ch09_kelly.py": "a8deefc2433e7a8ed4a0caba929fe9b2c0eb9266b746e004ecfd792c11dc1b13",
+    "ch10_optuna.py": "5f44c15f69a2bfb679982c34fb1ac44efd874af9c8cd23ab4742be3149d45099",
+    "ch11_practice.py": "a2f6361457f9d2ee87f4f8aafbb82ea976733d53bf68ca5edb431ba76732c854",
+    "ch12_practice.py": "0587cc219959bed4b37750412e4b3f2757c0700d9088fb855de8644d55a780bc",
+    "ch13_env.py": "d3d6fb458e720b2fae5e19fc099696b099298afa0fc804053c58fdedf0695062",
+    "ch14_sac.py": "fa9892c9301f6a5445c8ee0ee3547c962896cca5681c8cf6ee33da7fe323b2c5",
+    "ch15_optuna.py": "a39cb6d6cf5ff3bf2be7d0c7d3dda890201a337c70a363107302e2b30f1efba5",
+    "ch16_metrics.py": "3ab5c4d8371bd08e110a092184c38ad66d0716ee7184bd0b0438db0e19e33ee6",
+    "ch17_order_events.py": "a0471f3e53c965c5c56d6ec310e5b4b1ceb3a9a5b3860cc00766f8c5fb5b1355",
+    "ch18_lab.py": "08842106eb04b1beaf05fcd0f718cda05d2418daa44e6090a7f6a1442926226c",
+    "ch18_monitor.py": "f44e9177ef099bebe781f81b25e5edd0de0005cc42e2e3e76571f427bdeb7d47",
+    "ch19_cointegration.py": "b63659fbb5afb326509bc1eeea79d5d33b6630ddfab53be9c8c64b5b6e36d1ca",
+    "ch20_regime_events.py": "475d4de96f697cb49f25f777083a0c77106c31c4e1e01c888e1ff1eaefe9d737",
+    "ch20_screening.py": "bba6fef6357f51d1be8d6c198767f5831466f1beb115595f0ecf463efd27c7ac",
+    "ch21_regime_zscore.py": "8a3dcc18e6df51b983820b7ae8c7d0ff70467108fc9642710bbe4a2e3bd64dd1",
+    "ch22_pipeline.py": "c66e7fe67c33170983a17e365317c5497857d5b05be9a8035c0c79acee4cb401",
+    "ch23_sac.py": "22baf827200787418813209541d5163c23141519690a41402e9d2979c8daf738",
+    "ch24_validation.py": "3a60691a2c5e7d858422ba472534aed880bf35969937ad8e4a5187abea675ce1",
+    "ch25_per.py": "8b1a3568f05585a1286c15cf7b5c8a5181830ea935dac47872038486d1c4fb88",
+    "ch26_quantile_cvar.py": "6e4b44a3fd3e4a6e4aa1d5628eb4b303bca5bd751d954d221ab932f516728d48",
+    "ch27_mlflow.py": "0a870c237610ddffe8294b1cc0a0385ce81bb540e78db88604d061c8ffc7b617",
+    "ch28_guide.py": "14a0e15765c76aee85b8954af3d7dd47aae16f8e588643d8c01087e5559ed191",
+    "hmm_demo.py": "27b92dc36ed00c5ac1d4c895aed863ca2bad291040a81aa7923b7738ddecc956",
+    "manifest.json": "e710fc83e0373889ae2e9735713a6c24c288a722fba61c022f1b27de573ee461",
+    "monitor_example.py": "f5730cbaf0dc6d0852dc22d42355375a648997d6f0759f817b0f38469a3c1dea",
+    "requirements-full.txt": "6103e13621c406f2f8f98688d1f98163e40da085628e09dd8bfbe3d2be355ff3",
+    "requirements-lock.txt": "90b141f5a5eb75bc0c8257a0ef96bd905f551fb6f4c9a7898724722ee8db23a8",
+    "requirements.txt": "786461cb090cb0c1fdb360deeba8b9752dd2a6f62094b9aef1ec1154c5f32823",
+    "run.py": "ca3cfe6508565baa7c9df8a28b6b9c99e1356fd6fd6f9eb0911511bb1ae2b270",
+    "tests/offline/sitecustomize.py": "c086226e28c54245c07c93d7b1782c3435eea0b072a368a95369f93afb9a324e",
+    "tests/test_examples.py": "07607c0aec7ab4927a19691e321565f1534586afb20cba6e7bd4fcc5d6611f4c",
+    "tiny_env.py": "bb38f7cca3a1587aca6460626774ba5f2cb733c8edc77ef58ff10eb0560d1f39",
+    "verify.py": "cbf829d3a1b5918b497e5378c835c71d9c1329ac99cc1efe3143482fb5adabc5"
+  }
+}

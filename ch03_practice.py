@@ -1,0 +1,90 @@
+"""03장 학습 예제 — 더미 데이터 전용. 원문: 03-backtest-engine.md"""
+import math
+
+def simulate(
+    bars, targets, initial=1000.0, fee_bps=0.0, slippage_bps=0.0
+):
+    """Fill targets[t], known after close[t], at open[t+1].
+
+    Use fixed unit size.
+
+    cash is currency; quantity is signed units; equity = cash + quantity*close.
+    Omit financing, margin, taxes, dividends and market impact.
+    """
+    if len(bars) != len(targets) or not bars:
+        raise ValueError("Provide one target per nonempty bar sequence")
+    if not math.isfinite(initial) or initial <= 0:
+        raise ValueError("initial must be positive and finite")
+    if any(
+        not math.isfinite(x) or x < 0 or x >= 10000
+        for x in (fee_bps, slippage_bps)
+    ):
+        raise ValueError(
+            "costs must be finite and between 0 and 10000 bps"
+        )
+    if any(t not in (-1, 0, 1) for t in targets):
+        raise ValueError("target must be -1, 0 or 1")
+    if any(
+        not math.isfinite(b[k]) or b[k] <= 0
+        for b in bars
+        for k in ("open", "close")
+    ):
+        raise ValueError("prices must be positive and finite")
+    cash, quantity = initial, 0.0
+    unit = initial / bars[0]["open"]
+    equity, pnl, fills = [initial], [], []
+
+    def trade(delta, price, index, reason):
+        nonlocal cash, quantity
+        execution = price * (
+            1 + math.copysign(slippage_bps / 10000, delta)
+        )
+        fee = abs(delta) * execution * fee_bps / 10000
+        cash -= delta * execution + fee
+        quantity += delta
+        fills.append(
+            {
+                "bar": index,
+                "quantity": delta,
+                "price": execution,
+                "fee": fee,
+                "reason": reason,
+            }
+        )
+
+    for i, bar in enumerate(bars):
+        desired = targets[i - 1] * unit if i else 0.0
+        delta = desired - quantity
+        if delta:
+            trade(delta, bar["open"], i, "previous_close_target")
+        # Liquidate before recording the last equity sample.
+        # Include the final fill cost.
+        if i == len(bars) - 1 and quantity:
+            trade(-quantity, bar["close"], i, "final_liquidation")
+        current = cash + quantity * bar["close"]
+        pnl.append(current - equity[-1])
+        equity.append(current)
+    peak, mdd = initial, 0.0
+    for value in equity:
+        peak = max(peak, value)
+        mdd = max(mdd, (peak - value) / peak)
+    assert math.isclose(initial + sum(pnl), equity[-1], abs_tol=1e-8)
+    return {
+        "equity": equity,
+        "bar_pnl": pnl,
+        "final_equity": equity[-1],
+        "return": equity[-1] / initial - 1,
+        "mdd": mdd,
+        "fills": fills,
+        "fees": sum(f["fee"] for f in fills),
+    }
+
+bars = [
+    {"open": 100.0, "close": 100.0},
+    {"open": 100.0, "close": 80.0},
+    {"open": 80.0, "close": 100.0},
+]
+result = simulate(bars, [1, 1, 0])
+assert result["equity"] == [1000.0, 1000.0, 800.0, 1000.0]
+assert math.isclose(result["mdd"], 0.2)
+print(result["final_equity"], result["mdd"])  # 1000.0 0.2

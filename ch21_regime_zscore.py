@@ -1,0 +1,34 @@
+"""21장 보완 실습: 더미 레짐 확률로 진입·청산·손절 순서를 확인한다."""
+import numpy as np
+
+
+def decide(z, probabilities, position=0.0):
+    p = np.asarray(probabilities, dtype=float)
+    if (p.shape != (3,) or not np.isfinite(p).all() or (p < 0).any()
+            or not np.isclose(p.sum(), 1) or not np.isfinite([z, position]).all()
+            or abs(position) > 1):
+        raise ValueError('finite z/position and three normalized probabilities required')
+    entry = float(p @ [1.5, 9.9, 3.0])
+    exit_z = float(p @ [0.3, 0.3, 0.5])
+    stop = float(p @ [3.0, 9.9, 4.5])
+    if position:
+        if -np.sign(position) * z >= stop:
+            return 0.0, 'stop'
+        if np.sign(position) * z >= -exit_z:
+            return 0.0, 'exit'
+        return position, 'hold'
+    # 기본 정책: 전환/고변동이 우세하거나 저변동 확신이 약하면 신규 진입 금지.
+    if p.argmax() != 0 or p[0] < 0.7:
+        return 0.0, 'regime blocked'
+    if abs(z) >= entry:
+        return float(-np.sign(z) * p[0]), 'enter'
+    return 0.0, 'wait'
+
+
+if __name__ == '__main__':
+    for p in ([1, 0, 0], [0, 1, 0], [0, 0, 1], [0.85, 0.12, 0.03]):
+        print('z=1.8', p, decide(1.8, p))
+    position = 0.0
+    for z in [-1.8, -2.2, -0.2, 1.8, 3.2]:
+        position, reason = decide(z, [1, 0, 0], position)
+        print(f'z={z:4.1f} target={position:4.1f} reason={reason}')
