@@ -1,4 +1,4 @@
-# Stock Trading AI — Chapter-by-Chapter Dummy Data Examples
+# Implementing AI Quant Trading with Python — Dummy Data Examples
 
 This repository contains **33 runnable scripts** covering the quick start in Chapter 00 through Chapter 27, plus a learning guide in Chapter 28. They follow the concepts shared by the Korean, English, and Japanese editions of the book. All repository documentation, code comments, docstrings, and program messages are in English.
 
@@ -84,12 +84,12 @@ The examples demonstrate each chapter's calculations and workflow in a compact f
 
 ## 4. Modeling assumptions
 
-- In Chapters 04 and 22, the HMM and scaler are fitted on the first 60% of the feature rows. Forward filtering uses only observations available up to each point. Labeling states by variance does not establish that a state is mean-reverting.
+- In Chapters 04 and 22, the HMM and scaler are fitted on the first 60% of the feature rows. Forward filtering uses only observations available up to each point. State ordering uses total variance across standardized features, not return volatility alone. This ranking does not establish that a state is mean-reverting.
 - Chapter 22 decides the position using the close at time t and applies it to the return from t to t+1. This simplified close-fill model charges 0.1% on position changes and includes final liquidation costs. It does not model actual execution, order books, or slippage.
-- Chapter 21 uses **dummy probabilities** without an external HMM to isolate the decision rules. It blocks new entries when transition or high volatility dominates and checks stops first for existing positions.
+- Chapter 21 uses **dummy probabilities** without an external HMM to isolate the decision rules. It blocks new entries when transition or high volatility dominates checks stops first for existing positions, and rejects new entries at or beyond the stop threshold.
 - Chapter 17 changes only in-memory simulated order state. Chapter 18 uses FastAPI TestClient without opening a server port.
 - Chapter 27 writes to temporary local SQLite and artifact storage, verifies the logged data, then cleans up. No separate MLflow server is needed.
-- Chapter 25 demonstrates PER calculations; Chapter 26 demonstrates CVaR calculations. Neither implements an entire custom RL algorithm.
+- Chapter 25 demonstrates PER calculations; Chapter 26 demonstrates CVaR calculations with fractional boundary-bin weights so the requested tail probability is preserved. Neither implements an entire custom RL algorithm.
 
 ## 5. Verification and practice
 
@@ -97,7 +97,7 @@ Assertions check expected results in the calculation examples. Full execution an
 
 Start by changing one price or fee and observing the result. If an assertion with a fixed expected value fails, calculate the new result by hand before updating the expectation. Keep experiments small, and avoid choosing synthetic data just to improve reported performance.
 
-See `VALIDATION.json` for the verification environment and results. `requirements-lock.txt` records the complete verified environment; use the core/full requirement files above for normal installation. Third-party deprecation warnings may appear depending on your environment.
+See [REVIEW.md](REVIEW.md) for numerical fixes, input checks, and comment clarifications from the latest review. See `VALIDATION.json` for the verification environment and results. `requirements-lock.txt` records the complete verified environment; use the core/full requirement files above for normal installation. Third-party deprecation warnings may appear depending on your environment.
 
 ## Public repository
 

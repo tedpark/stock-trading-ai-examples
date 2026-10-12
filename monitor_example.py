@@ -1,9 +1,12 @@
 import json
-from math import ceil, isfinite, sqrt
+from math import isfinite, sqrt
 from statistics import mean, stdev
 
 
 def monitor(pnl, starting_equity=1000.0, mdd_limit=0.08):
+    """Convert daily currency P&L to returns on the previous equity balance."""
+    if not isfinite(mdd_limit) or not 0 <= mdd_limit <= 1:
+        raise ValueError("drawdown limit must be between zero and one")
     if (not pnl or not isfinite(starting_equity)
             or starting_equity <= 0
             or any(not isfinite(x) for x in pnl)):

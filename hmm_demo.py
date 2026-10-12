@@ -31,6 +31,8 @@ def fit_model(x, train_len):
     model = GaussianHMM(n_components=3, covariance_type='full',
                         n_iter=100, random_state=42, min_covar=0.001)
     model.fit(scaler.transform(x[:train_len]))
+    # Match the book: rank total variance across standardized features.
+    # This is not a ranking of return volatility alone or proof of mean reversion.
     order = np.argsort([np.trace(cov) for cov in model.covars_])
     return model, scaler, order
 

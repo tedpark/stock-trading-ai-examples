@@ -1,6 +1,11 @@
 """Chapter 06 learning example; dummy data only. Source: 06-kalman-filter.md"""
+from math import isfinite
+
+
 def filter_prices(prices, q=0.01, r=1.0):
-    if not prices or q < 0 or r <= 0:
+    """Scalar random-walk filter; q/r are process/measurement variances."""
+    if (not prices or not all(isfinite(x) for x in [q, r, *prices])
+            or q < 0 or r <= 0):
         raise ValueError("nonempty prices, q >= 0 and r > 0 required")
     estimate, variance = float(prices[0]), 1.0
     result = []

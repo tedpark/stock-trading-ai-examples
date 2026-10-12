@@ -3,6 +3,11 @@ import numpy as np
 
 
 def decide(z, probabilities, position=0.0):
+    """Use [low-variance, transition, high-variance] dummy probabilities.
+
+    Positive positions are long the spread; negative positions are short.
+    Return a target exposure and the reason, without simulating execution.
+    """
     p = np.asarray(probabilities, dtype=float)
     if (p.shape != (3,) or not np.isfinite(p).all() or (p < 0).any()
             or not np.isclose(p.sum(), 1) or not np.isfinite([z, position]).all()
@@ -20,6 +25,9 @@ def decide(z, probabilities, position=0.0):
     # Block new entries if transition/high volatility dominates or low-volatility confidence is weak.
     if p.argmax() != 0 or p[0] < 0.7:
         return 0.0, 'regime blocked'
+    # Do not open a trade that would immediately violate its stop threshold.
+    if abs(z) >= stop:
+        return 0.0, 'entry beyond stop'
     if abs(z) >= entry:
         return float(-np.sign(z) * p[0]), 'enter'
     return 0.0, 'wait'

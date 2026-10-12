@@ -30,7 +30,7 @@ assert features.shape == (25, 4)
 assert np.allclose(features[20], [0.0, 0.0, 0.0, 1.0])
 assert np.isfinite(features).all(axis=1).sum() == 5
 
-# Append to the compute_daily_features definition printed above.
+# Fit scaling statistics on training rows, then reuse them unchanged for OOS rows.
 close = 100 * np.exp(np.arange(60) * 0.001)
 volume = np.full(60, 10.0)
 features = compute_daily_features(close, volume)

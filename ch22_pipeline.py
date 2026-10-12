@@ -17,6 +17,8 @@ for t in range(split, len(x) - 1):
     p, z = probabilities[t], zscore[t]
     regime = p.argmax()
     target = 0.0
+    # State ranks refer to total standardized-feature variance (see fit_model).
+    # Mean reversion/momentum are illustrative rules, not inferred state facts.
     if np.isfinite(z) and p.max() >= 0.65:
         if regime == 0 and abs(z) > 1.5:
             target = -np.sign(z)

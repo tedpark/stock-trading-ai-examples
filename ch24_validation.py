@@ -3,6 +3,9 @@ from math import isfinite
 
 
 def validate(timestamp, probabilities, previous=None):
+    """Accept finite numeric timestamps; rejection never advances the watermark."""
+    if not isfinite(timestamp) or (previous is not None and not isfinite(previous)):
+        return "invalid_timestamp", previous
     if previous is not None and timestamp <= previous:
         return "duplicate_or_old", previous
     if (len(probabilities) != 3

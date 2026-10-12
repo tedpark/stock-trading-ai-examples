@@ -1,4 +1,5 @@
 """Chapter 27 learning example; dummy data only. Source: 27-mlflow-serving.md"""
+import json
 import mlflow
 
 from pathlib import Path
@@ -21,5 +22,8 @@ record = mlflow.get_run(run.info.run_id)
 assert record.data.params['fee_bps'] == '10'
 assert record.data.metrics['mdd'] == 0.2
 assert mlflow.MlflowClient().list_artifacts(run.info.run_id)[0].path == 'input.json'
-print("local parameter / metric / artifact checks passed")
+artifact_path = mlflow.MlflowClient().download_artifacts(
+    run.info.run_id, "input.json", str(base))
+assert json.loads(Path(artifact_path).read_text()) == {"prices": [100, 80, 100]}
+print("local parameter / metric / artifact content checks passed")
 workspace.cleanup()

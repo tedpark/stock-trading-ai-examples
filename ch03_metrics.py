@@ -4,7 +4,12 @@ from statistics import mean, stdev
 
 
 def compute_risk_metrics(equity, periods=252):
-    if len(equity) < 3 or periods <= 0:
+    """Use equal-period equity samples and a zero risk-free rate.
+
+    VaR/CVaR use signed losses: negative values indicate gains in the tail.
+    CVaR integrates exactly 5% of the empirical probability mass.
+    """
+    if len(equity) < 3 or not isfinite(periods) or periods <= 0:
         raise ValueError("at least three equity observations required")
     if any(not isfinite(x) or x <= 0 for x in equity):
         raise ValueError("positive finite equity required")
@@ -19,14 +24,16 @@ def compute_risk_metrics(equity, periods=252):
     ordered = sorted(returns)
     index = max(0, ceil(0.05 * len(ordered)) - 1)
     q05 = ordered[index]
-    tail = [r for r in ordered if r <= q05]
+    mass = 0.05 * len(ordered)
+    whole = int(mass)
+    tail_mean = (sum(ordered[:whole]) + (mass - whole) * ordered[whole]) / mass
     return {
         "sharpe": mu / sigma * sqrt(periods) if sigma else None,
         "sortino": mu / downside * sqrt(periods) if downside else None,
         "mdd": mdd,
         "calmar": annual / mdd if mdd else None,
         "var95_loss": -q05,
-        "cvar95_loss": -mean(tail),
+        "cvar95_loss": -tail_mean,
     }
 
 

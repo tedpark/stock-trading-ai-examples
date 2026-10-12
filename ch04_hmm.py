@@ -7,7 +7,7 @@ train_len = int(len(x) * 0.6)
 model, scaler, order = fit_model(x, train_len)
 probabilities = forward(model, scaler.transform(x))[:, order]
 assert np.allclose(probabilities.sum(axis=1), 1)
-print('state order (low / middle / high variance):', order)
+print('state order (low / middle / high total standardized-feature variance):', order)
 print('latest probabilities:', probabilities[-1].round(4))
 print('train / evaluation:', train_len, len(x) - train_len)
 # Variance ranks label states; they do not establish mean reversion or trends.

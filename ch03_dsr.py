@@ -1,11 +1,18 @@
 """Chapter 03 learning example; dummy data only. Source: 03-backtest-engine.md"""
-from math import sqrt
+from math import isfinite, sqrt
 from statistics import NormalDist
 
 
 def dsr_probability(sr, n, trials, trial_sr_std,
                     skew=0.0, excess_kurtosis=0.0):
-    if n < 3 or trials < 1 or trial_sr_std < 0:
+    """Use per-observation Sharpe ratios, not annualized values.
+
+    trial_sr_std is the standard deviation across trial Sharpe estimates;
+    excess_kurtosis is ordinary kurtosis minus three.
+    """
+    if (not all(isfinite(x) for x in (sr, n, trials, trial_sr_std, skew, excess_kurtosis))
+            or n < 3 or int(n) != n or trials < 1 or int(trials) != trials
+            or trial_sr_std < 0 or excess_kurtosis < -2):
         raise ValueError("invalid sample or trial inputs")
     normal = NormalDist()
     benchmark = 0.0

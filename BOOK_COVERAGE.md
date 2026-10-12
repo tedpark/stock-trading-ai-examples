@@ -2,7 +2,7 @@
 
 The initial source review compared 24 marked `book-example` blocks in each of the Korean, English, and Japanese editions: **72 blocks in total**, using Python abstract syntax trees (ASTs). All statements from 69 blocks were represented in the source. The other three were the same Chapter 27 example in each edition, adapted to use temporary local SQLite/artifact storage instead of an external MLflow server. Logged parameters, metrics, and files are preserved and checked by reading them back.
 
-The English rewrite translates comments, docstrings, display labels, and documentation. A separate AST comparison against the initial release checks that executable structure and non-language constants are unchanged. The initial book comparison is provenance evidence; it is not a claim that translated string literals are byte-for-byte identical to the manuscripts.
+The initial English rewrite translates comments, docstrings, display labels, and documentation. A separate AST comparison against the initial release checked that executable structure and non-language constants were unchanged at v1.0.1. Subsequent correctness improvements intentionally change some executable statements; see REVIEW.md. The initial book comparison is provenance evidence; it is not a claim that translated string literals are byte-for-byte identical to the manuscripts.
 
 These compact dummy-data exercises reproduce the chapters' key calculations. They do not turn every short architectural excerpt or exercise into a full production service. `manifest.json` maps scripts to manuscript filenames. The manuscripts are not included in this public repository.
 
@@ -17,9 +17,9 @@ These compact dummy-data exercises reproduce the chapters' key calculations. The
 | 12 | Uses the book's five entry checks. Removes the duplicate `compute_entry_score` definition and rejects invalid half-lives, thresholds, correlations, and volume multipliers. |
 | 13, 14, 23 | The book's 11-dimensional `TinyTradingEnv` and public Stable-Baselines3 SAC. Trains on in-memory dummy returns for 128 steps, then evaluates on 70 separate steps. Uses standard SAC rather than a complete custom algorithm. |
 | 18 | Provides the monitor and FastAPI example together. TestClient checks `/health` and `/report`, so no server process is required. |
-| 21 | Uses probability-weighted entry, exit, and stop thresholds; alpha-0 position sizing; and a 0.7 confidence gate. The default high-volatility policy blocks new entries. Unspecified transition-state exit/stop values are set to 0.3/9.9 for this exercise. Comparisons include their boundary values. Demonstrates decisions without a pair-price or P&L model. |
+| 21 | Uses probability-weighted entry, exit, and stop thresholds; alpha-0 position sizing; and a 0.7 confidence gate. The default high-volatility policy blocks new entries. Unspecified transition-state exit/stop values are set to 0.3/9.9 for this exercise. Comparisons include their boundary values. New entries at or beyond their stop threshold are rejected. Demonstrates decisions without a pair-price or P&L model. |
 | 22 | Implements four features, 60% training, a 0.65 probability gate, low-volatility mean reversion, and high-volatility momentum. Replaces market downloads with dummy closes and volume. States the close-fill assumption and trading costs. |
-| 27 | Replaces the MLflow server address with temporary local storage. Reads back parameters, metrics, and artifacts before cleanup. |
+| 27 | Replaces the MLflow server address with temporary local storage. Reads back parameters, metrics, and artifact JSON content before cleanup. |
 | 28 | Prints the appendix learning path and available scripts. |
 
 Chapters 04 and 22 calculate probabilities with a fixed model after training. Training-period probabilities are not presented as OOS results available at that historical time. Leakage tests keep the model fixed and alter future observations, then verify that past features and filtering results remain unchanged.

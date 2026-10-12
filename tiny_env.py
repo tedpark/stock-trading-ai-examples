@@ -4,6 +4,11 @@ from gymnasium import spaces
 
 
 class TinyTradingEnv(gym.Env):
+    """Observe ten past returns and exposure, then earn the next return.
+
+    Reward is a simple return minus turnover costs, not compounded wealth.
+    The final step also pays to liquidate the remaining position.
+    """
     def __init__(self, returns, fee=0.001):
         super().__init__()
         self.returns = np.asarray(returns, dtype=np.float64)

@@ -1,17 +1,26 @@
 """Chapter 17 learning example; dummy data only. Source: 17-ibkr.md"""
+from math import isfinite
+
+
 class OrderLedger:
+    """Track dummy execution events; quantities are positive whole units."""
     def __init__(self, quantity):
+        if (not isfinite(quantity) or quantity <= 0 or int(quantity) != quantity):
+            raise ValueError("positive whole order quantity required")
         self.quantity, self.filled = quantity, 0
         self.status, self.executions = "submitted", set()
 
     def request_cancel(self):
-        if self.status != "filled":
+        if self.status not in ("filled", "cancelled"):
             self.status = "cancel_pending"
 
     def on_fill(self, execution_id, quantity):
         if execution_id in self.executions:
             return
-        if quantity <= 0 or self.filled + quantity > self.quantity:
+        # A delayed fill can arrive after a cancellation acknowledgement.
+        # Keep it in the ledger, but never reopen the cancelled remainder.
+        if (not isfinite(quantity) or quantity <= 0 or int(quantity) != quantity
+                or self.filled + quantity > self.quantity):
             raise ValueError("invalid fill quantity")
         self.executions.add(execution_id)
         self.filled += quantity
