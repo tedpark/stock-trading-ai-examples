@@ -1,4 +1,4 @@
-"""4·22장 공통: 더미 종가·거래량, 훈련 구간 전처리, 순방향 필터."""
+"""Shared by Chapters 04 and 22: dummy closes/volume, training-only scaling, and forward filtering."""
 import numpy as np
 import pandas as pd
 from hmmlearn.hmm import GaussianHMM
@@ -36,7 +36,7 @@ def fit_model(x, train_len):
 
 
 def forward(model, x):
-    """미래 관측을 사용하지 않는 log-space 필터. 반환 열은 원본 상태 순서."""
+    """Filter in log space without future observations. Columns retain the original state order."""
     emissions = np.column_stack([
         multivariate_normal.logpdf(x, mean=mean, cov=cov)
         for mean, cov in zip(model.means_, model.covars_)])

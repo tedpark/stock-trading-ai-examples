@@ -1,4 +1,4 @@
-"""00장 학습 예제 — 더미 데이터 전용. 원문: 00a-vibe-coding-quickstart.md"""
+"""Chapter 00 learning example; dummy data only. Source: 00a-vibe-coding-quickstart.md"""
 prices = [100.0, 80.0, 100.0]
 initial = 1000.0
 quantity = initial / prices[0]

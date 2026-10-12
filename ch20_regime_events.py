@@ -1,4 +1,4 @@
-"""20장 학습 예제 — 더미 데이터 전용. 원문: 20-pair-selection-regime.md"""
+"""Chapter 20 learning example; dummy data only. Source: 20-pair-selection-regime.md"""
 def reversion_counts(zscores, labels, horizon=20):
     if len(zscores) != len(labels) or horizon < 1:
         raise ValueError("aligned inputs and positive horizon required")

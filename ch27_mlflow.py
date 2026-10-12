@@ -1,10 +1,10 @@
-"""27장 학습 예제 — 더미 데이터 전용. 원문: 27-mlflow-serving.md"""
+"""Chapter 27 learning example; dummy data only. Source: 27-mlflow-serving.md"""
 import mlflow
 
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-# 로컬 임시 SQLite와 artifact만 사용. 서버/계정이 필요하지 않다.
+# Use temporary local SQLite and artifacts only; no server or account is required.
 workspace = TemporaryDirectory(prefix="book-mlflow-")
 base = Path(workspace.name)
 mlflow.set_tracking_uri("sqlite:///" + str(base / "tracking.db"))

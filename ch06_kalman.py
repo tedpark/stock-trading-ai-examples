@@ -1,4 +1,4 @@
-"""06장 학습 예제 — 더미 데이터 전용. 원문: 06-kalman-filter.md"""
+"""Chapter 06 learning example; dummy data only. Source: 06-kalman-filter.md"""
 def filter_prices(prices, q=0.01, r=1.0):
     if not prices or q < 0 or r <= 0:
         raise ValueError("nonempty prices, q >= 0 and r > 0 required")

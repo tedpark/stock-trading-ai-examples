@@ -1,4 +1,4 @@
-"""20장 학습 예제 — 더미 데이터 전용. 원문: 20-pair-selection-regime.md"""
+"""Chapter 20 learning example; dummy data only. Source: 20-pair-selection-regime.md"""
 from itertools import combinations
 from scipy.stats import linregress
 from statsmodels.stats.multitest import multipletests
@@ -38,15 +38,15 @@ tested = []
 for sym_a, sym_b in combinations(symbols, 2):
     pa, pb = prices_train[sym_a], prices_train[sym_b]
 
-    # (1) 절편을 포함한 OLS 헤지 비율 → 스프레드
+    # (1) OLS hedge ratio with an intercept, then calculate the spread
     slope, intercept, *_ = linregress(pb.values, pa.values)
     spread = pa - (intercept + slope * pb)
 
-    # (2) 공적분 회귀에 맞는 Engle-Granger p-value
+    # (2) Engle-Granger p-value for the cointegrating regression
     _, eg_p, _ = coint(pa.values, pb.values)
     tested.append((sym_a, sym_b, slope, spread, eg_p))
 
-# (3) 모든 raw p-value를 모은 뒤 FDR 보정
+# (3) Apply FDR correction after collecting all raw p-values
 candidates = []
 if tested:
     reject, qvalues, _, _ = multipletests(

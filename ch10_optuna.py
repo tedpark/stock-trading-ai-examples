@@ -1,4 +1,4 @@
-"""10장 학습 예제 — 더미 데이터 전용. 원문: 10-hmm-ensemble.md"""
+"""Chapter 10 learning example; dummy data only. Source: 10-hmm-ensemble.md"""
 import numpy as np
 import optuna
 optuna.logging.set_verbosity(optuna.logging.WARNING)

@@ -51,7 +51,7 @@ class ExamplesTest(unittest.TestCase):
         self.assertFalse(done)
         _, last, done, _, _ = env.step([-1.])
         self.assertTrue(done)
-        self.assertAlmostEqual(first + last, -0.004)  # 진입1+반전2+청산1
+        self.assertAlmostEqual(first + last, -0.004)  # Entry 1 + reversal 2 + liquidation 1
         with self.assertRaises(RuntimeError):
             env.step([0.])
         with self.assertRaises(ValueError):

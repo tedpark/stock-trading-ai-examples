@@ -1,4 +1,4 @@
-"""19장 학습 예제 — 더미 데이터 전용. 원문: 19-bamberger-pairs-theory.md"""
+"""Chapter 19 learning example; dummy data only. Source: 19-bamberger-pairs-theory.md"""
 import numpy as np
 import pandas as pd
 import statsmodels.api as sm
@@ -15,7 +15,7 @@ def fit_and_test_pair(price_a, price_b):
     alpha, beta = fit.params
     spread = pair["a"] - (alpha + beta * pair["b"])
 
-    # Engle-Granger 검정에 맞는 MacKinnon 근사 p-value
+    # MacKinnon approximate p-value for the Engle-Granger test
     eg_stat, eg_pvalue, critical_values = coint(pair["a"], pair["b"])
     return {
         "alpha": float(alpha),

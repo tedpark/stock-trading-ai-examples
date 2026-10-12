@@ -1,4 +1,4 @@
-"""24장 학습 예제 — 더미 데이터 전용. 원문: 24-production-validation.md"""
+"""Chapter 24 learning example; dummy data only. Source: 24-production-validation.md"""
 from math import isfinite
 
 

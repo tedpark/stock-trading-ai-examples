@@ -1,4 +1,4 @@
-"""23장 학습 예제 — 더미 데이터 전용. 원문: 23-sac-rl-preview.md"""
+"""Chapter 23 learning example; dummy data only. Source: 23-sac-rl-preview.md"""
 import numpy as np
 from stable_baselines3 import SAC
 from stable_baselines3.common.env_checker import check_env

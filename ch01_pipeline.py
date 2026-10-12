@@ -1,4 +1,4 @@
-"""01장 학습 예제 — 더미 데이터 전용. 원문: 01-architecture.md"""
+"""Chapter 01 learning example; dummy data only. Source: 01-architecture.md"""
 from math import isfinite
 
 

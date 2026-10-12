@@ -1,4 +1,4 @@
-"""22장 보완 실습: 더미 가격 → 피처 → HMM → 신호 → 비용 차감 평가."""
+"""Chapter 22: dummy prices, features, HMM, signals, and evaluation after costs."""
 import numpy as np
 from hmm_demo import dummy_bars, features, fit_model, forward
 
@@ -10,7 +10,7 @@ model, scaler, order = fit_model(x, split)
 probabilities = forward(model, scaler.transform(x))[:, order]
 close = bars.close.reindex(frame.index)
 zscore = ((close - close.rolling(20).mean()) / close.rolling(20).std()).to_numpy()
-# 종가 t의 정보로 결정하고 수익은 t → t+1에만 적용한다.
+# Decide using close t; apply the position only to the return from t to t+1.
 position, equity, peak, mdd, turnover = 0.0, 1000.0, 1000.0, 0.0, 0.0
 fee = 0.001
 for t in range(split, len(x) - 1):
@@ -29,7 +29,7 @@ for t in range(split, len(x) - 1):
     position = target
     peak = max(peak, equity)
     mdd = max(mdd, 1 - equity / peak)
-equity *= 1 - fee * abs(position)  # 최종 청산 비용
+equity *= 1 - fee * abs(position)  # Final liquidation cost
 turnover += abs(position)
 mdd = max(mdd, 1 - equity / peak)
 assert np.isfinite(equity) and equity > 0 and 0 <= mdd < 1

@@ -1,4 +1,4 @@
-"""05장 학습 예제 — 더미 데이터 전용. 원문: 05-hmm-forward-only.md"""
+"""Chapter 05 learning example; dummy data only. Source: 05-hmm-forward-only.md"""
 from math import exp, pi, sqrt
 
 

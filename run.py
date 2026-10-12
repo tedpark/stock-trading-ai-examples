@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parent
 
 
 def main():
-    parser = argparse.ArgumentParser(description='더미 데이터 기반 책 실습 실행')
+    parser = argparse.ArgumentParser(description='Run book exercises with dummy data')
     parser.add_argument('chapter', nargs='?', default='00', help='00~28, core, all')
     parser.add_argument('--list', action='store_true')
     args = parser.parse_args()
@@ -24,7 +24,7 @@ def main():
                 or (args.chapter == 'core' and r['chapter'] not in ('14', '23', '27'))
                 or r['chapter'] == chapter]
     if not selected:
-        parser.error('장 번호는 00~28 또는 core/all입니다.')
+        parser.error('Choose a chapter from 00 to 28, or core/all.')
     env = dict(os.environ, OMP_NUM_THREADS='1', OPENBLAS_NUM_THREADS='1',
                MKL_NUM_THREADS='1', MPLBACKEND='Agg')
     failures = []
@@ -37,11 +37,11 @@ def main():
                 failures.append(row['file'])
         except subprocess.TimeoutExpired:
             failures.append(row['file'])
-            print('240초 실행 제한 초과')
+            print('Execution exceeded the 240-second limit')
     print(f'\nPASS {len(selected)-len(failures)}/{len(selected)}', flush=True)
     if failures:
         print('FAIL:', ', '.join(failures))
-        print('의존성 오류라면: python -m pip install -r requirements-full.txt')
+        print('For missing dependencies, run: python -m pip install -r requirements-full.txt')
     return int(bool(failures))
 
 

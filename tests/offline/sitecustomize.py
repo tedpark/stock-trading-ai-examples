@@ -1,4 +1,4 @@
-"""검증 프로세스에서 TCP/UDP 연결을 차단한다. PYTHONPATH로 활성화."""
+"""Block TCP/UDP connections in verification processes. Activate via PYTHONPATH."""
 import socket
 
 

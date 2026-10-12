@@ -1,4 +1,4 @@
-"""21장 보완 실습: 더미 레짐 확률로 진입·청산·손절 순서를 확인한다."""
+"""Chapter 21: use dummy regime probabilities to demonstrate entry, exit, and stops."""
 import numpy as np
 
 
@@ -17,7 +17,7 @@ def decide(z, probabilities, position=0.0):
         if np.sign(position) * z >= -exit_z:
             return 0.0, 'exit'
         return position, 'hold'
-    # 기본 정책: 전환/고변동이 우세하거나 저변동 확신이 약하면 신규 진입 금지.
+    # Block new entries if transition/high volatility dominates or low-volatility confidence is weak.
     if p.argmax() != 0 or p[0] < 0.7:
         return 0.0, 'regime blocked'
     if abs(z) >= entry:

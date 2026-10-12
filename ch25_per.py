@@ -1,4 +1,4 @@
-"""25장 학습 예제 — 더미 데이터 전용. 원문: 25-rl-algorithm-comparison.md"""
+"""Chapter 25 learning example; dummy data only. Source: 25-rl-algorithm-comparison.md"""
 from math import isfinite
 
 

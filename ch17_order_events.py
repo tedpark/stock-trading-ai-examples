@@ -1,4 +1,4 @@
-"""17장 학습 예제 — 더미 데이터 전용. 원문: 17-ibkr.md"""
+"""Chapter 17 learning example; dummy data only. Source: 17-ibkr.md"""
 class OrderLedger:
     def __init__(self, quantity):
         self.quantity, self.filled = quantity, 0

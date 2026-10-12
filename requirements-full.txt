@@ -1,5 +1,5 @@
 -r requirements.txt
-# 14/23장 SAC, 27장 로컬 MLflow
+# SAC for Chapters 14/23; local MLflow for Chapter 27
 stable-baselines3==2.9.0
 torch==2.14.1
 mlflow==3.17.0

@@ -1,4 +1,4 @@
-"""13장 학습 예제 — 더미 데이터 전용. 원문: 13-rl-environment.md"""
+"""Chapter 13 learning example; dummy data only. Source: 13-rl-environment.md"""
 import gymnasium as gym
 import numpy as np
 from gymnasium import spaces

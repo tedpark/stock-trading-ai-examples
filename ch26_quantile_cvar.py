@@ -1,4 +1,4 @@
-"""26장 학습 예제 — 더미 데이터 전용. 원문: 26-distributional-rl-cvar.md"""
+"""Chapter 26 learning example; dummy data only. Source: 26-distributional-rl-cvar.md"""
 from math import ceil, isfinite
 
 

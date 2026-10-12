@@ -1,25 +1,27 @@
-# 본문 대응 검토
+# Mapping the Examples to the Book
 
-한국어·영어·일본어판의 `book-example` 실행 블록 24개씩, 총 72개를 Python AST(구문 트리)로 대조했습니다. 69개는 본문의 모든 문장이 소스에 반영되어 있습니다. 나머지 3개는 각 언어판 27장의 동일한 예제로, MLflow 주소를 외부 서버에서 임시 로컬 SQLite/artifact로 변경했습니다. 로깅 파라미터·지표·파일은 동일하고 다시 조회해 검사합니다.
+The initial source review compared 24 marked `book-example` blocks in each of the Korean, English, and Japanese editions: **72 blocks in total**, using Python abstract syntax trees (ASTs). All statements from 69 blocks were represented in the source. The other three were the same Chapter 27 example in each edition, adapted to use temporary local SQLite/artifact storage instead of an external MLflow server. Logged parameters, metrics, and files are preserved and checked by reading them back.
 
-본문의 짧은 설계 발췌와 연습문제 전체를 대규모 서비스로 구현한 패키지는 아닙니다. 장마다 핵심 계산을 재현하는 간결한 더미 실습입니다. 각 파일과 원고 이름은 `manifest.json`에서 확인할 수 있습니다. 원고는 공개 저장소에 포함되지 않습니다.
+The English rewrite translates comments, docstrings, display labels, and documentation. A separate AST comparison against the initial release checks that executable structure and non-language constants are unchanged. The initial book comparison is provenance evidence; it is not a claim that translated string literals are byte-for-byte identical to the manuscripts.
 
-| 범위 | 반영 방식과 검토 사항 |
+These compact dummy-data exercises reproduce the chapters' key calculations. They do not turn every short architectural excerpt or exercise into a full production service. `manifest.json` maps scripts to manuscript filenames. The manuscripts are not included in this public repository.
+
+| Scope | Implementation and review notes |
 |---|---|
-| 00·03 | 본문의 현금·수량·평가액 회계. 03장은 전 봉 신호를 다음 시가에 체결하며 최종 청산 비용도 반영. 추가 테스트에서 시가 갭과 비용을 수계산 값과 비교 |
-| 02 | 실행 블록 앞의 `compute_daily_features` 정의를 함께 제공. 훈련 구간으로 스케일링 |
-| 04 | 본문의 StandardScaler·3상태 full-covariance HMM·공분산 trace 정렬을 작은 실습으로 구성. 60% 훈련, 나머지는 OOS |
-| 05·07 | 미래 정보 없는 순방향 필터와 prefix의 마지막 사후확률. 동일한 고정 모델에서 둘이 일치하는지 추가 테스트 |
-| 06·08~10·15~17·19~20·24~26 | 본문 실행 블록과 더미 입력 반영. Optuna holdout, 중복 체결, FDR, PER, CVaR 계산 포함 |
-| 11 | 본문 `screen_pair`와 합성 로그가격 입력. 훈련용 페어 스크리닝이며 실거래 선정기가 아님 |
-| 12 | 본문 진입 5단계 예제를 사용. 중복 `compute_entry_score` 정의를 하나로 정리하고, 잘못된 반감기·임계값·상관·거래량을 거절하도록 보완 |
-| 13·14·23 | 본문의 11차원 `TinyTradingEnv`와 public Stable-Baselines3 SAC. 메모리의 더미 수익률로 128스텝 학습 후 별도 70스텝 평가. SAC 기본 알고리즘이며 사용자 정의 전체 알고리즘은 제외 |
-| 18 | 본문 monitor와 FastAPI를 함께 제공. TestClient로 `/health`와 `/report`를 검사하므로 서버 실행 불필요 |
-| 21 | 본문 확률 가중 진입·청산·손절 임계값과 α0 비중, 0.7 신뢰도 게이트를 적용. 고변동 기본 정책은 신규 진입 중단. 전환기의 미지정 청산·손절 값은 실습용으로 0.3·9.9를 사용. 경계값 도달 시 판정하도록 포함 비교 사용. 실제 페어 가격이나 손익 모델은 생략하고 의사결정만 확인 |
-| 22 | 본문의 피처 4개·60% 훈련·확률 0.65 게이트·저변동 평균회귀/고변동 모멘텀 분기 구현. 실제 다운로드를 더미 종가·거래량으로 대체. 종가 체결 가정과 비용을 명시 |
-| 27 | MLflow 서버 주소 대신 로컬 임시 저장소. 파라미터·지표·artifact 조회 후 삭제 |
-| 28 | 부록 학습 순서와 실행 파일 목록 출력 |
+| 00, 03 | Cash, positions, and equity accounting from the book. Chapter 03 executes the preceding bar's signal at the next open and includes final liquidation costs. An additional test compares an opening gap and costs with hand-calculated values. |
+| 02 | Includes the `compute_daily_features` definition preceding the runnable block. Scaling uses the training portion. |
+| 04 | Demonstrates StandardScaler, a three-state full-covariance HMM, and covariance-trace ordering. Uses 60% for training and the remainder for OOS evaluation. |
+| 05, 07 | Forward filtering without future data and the final posterior of each observation prefix. Additional tests check agreement under the same fixed model. |
+| 06, 08–10, 15–17, 19–20, 24–26 | Runnable book blocks with dummy inputs, including Optuna holdout evaluation, duplicate fills, FDR, PER, and CVaR. |
+| 11 | The book's `screen_pair` with synthetic log prices. Demonstrates pair screening for learning, not live selection. |
+| 12 | Uses the book's five entry checks. Removes the duplicate `compute_entry_score` definition and rejects invalid half-lives, thresholds, correlations, and volume multipliers. |
+| 13, 14, 23 | The book's 11-dimensional `TinyTradingEnv` and public Stable-Baselines3 SAC. Trains on in-memory dummy returns for 128 steps, then evaluates on 70 separate steps. Uses standard SAC rather than a complete custom algorithm. |
+| 18 | Provides the monitor and FastAPI example together. TestClient checks `/health` and `/report`, so no server process is required. |
+| 21 | Uses probability-weighted entry, exit, and stop thresholds; alpha-0 position sizing; and a 0.7 confidence gate. The default high-volatility policy blocks new entries. Unspecified transition-state exit/stop values are set to 0.3/9.9 for this exercise. Comparisons include their boundary values. Demonstrates decisions without a pair-price or P&L model. |
+| 22 | Implements four features, 60% training, a 0.65 probability gate, low-volatility mean reversion, and high-volatility momentum. Replaces market downloads with dummy closes and volume. States the close-fill assumption and trading costs. |
+| 27 | Replaces the MLflow server address with temporary local storage. Reads back parameters, metrics, and artifacts before cleanup. |
+| 28 | Prints the appendix learning path and available scripts. |
 
-4·22장의 확률은 훈련 완료 후 고정된 모델로 계산합니다. 훈련 구간의 확률을 당시에 알 수 있었던 OOS 결과처럼 해석하지 않습니다. 미래 참조 테스트는 고정된 모델에 관측의 미래 부분만 바꾸었을 때 과거 피처·필터 결과가 유지되는지 확인합니다.
+Chapters 04 and 22 calculate probabilities with a fixed model after training. Training-period probabilities are not presented as OOS results available at that historical time. Leakage tests keep the model fixed and alter future observations, then verify that past features and filtering results remain unchanged.
 
-GitHub Actions는 Python 3.12에서 의존성을 설치한 뒤 `python verify.py`를 실행합니다. 이 명령은 예제와 테스트 실행 중 Python socket 연결을 차단합니다. 검증 기록은 `VALIDATION.json`에 있습니다.
+GitHub Actions installs dependencies on Python 3.12 and runs `python verify.py`. This command blocks Python socket connections while running the examples and tests. See `VALIDATION.json` for the recorded checks.

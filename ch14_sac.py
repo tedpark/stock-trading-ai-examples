@@ -1,4 +1,4 @@
-"""14장 학습 예제 — 더미 데이터 전용. 원문: 14-sac-agent.md"""
+"""Chapter 14 learning example; dummy data only. Source: 14-sac-agent.md"""
 import numpy as np
 from stable_baselines3 import SAC
 from stable_baselines3.common.env_checker import check_env

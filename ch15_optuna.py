@@ -1,4 +1,4 @@
-"""15장 학습 예제 — 더미 데이터 전용. 원문: 15-optuna-tuning.md"""
+"""Chapter 15 learning example; dummy data only. Source: 15-optuna-tuning.md"""
 import numpy as np
 import optuna
 optuna.logging.set_verbosity(optuna.logging.WARNING)

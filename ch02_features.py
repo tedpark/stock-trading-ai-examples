@@ -1,4 +1,4 @@
-"""02장 학습 예제 — 더미 데이터 전용. 원문: 02-data-pipeline.md"""
+"""Chapter 02 learning example; dummy data only. Source: 02-data-pipeline.md"""
 import numpy as np
 
 def compute_daily_features(close, volume):

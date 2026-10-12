@@ -1,4 +1,4 @@
-"""03장 학습 예제 — 더미 데이터 전용. 원문: 03-backtest-engine.md"""
+"""Chapter 03 learning example; dummy data only. Source: 03-backtest-engine.md"""
 import math
 
 def simulate(

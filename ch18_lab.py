@@ -1,4 +1,4 @@
-"""18장 학습 예제 — 더미 데이터 전용. 원문: 18-monitoring.md"""
+"""Chapter 18 learning example; dummy data only. Source: 18-monitoring.md"""
 from fastapi import FastAPI
 from monitor_example import monitor
 
