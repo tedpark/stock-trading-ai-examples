@@ -1,2 +1,0 @@
-# Incorrect/unsafe example.
-X = np.nan_to_num(features, nan=0.0)

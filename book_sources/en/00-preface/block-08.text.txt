@@ -1,5 +1,0 @@
-Slow clock: training / validation / model registration
-historical data -> training -> OOS validation -> save model file -> approve
-
-Fast clock: real-time inference / order flow
-today's data -> features -> load model file -> inference -> risk check -> order -> fill check -> monitoring

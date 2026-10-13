@@ -1,8 +1,0 @@
-
-raw = yf.download(symbol, start=start, end=end, auto_adjust=True, progress=False)
-
-
-idx = pd.to_datetime(raw.index)
-if idx.tz is not None:
-    idx = idx.tz_convert("UTC").tz_localize(None)
-raw.index = idx

@@ -17,7 +17,10 @@ from hmm_demo import forward
 
 def snippet(path):
     scope = dict(np=np, time=time, logger=logging.getLogger('audit'))
-    exec((ROOT / 'book_snippets' / path).read_text(), scope)
+    from sync_book import contract, source_text
+    key=path.removesuffix('.py.txt')
+    entry=next(e for e in contract() if e['id']==key)
+    exec(source_text(entry), scope)
     return scope
 
 
@@ -61,22 +64,15 @@ class ContentCodeAuditTests(unittest.TestCase):
             with self.assertRaises(ValueError):ratchet(*args)
 
     def test_ibkr_account_initialization_failure_is_not_success(self):
-        connect=snippet('17-ibkr/python-02.py.txt')['connect']
-        class Event:
-            def __iadd__(self,other):return self
-        class IB:
-            disconnectedEvent=Event()
-            def connectAsync(self,*args,**kw):return None
-            def isConnected(self):return True
-            def managedAccounts(self):return ['paper']
-            def reqAccountUpdatesAsync(self,**kw):raise RuntimeError('account unavailable')
-        obj=SimpleNamespace(_lock=threading.Lock(),_ib=None,_connected=False,
-            _last_connect_failed_at=0.,_connect_cooldown=30,host='localhost',port=1,client_id=1,timeout=1,
-            _teardown_and_recreate_loop_locked=lambda:None,_make_disconnect_callback=lambda ib:lambda:None,
-            _run=lambda *a,**kw:None)
-        with patch.dict(sys.modules,{'ib_async':SimpleNamespace(IB=IB)}):
-            with self.assertLogs('audit',level='ERROR'):self.assertFalse(connect(obj))
-            self.assertFalse(obj._connected)
-            self.assertFalse(connect(obj))
+        import asyncio
+        from quantlab.broker import BrokerSession, PaperBrokerBackend
+        class Broken(PaperBrokerBackend):
+            async def accounts(self):raise RuntimeError('unavailable')
+        async def check():
+            obj=BrokerSession(Broken())
+            self.assertFalse(await obj.connect())
+            self.assertFalse(obj.connected)
+            self.assertFalse(await obj.connect())
+        asyncio.run(check())
 
 if __name__=='__main__':unittest.main()

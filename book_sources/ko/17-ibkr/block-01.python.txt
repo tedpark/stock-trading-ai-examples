@@ -1,0 +1,11 @@
+def __init__(self, backend, host=None, port=None, client_id=None, cooldown=30):
+    self.backend = backend
+    self.host = host or os.environ.get("IBKR_HOST", "127.0.0.1")
+    self.port = int(os.environ.get("IBKR_PORT", "4002")) if port is None else port
+    self.client_id = int(os.environ.get("IBKR_CLIENT_ID", "1")) if client_id is None else client_id
+    if not 1 <= self.port <= 65535 or self.client_id < 0 or not isfinite(cooldown) or cooldown < 0:
+        raise ValueError("valid port, client ID and cooldown required")
+    self.cooldown = cooldown
+    self.connected = False
+    self.failed_at = None
+    self.lock = asyncio.Lock()

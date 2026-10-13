@@ -1,3 +1,9 @@
+# Current runtime-source contract
+
+All 107 Python blocks per edition are now extracted from executable repository modules: 34 full-file listings and 73 named implementation excerpts. No book_snippets text source is used. Shell/JSON listings are mapped to real command/configuration files. `RUNTIME_VALIDATION.json` records whether each excerpt callable was actually exercised by the regression suite. This is not branch-coverage or live broker certification.
+
+## Historical review notes (superseded source classifications)
+
 # Mapping the Examples to the Book
 
 The initial source review compared 24 marked `book-example` blocks in each of the Korean, English, and Japanese editions: **72 blocks in total**, using Python abstract syntax trees (ASTs). All statements from 69 blocks were represented in the source. The other three were the same Chapter 27 example in each edition, adapted to use temporary local SQLite/artifact storage instead of an external MLflow server. Logged parameters, metrics, and files are preserved and checked by reading them back.

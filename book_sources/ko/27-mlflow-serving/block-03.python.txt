@@ -1,14 +1,18 @@
-# run_sac_stat_pair.py
-with MlflowTracker(
-    experiment="sac_rl_stat_pair",
-    run_name=f"sac_{datetime.now():%Y%m%d_%H%M}",
-    params={"gamma": 0.99, "tau": 0.005, "lr_actor": 1e-4},
-    tags={"algo": "sac", "n_pairs": 32},
-) as tracker:
-    for ep in range(n_episodes):
-        # ... SACTrainer step ...
-        tracker.log_metrics(
-            {"train_reward": r, "critic_loss": cl, "alpha": alpha},
-            step=ep,
-        )
-    tracker.log_artifact(checkpoint_path)
+def train_and_track(returns, tracking_backend=None, steps=128):
+    """A complete SAC training/logging exercise using an 11D toy environment."""
+    from tempfile import TemporaryDirectory
+    from pathlib import Path
+    from stable_baselines3 import SAC
+    from tiny_env import TinyTradingEnv
+    env = TinyTradingEnv(returns)
+    agent = SAC("MlpPolicy", env, learning_starts=32, buffer_size=512,
+                batch_size=16, policy_kwargs={"net_arch":[16,16]}, device="cpu", seed=7)
+    with TemporaryDirectory() as directory:
+        with MlflowTracker("book-sac", "local-exercise", {"steps": steps},
+                           {"mode":"learning"}, backend=tracking_backend) as tracker:
+            agent.learn(total_timesteps=steps)
+            tracker.log_metrics({"training_steps":float(agent.num_timesteps)}, step=0)
+            path = Path(directory) / "sac.zip"
+            agent.save(path)
+            tracker.log_artifact(str(path))
+    return agent

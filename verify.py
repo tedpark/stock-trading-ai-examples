@@ -14,7 +14,7 @@ def main():
     # Do not inherit MLflow settings, automatic tracking, or experiment IDs from other tasks.
     env = {k: v for k, v in env.items() if not k.startswith('MLFLOW_')}
     env['MLFLOW_ENABLE_TELEMETRY'] = 'false'
-    commands = [['run.py', 'all'], ['-m', 'unittest', 'discover', '-s', 'tests', '-v']]
+    commands = [['run.py', 'all'], ['verify_runtime_sources.py']]
     for command in commands:
         result = subprocess.run([sys.executable, *command], cwd=ROOT, env=env)
         if result.returncode:

@@ -1,2 +1,2 @@
-srm = sc.inverse_transform(m.means_)[:, idx]   # causal
-# m.predict(Xs)   # look-ahead bias
+def state_return_means(scaler, model, return_index=0):
+    return scaler.inverse_transform(model.means_)[:, return_index]

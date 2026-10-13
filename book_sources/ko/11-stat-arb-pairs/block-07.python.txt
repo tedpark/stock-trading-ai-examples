@@ -1,5 +1,6 @@
-if kdata["corr"] < cfg.corr_min:                  
-    return False
-if calc_halflife(recent_spreads) > cfg.hl_max:    
-    return False
-dyn_max_hold = min(cfg.max_hold_days, int(cfg.hl_hold_mult * hl))
+def holding_limit(correlation, spread, corr_min=0.4, hl_max=60, max_hold_days=30, hl_hold_mult=2):
+    hl = calc_halflife(spread)
+    if (not np.isfinite(correlation) or correlation < corr_min or not np.isfinite(hl)
+            or hl > hl_max or min(max_hold_days, hl_hold_mult) <= 0):
+        return None
+    return max(1, min(max_hold_days, int(hl_hold_mult * hl)))

@@ -1,9 +1,0 @@
-equity_curve = np.asarray(equity_curve, dtype=float)
-if (equity_curve.ndim != 1 or not len(equity_curve)
-        or not np.isfinite(equity_curve).all()
-        or np.any(equity_curve <= 0)):
-    raise ValueError("positive finite equity required")
-peak = np.maximum.accumulate(equity_curve)          
-drawdown = equity_curve / peak - 1.0      
-mdd_signed = float(np.min(drawdown))                
-mdd_magnitude = -mdd_signed

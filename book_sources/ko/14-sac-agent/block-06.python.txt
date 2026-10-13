@@ -1,2 +1,8 @@
-agent  = SACAgent.load("cache/models/rl/stat_pair/model_2025-01-01.pt")
-action = agent.act(state, deterministic=True)
+def load_and_act(path, state):
+    from stable_baselines3 import SAC
+    agent = SAC.load(path, device="cpu")
+    state = np.asarray(state, dtype=np.float32)
+    if state.shape != agent.observation_space.shape or not np.isfinite(state).all():
+        raise ValueError("state must match the checkpoint observation schema")
+    action, _ = agent.predict(state, deterministic=True)
+    return action

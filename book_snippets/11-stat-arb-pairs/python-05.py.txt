@@ -1,6 +1,0 @@
-
-if kdata["corr"] < cfg.corr_min:                  
-    return False
-if calc_halflife(recent_spreads) > cfg.hl_max:    
-    return False
-dyn_max_hold = min(cfg.max_hold_days, int(cfg.hl_hold_mult * hl))

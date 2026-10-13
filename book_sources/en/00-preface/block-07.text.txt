@@ -1,4 +1,6 @@
-training creates the model file
-serving loads the model file
-inference sends new features into the loaded model
-risk decides whether the model output can become an order
+Is this chapter preparing data?
+Is it reading the market?
+Is it finding an opportunity?
+Is it deciding size?
+Is it blocking risk?
+Is it checking operational health?

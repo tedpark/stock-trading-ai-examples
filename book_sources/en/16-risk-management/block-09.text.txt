@@ -1,7 +1,0 @@
-Strategy A
-final return +40%, MDD -8%
--> comparatively easier to hold
-
-Strategy B
-final return +80%, MDD -55%
--> looks good by final return, but hard to run live

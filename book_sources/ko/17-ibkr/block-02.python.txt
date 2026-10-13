@@ -1,0 +1,19 @@
+async def connect(self):
+    async with self.lock:
+        if self.connected and self.backend.is_connected():
+            return True
+        now = time.monotonic()
+        if self.failed_at is not None and now - self.failed_at < self.cooldown:
+            return False
+        self.connected = False
+        try:
+            await asyncio.wait_for(self.backend.connect(self.host, self.port, self.client_id), 10)
+            if not self.backend.is_connected():
+                raise ConnectionError("not connected")
+            accounts = await asyncio.wait_for(self.backend.accounts(), 10)
+            if not accounts:
+                raise ValueError("no managed account")
+            self.connected, self.failed_at = True, None
+        except Exception:
+            self.failed_at = time.monotonic()
+        return self.connected

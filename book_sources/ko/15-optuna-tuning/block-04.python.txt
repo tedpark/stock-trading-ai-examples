@@ -1,10 +1,14 @@
-def objective(trial) -> float:
-    scale  = trial.suggest_float("scale", 0.15, 2.5)   
-    thresh = std_e * scale                              
-    e_v, r_v = e_arr[:val_end], ret_arr[:val_end]      
-    sigs = np.where(e_v > thresh, 1.0,
-            np.where(e_v < -thresh, -1.0, 0.0))
-    changes = np.abs(np.diff(np.r_[0.0, sigs]))
-    changes[-1] += abs(sigs[-1])
-    strat = sigs * r_v - fee_rate * changes
-    return evaluate_objective(strat)
+def threshold_objective(trial, forecasts, next_returns, std_e, val_end, fee_rate=0.001):
+    """Tune only the explicitly supplied validation prefix; no held-out returns."""
+    f, r = np.asarray(forecasts, dtype=float), np.asarray(next_returns, dtype=float)
+    if (f.ndim != 1 or f.shape != r.shape or not isinstance(val_end, int)
+            or not 0 < val_end <= len(f) or not np.isfinite([std_e, fee_rate]).all()
+            or std_e <= 0 or fee_rate < 0 or not np.isfinite(f[:val_end]).all()
+            or not np.isfinite(r[:val_end]).all()):
+        raise ValueError("aligned validation arrays and valid costs required")
+    scale = trial.suggest_float("scale", 0.15, 2.5)
+    thresh = std_e * scale
+    signals = np.where(f[:val_end] > thresh, 1.0, np.where(f[:val_end] < -thresh, -1.0, 0.0))
+    changes = np.abs(np.diff(np.r_[0.0, signals]))
+    changes[-1] += abs(signals[-1])
+    return float(np.sum(signals * r[:val_end] - fee_rate * changes))

@@ -1,0 +1,12 @@
+def walk_forward(features, train_bars=60, refit_days=20):
+    """Refit strictly before t, then consume observation t once."""
+    if train_bars < 60 or refit_days < 1:
+        raise ValueError("at least 60 training bars and positive refit interval required")
+    model = DailyHMM()
+    result = []
+    for t in range(train_bars, len(features)):
+        if (t - train_bars) % refit_days == 0:
+            if not model.fit(features[:t]):
+                raise ValueError("insufficient training observations")
+        result.append(model.step_forward(features[t]))
+    return result

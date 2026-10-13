@@ -1,2 +1,0 @@
-scaler = StandardScaler().fit(X_all)
-X_scaled = scaler.transform(X_all)

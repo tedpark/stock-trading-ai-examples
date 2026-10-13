@@ -1,1 +1,0 @@
-gamma_t(k) = alpha_t(k) * beta_t(k) / P(X)

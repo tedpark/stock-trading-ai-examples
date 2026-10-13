@@ -1,6 +1,7 @@
-from statsmodels.tsa.stattools import coint
-
-_, pvalue, _ = coint(price_a.values, price_b.values)
-
-if pvalue >= self.coint_pvalue:    # default = 0.05
-    continue
+def cointegration_pvalue(a, b):
+    a, b = np.asarray(a, dtype=float), np.asarray(b, dtype=float)
+    if a.ndim != 1 or a.shape != b.shape or len(a) < 20 or not np.isfinite([a, b]).all():
+        raise ValueError("aligned finite series of length >= 20 required")
+    if np.std(a) == 0 or np.std(b) == 0:
+        return 1.0
+    return float(coint(a, b)[1])

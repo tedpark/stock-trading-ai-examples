@@ -1,0 +1,152 @@
+[
+  {
+    "edition": "ko",
+    "chapter": "28-appendix-beginner-map.md",
+    "language": "bash",
+    "source": "commands/verify.sh"
+  },
+  {
+    "edition": "ko",
+    "chapter": "28-appendix-beginner-map.md",
+    "language": "sh",
+    "source": "commands/paper-service.sh"
+  },
+  {
+    "edition": "ko",
+    "chapter": "17-ibkr.md",
+    "language": "bash",
+    "source": "commands/broker-preview.sh"
+  },
+  {
+    "edition": "ko",
+    "chapter": "27-mlflow-serving.md",
+    "language": "json",
+    "source": "examples_payloads/actor-state.json"
+  },
+  {
+    "edition": "ko",
+    "chapter": "03-backtest-engine.md",
+    "language": "sh",
+    "source": "commands/backtest.sh"
+  },
+  {
+    "edition": "ko",
+    "chapter": "01-architecture.md",
+    "language": "sh",
+    "source": "commands/install.sh"
+  },
+  {
+    "edition": "ko",
+    "chapter": "00-preface.md",
+    "language": "sh",
+    "source": "commands/install.sh"
+  },
+  {
+    "edition": "ko",
+    "chapter": "18-monitoring.md",
+    "language": "sh",
+    "source": "commands/monitor.sh"
+  },
+  {
+    "edition": "ko",
+    "chapter": "18-monitoring.md",
+    "language": "sh",
+    "source": "commands/monitor-health.sh"
+  },
+  {
+    "edition": "en",
+    "chapter": "28-appendix-beginner-map.md",
+    "language": "bash",
+    "source": "commands/verify.sh"
+  },
+  {
+    "edition": "en",
+    "chapter": "28-appendix-beginner-map.md",
+    "language": "sh",
+    "source": "commands/paper-service.sh"
+  },
+  {
+    "edition": "en",
+    "chapter": "17-ibkr.md",
+    "language": "bash",
+    "source": "commands/broker-preview.sh"
+  },
+  {
+    "edition": "en",
+    "chapter": "27-mlflow-serving.md",
+    "language": "json",
+    "source": "examples_payloads/actor-state.json"
+  },
+  {
+    "edition": "en",
+    "chapter": "01-architecture.md",
+    "language": "sh",
+    "source": "commands/install.sh"
+  },
+  {
+    "edition": "en",
+    "chapter": "00-preface.md",
+    "language": "sh",
+    "source": "commands/install.sh"
+  },
+  {
+    "edition": "en",
+    "chapter": "18-monitoring.md",
+    "language": "sh",
+    "source": "commands/monitor.sh"
+  },
+  {
+    "edition": "en",
+    "chapter": "18-monitoring.md",
+    "language": "sh",
+    "source": "commands/monitor-health.sh"
+  },
+  {
+    "edition": "ja",
+    "chapter": "28-appendix-beginner-map.md",
+    "language": "bash",
+    "source": "commands/verify.sh"
+  },
+  {
+    "edition": "ja",
+    "chapter": "28-appendix-beginner-map.md",
+    "language": "sh",
+    "source": "commands/paper-service.sh"
+  },
+  {
+    "edition": "ja",
+    "chapter": "17-ibkr.md",
+    "language": "bash",
+    "source": "commands/broker-preview.sh"
+  },
+  {
+    "edition": "ja",
+    "chapter": "27-mlflow-serving.md",
+    "language": "json",
+    "source": "examples_payloads/actor-state.json"
+  },
+  {
+    "edition": "ja",
+    "chapter": "01-architecture.md",
+    "language": "sh",
+    "source": "commands/install.sh"
+  },
+  {
+    "edition": "ja",
+    "chapter": "00-preface.md",
+    "language": "sh",
+    "source": "commands/install.sh"
+  },
+  {
+    "edition": "ja",
+    "chapter": "18-monitoring.md",
+    "language": "sh",
+    "source": "commands/monitor.sh"
+  },
+  {
+    "edition": "ja",
+    "chapter": "18-monitoring.md",
+    "language": "sh",
+    "source": "commands/monitor-health.sh"
+  }
+]

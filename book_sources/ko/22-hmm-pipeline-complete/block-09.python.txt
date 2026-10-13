@@ -1,18 +1,14 @@
-# Start flat on each decision; no stale direction from the previous bar.
-direction = 0
-
-current_regime = int(np.argmax(alpha[i]))
-max_prob       = alpha[i].max()
-
-
-if max_prob < CONFIDENCE_THRESHOLD:        
-    continue
-
-
-if current_regime == 0:                    
-    if z < -Z_ENTRY:   direction = +1
-    elif z > +Z_ENTRY: direction = -1
-
-elif current_regime == 2:                  
-    if z > +1.0:       direction = +1
-    elif z < -1.0:     direction = -1
+def pipeline_direction(alpha, z, confidence=0.65, entry_z=1.5):
+    p = np.asarray(alpha, dtype=float)
+    if p.shape != (3,) or not np.isfinite(p).all() or (p < 0).any() or not np.isclose(p.sum(), 1):
+        raise ValueError("three normalized probabilities required")
+    if not np.isfinite([z, confidence, entry_z]).all() or not 0 <= confidence <= 1 or entry_z <= 0:
+        raise ValueError("valid thresholds required")
+    if p.max() < confidence:
+        return 0
+    state = int(p.argmax())
+    if state == 0:
+        return 1 if z < -entry_z else (-1 if z > entry_z else 0)
+    if state == 2:
+        return 1 if z > 1 else (-1 if z < -1 else 0)
+    return 0

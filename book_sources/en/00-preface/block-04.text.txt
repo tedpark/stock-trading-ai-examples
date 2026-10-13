@@ -1,0 +1,12 @@
+5 years of features
+
+first 2 years: training data
+  -> fit scaler
+  -> fit model
+  -> save model parameters
+
+next 3 years: OOS inference data
+  -> load trained model
+  -> feed one row at a time
+  -> record model output
+  -> pass through risk checks

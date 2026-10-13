@@ -1,4 +1,14 @@
-# ibkr_client.py __init__
-self.host      = host or os.environ.get("IBKR_HOST", "127.0.0.1")
-self.port      = port or int(os.environ.get("IBKR_PORT", "4004"))  
-self.client_id = client_id or int(os.environ.get("IBKR_CLIENT_ID", "1"))
+async def preview_order(self, symbol, action, qty, limit_price=None, allow_outside_rth=False):
+    if (not self.connected or action not in ("BUY", "SELL") or not isfinite(qty)
+            or isinstance(qty, bool) or qty <= 0 or int(qty) != qty):
+        raise ValueError("connected session, valid side and positive whole quantity required")
+    if limit_price is not None and (not isfinite(limit_price) or limit_price <= 0):
+        raise ValueError("positive finite limit price required")
+    if not await asyncio.wait_for(self.backend.session_open(symbol, allow_outside_rth), 10):
+        return {"success": False, "error": "session_closed"}
+    contract = await asyncio.wait_for(self.backend.qualify(symbol), 10)
+    if not contract.get("con_id"):
+        return {"success": False, "error": "contract_not_qualified"}
+    return {"success": True, "mode": "preview", "contract": contract,
+            "action": action, "qty": int(qty), "limit_price": limit_price,
+            "outside_rth": allow_outside_rth}

@@ -21,7 +21,7 @@ def extract(edition,chapter,needle,**scope):
 
 class PrintedSourceTests(unittest.TestCase):
     def test_complete_integrity_and_runnable_mapping(self):
-        self.assertEqual(verify()['fenced_blocks'],711)
+        self.assertEqual(verify()['fenced_blocks'],652)
 
     def test_missing_non_python_source_is_rejected(self):
         for edition in ['ko','en','ja']:
@@ -61,10 +61,11 @@ class PrintedSourceTests(unittest.TestCase):
         for lang in ['ko','en','ja']:
             for forecasts,returns,expected in [([1.,-1.,0.],[.1,.2,.3],-.104),([1.,1.],[.1,.2],.298)]:
                 n=len(forecasts)
-                scope=extract(lang,'15','thresh = std_e * scale',std_e=1.,
-                    e_arr=np.array(forecasts+[999.]),ret_arr=np.array(returns+[-999.]),
-                    val_end=n,fee_rate=.001,evaluate_objective=np.sum)
-                self.assertAlmostEqual(scope['objective'](SimpleNamespace(suggest_float=lambda *a:.5)),expected)
+                scope=extract(lang,'15','def threshold_objective(')
+                self.assertAlmostEqual(scope['threshold_objective'](
+                    SimpleNamespace(suggest_float=lambda *a:.5),
+                    forecasts+[999.],returns+[-999.],1.,n,.001),expected)
+
 
     def test_kalman_missing_bars_and_no_future_effect(self):
         for lang in ['ko','en','ja']:
@@ -83,8 +84,8 @@ class PrintedSourceTests(unittest.TestCase):
     def test_atr_stop_bounds(self):
         for lang in ['ko','en','ja']:
             for atr,expected in [(1,-.02),(2,-.03),(10,-.05)]:
-                fn=extract(lang,'16','def _calculate_atr_stop_loss(',compute_atr=lambda *a,**k:atr)['_calculate_atr_stop_loss']
-                self.assertAlmostEqual(fn(None,'TEST',100),expected)
+                fn=extract(lang,'16','def atr_stop_loss(')['atr_stop_loss']
+                self.assertAlmostEqual(fn(atr,100),expected)
 
     def test_kelly_and_sortino_boundaries(self):
         for lang in ['ko','en','ja']:

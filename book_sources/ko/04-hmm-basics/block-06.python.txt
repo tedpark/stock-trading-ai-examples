@@ -1,0 +1,4 @@
+def predict_proba(self, features):
+    if self.model is None:
+        raise RuntimeError("fit first")
+    return forward(self.model, self.scaler.transform(features))[:, self.order]

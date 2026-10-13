@@ -1,13 +1,13 @@
-class CVaRSizer:
-    def __init__(self, agent, config):
-        self.agent = agent
-        self.config = config
-        self.last_cvar = None
-
-    def scale(self, state, action):
-        # This signal hook accepts one state, not a batch of different trades.
-        value = self.agent.cvar(state, action, alpha=0.05)
-        if value.numel() != 1:
-            raise ValueError("one state required")
-        self.last_cvar = float(value.item())
-        return cvar_position_scaler(self.last_cvar, self.config)
+def apply_cvar_to_signal(signal, sizer, state):
+    # Signal values: EXIT=-1, HOLD=0, ENTER=1.
+    # Network columns: EXIT=0, HOLD=1, ENTER=2.
+    action_to_index = {-1: 0, 0: 1, 1: 2}
+    if signal.action not in action_to_index:
+        raise ValueError("unknown trading action")
+    proposed_scale = sizer.scale(state, action_to_index[signal.action])
+    # Scale new entry size; never reduce a requested exit or alter HOLD.
+    applied_scale = proposed_scale if signal.action == 1 else 1.0
+    signal.size *= applied_scale
+    signal.metadata["cvar_5pct"] = sizer.last_cvar
+    signal.metadata["cvar_scale"] = applied_scale
+    return signal

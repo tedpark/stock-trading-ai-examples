@@ -1,0 +1,4 @@
+def atr_stop_loss(atr, entry_price):
+    if not np.isfinite([atr, entry_price]).all() or atr < 0 or entry_price <= 0:
+        raise ValueError("nonnegative ATR and positive entry price required")
+    return -min(max(1.5 * atr / entry_price, 0.02), 0.05)

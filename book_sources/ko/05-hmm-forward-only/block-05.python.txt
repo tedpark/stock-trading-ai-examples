@@ -1,0 +1,11 @@
+def fit(self, features):
+    x = np.asarray(features, dtype=float)
+    if x.ndim != 2 or np.isinf(x).any():
+        raise ValueError("finite feature matrix required; NaN warmup allowed")
+    x = x[np.isfinite(x).all(axis=1)]
+    if len(x) < 60:
+        return False
+    model, scaler, order = fit_model(x, len(x))
+    posterior = forward(model, scaler.transform(x))[-1]
+    self.model, self.scaler, self.order, self.alpha = model, scaler, order, posterior
+    return True

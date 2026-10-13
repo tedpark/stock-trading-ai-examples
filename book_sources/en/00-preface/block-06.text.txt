@@ -1,12 +1,5 @@
-5 years of features
+Slow clock: training / validation / model registration
+historical data -> training -> OOS validation -> save model file -> approve
 
-first 2 years: training data
-  -> fit scaler
-  -> fit model
-  -> save model parameters
-
-next 3 years: OOS inference data
-  -> load trained model
-  -> feed one row at a time
-  -> record model output
-  -> pass through risk checks
+Fast clock: real-time inference / order flow
+today's data -> features -> load model file -> inference -> risk check -> order -> fill check -> monitoring

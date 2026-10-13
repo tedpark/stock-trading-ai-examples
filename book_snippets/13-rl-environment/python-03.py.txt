@@ -1,1 +1,0 @@
-env = StatPairRLEnv(..., reward_scheme=MyCustomReward(pnl_target=5.0))

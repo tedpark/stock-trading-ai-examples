@@ -1,35 +1,5 @@
-def connect(self) -> bool:
-    with self._lock:
-        if self._ib is not None and self._connected and self._ib.isConnected():
-            return True
-
-        self._connected = False
-        now = time.monotonic()
-        if (self._last_connect_failed_at > 0
-                and now - self._last_connect_failed_at < self._connect_cooldown):
-            return False
-
-        self._teardown_and_recreate_loop_locked()
-
-        try:
-            from ib_async import IB
-            self._ib = IB()
-            self._disconnect_callback = self._make_disconnect_callback(self._ib)
-            self._ib.disconnectedEvent += self._disconnect_callback
-
-            self._run(
-                self._ib.connectAsync(self.host, self.port, clientId=self.client_id),
-                timeout=self.timeout,
-            )
-            self._connected = self._ib.isConnected()
-
-            if self._connected:
-                self._last_connect_failed_at = 0.0
-                accounts = self._ib.managedAccounts()
-                if accounts:
-                    self._run(self._ib.reqAccountUpdatesAsync(account=accounts[0]), timeout=10)
-        except Exception as e:
-            self._connected = False
-            self._last_connect_failed_at = time.monotonic()
-            logger.error("IBKR connection failed: %s", e)
-    return self._connected
+async def positions(self, account):
+    if not self.connected or not account:
+        raise ValueError("connected session and explicit account required")
+    rows = await asyncio.wait_for(self.backend.positions(), 8)
+    return [p for p in rows if p["account"] == account and p["size"] != 0]

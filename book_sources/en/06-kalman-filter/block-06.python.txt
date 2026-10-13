@@ -1,8 +1,6 @@
-@register_signal("kalman_self_mr")
-class KalmanSelfMRSignal(SignalGenerator):
-    def initialize(self, data):
-        for sym in self._symbols:
-            log_p = np.log(np.maximum(self._close[sym], 1e-10))
-            innov = _kalman_innovations(log_p, self._kalman_delta, self._kalman_obs)
-            self._spreads[sym]  = innov
-            self._z_series[sym] = _build_z_series(innov, self._z_window)
+def kalman_zscores(close, window=60, delta=1e-4, obs_noise=1.0):
+    close = np.asarray(close, dtype=float)
+    if close.ndim != 1 or not np.isfinite(close).all() or (close <= 0).any():
+        raise ValueError("positive finite prices required")
+    innovations = _kalman_innovations(np.log(close), delta, obs_noise)
+    return _build_z_series(innovations, window)

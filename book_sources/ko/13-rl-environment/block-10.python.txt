@@ -1,6 +1,10 @@
-obs, info = env.reset(seed=7)
-done = False
-while not done:
-    action = agent.act(obs, deterministic=False)
-    obs, reward, terminated, truncated, info = env.step(action)
-    done = terminated or truncated
+def rollout(env, agent, seed=7):
+    obs, info = env.reset(seed=seed)
+    rewards = []
+    done = False
+    while not done:
+        action, _ = agent.predict(obs, deterministic=True)
+        obs, reward, terminated, truncated, info = env.step(action)
+        rewards.append(reward)
+        done = terminated or truncated
+    return float(sum(rewards))

@@ -1,0 +1,444 @@
+{
+  "tests_run": 80,
+  "successful": true,
+  "excerpts": [
+    {
+      "source_id": "00-preface/python-01",
+      "source": "quantlab/training.py",
+      "symbol": "model",
+      "exercised": true
+    },
+    {
+      "source_id": "01-architecture/python-01",
+      "source": "quantlab/training.py",
+      "symbol": "decision_demo",
+      "exercised": true
+    },
+    {
+      "source_id": "01-architecture/python-02",
+      "source": "quantlab/data.py",
+      "symbol": "scale_training_only",
+      "exercised": true
+    },
+    {
+      "source_id": "01-architecture/python-04",
+      "source": "quantlab/data.py",
+      "symbol": "scale_training_only",
+      "exercised": true
+    },
+    {
+      "source_id": "02-data-pipeline/python-01",
+      "source": "quantlab/data.py",
+      "symbol": "configure_logging",
+      "exercised": true
+    },
+    {
+      "source_id": "02-data-pipeline/python-02",
+      "source": "quantlab/data.py",
+      "symbol": "download_ohlcv",
+      "exercised": true
+    },
+    {
+      "source_id": "02-data-pipeline/python-03",
+      "source": "ch02_features.py",
+      "symbol": "compute_daily_features",
+      "exercised": true
+    },
+    {
+      "source_id": "02-data-pipeline/python-04",
+      "source": "quantlab/data.py",
+      "symbol": "discard_warmup",
+      "exercised": true
+    },
+    {
+      "source_id": "02-data-pipeline/python-05",
+      "source": "quantlab/statistics.py",
+      "symbol": "compute_zscore",
+      "exercised": true
+    },
+    {
+      "source_id": "04-hmm-basics/python-01",
+      "source": "quantlab/regime.py",
+      "symbol": "DailyHMM.fit",
+      "exercised": true
+    },
+    {
+      "source_id": "04-hmm-basics/python-02",
+      "source": "quantlab/regime.py",
+      "symbol": "rank_states",
+      "exercised": true
+    },
+    {
+      "source_id": "04-hmm-basics/python-03",
+      "source": "quantlab/regime.py",
+      "symbol": "DailyHMM.predict_proba",
+      "exercised": true
+    },
+    {
+      "source_id": "04-hmm-basics/python-04",
+      "source": "quantlab/regime.py",
+      "symbol": "walk_forward",
+      "exercised": true
+    },
+    {
+      "source_id": "04-hmm-basics/python-05",
+      "source": "quantlab/regime.py",
+      "symbol": "regime_signal",
+      "exercised": true
+    },
+    {
+      "source_id": "05-hmm-forward-only/python-01",
+      "source": "quantlab/regime.py",
+      "symbol": "walk_forward",
+      "exercised": true
+    },
+    {
+      "source_id": "05-hmm-forward-only/python-02",
+      "source": "quantlab/regime.py",
+      "symbol": "DailyHMM.predict_proba",
+      "exercised": true
+    },
+    {
+      "source_id": "05-hmm-forward-only/python-03",
+      "source": "quantlab/regime.py",
+      "symbol": "DailyHMM.fit",
+      "exercised": true
+    },
+    {
+      "source_id": "05-hmm-forward-only/python-04",
+      "source": "quantlab/regime.py",
+      "symbol": "DailyHMM.step_forward",
+      "exercised": true
+    },
+    {
+      "source_id": "05-hmm-forward-only/python-05",
+      "source": "quantlab/regime.py",
+      "symbol": "regime_multiplier",
+      "exercised": true
+    },
+    {
+      "source_id": "06-kalman-filter/python-01",
+      "source": "quantlab/kalman.py",
+      "symbol": "KalmanFilter1D",
+      "exercised": true
+    },
+    {
+      "source_id": "06-kalman-filter/python-02",
+      "source": "quantlab/statistics.py",
+      "symbol": "_kalman_innovations",
+      "exercised": true
+    },
+    {
+      "source_id": "06-kalman-filter/python-03",
+      "source": "quantlab/statistics.py",
+      "symbol": "_build_z_series",
+      "exercised": true
+    },
+    {
+      "source_id": "06-kalman-filter/python-04",
+      "source": "quantlab/kalman.py",
+      "symbol": "kalman_zscores",
+      "exercised": true
+    },
+    {
+      "source_id": "07-cross-asset-joint-hmm/python-01",
+      "source": "quantlab/statistics.py",
+      "symbol": "kelly_fraction",
+      "exercised": true
+    },
+    {
+      "source_id": "08-two-layer-hmm/python-01",
+      "source": "quantlab/regime.py",
+      "symbol": "blend_votes",
+      "exercised": true
+    },
+    {
+      "source_id": "09-kelly-sizing/python-01",
+      "source": "quantlab/risk.py",
+      "symbol": "@kelly",
+      "exercised": true
+    },
+    {
+      "source_id": "09-kelly-sizing/python-02",
+      "source": "quantlab/statistics.py",
+      "symbol": "fractional_kelly",
+      "exercised": true
+    },
+    {
+      "source_id": "09-kelly-sizing/python-03",
+      "source": "quantlab/risk.py",
+      "symbol": "@kelly",
+      "exercised": true
+    },
+    {
+      "source_id": "10-hmm-ensemble/python-01",
+      "source": "quantlab/regime.py",
+      "symbol": "state_return_means",
+      "exercised": true
+    },
+    {
+      "source_id": "11-stat-arb-pairs/python-01",
+      "source": "quantlab/pairs.py",
+      "symbol": "cointegration_pvalue",
+      "exercised": true
+    },
+    {
+      "source_id": "11-stat-arb-pairs/python-02",
+      "source": "quantlab/pairs.py",
+      "symbol": "find_cointegrated_pairs",
+      "exercised": true
+    },
+    {
+      "source_id": "11-stat-arb-pairs/python-03",
+      "source": "quantlab/statistics.py",
+      "symbol": "calc_halflife",
+      "exercised": true
+    },
+    {
+      "source_id": "11-stat-arb-pairs/python-04",
+      "source": "quantlab/pairs.py",
+      "symbol": "log_spread",
+      "exercised": true
+    },
+    {
+      "source_id": "11-stat-arb-pairs/python-05",
+      "source": "quantlab/pairs.py",
+      "symbol": "holding_limit",
+      "exercised": true
+    },
+    {
+      "source_id": "12-stat-arb-signals/python-01",
+      "source": "ch12_practice.py",
+      "symbol": "compute_entry_score",
+      "exercised": true
+    },
+    {
+      "source_id": "13-rl-environment/python-02",
+      "source": "quantlab/training.py",
+      "symbol": "@actions",
+      "exercised": true
+    },
+    {
+      "source_id": "13-rl-environment/python-03",
+      "source": "quantlab/training.py",
+      "symbol": "make_environment",
+      "exercised": true
+    },
+    {
+      "source_id": "13-rl-environment/python-04",
+      "source": "quantlab/training.py",
+      "symbol": "rollout",
+      "exercised": true
+    },
+    {
+      "source_id": "14-sac-agent/python-02",
+      "source": "quantlab/training.py",
+      "symbol": "load_and_act",
+      "exercised": true
+    },
+    {
+      "source_id": "15-optuna-tuning/python-01",
+      "source": "quantlab/training.py",
+      "symbol": "threshold_objective",
+      "exercised": true
+    },
+    {
+      "source_id": "15-optuna-tuning/python-02",
+      "source": "quantlab/training.py",
+      "symbol": "vote_objective",
+      "exercised": true
+    },
+    {
+      "source_id": "15-optuna-tuning/python-03",
+      "source": "quantlab/training.py",
+      "symbol": "create_study",
+      "exercised": true
+    },
+    {
+      "source_id": "16-risk-management/python-01",
+      "source": "quantlab/risk.py",
+      "symbol": "hard_stop",
+      "exercised": true
+    },
+    {
+      "source_id": "16-risk-management/python-02",
+      "source": "quantlab/risk.py",
+      "symbol": "atr_stop_loss",
+      "exercised": true
+    },
+    {
+      "source_id": "16-risk-management/python-03",
+      "source": "quantlab/risk.py",
+      "symbol": "@trailing",
+      "exercised": true
+    },
+    {
+      "source_id": "16-risk-management/python-04",
+      "source": "quantlab/risk.py",
+      "symbol": "drawdowns",
+      "exercised": true
+    },
+    {
+      "source_id": "16-risk-management/python-05",
+      "source": "quantlab/statistics.py",
+      "symbol": "compute_sortino",
+      "exercised": true
+    },
+    {
+      "source_id": "16-risk-management/python-06",
+      "source": "quantlab/risk.py",
+      "symbol": "return_tail",
+      "exercised": true
+    },
+    {
+      "source_id": "16-risk-management/python-08",
+      "source": "quantlab/risk.py",
+      "symbol": "HighWatermarks.save",
+      "exercised": true
+    },
+    {
+      "source_id": "17-ibkr/python-01",
+      "source": "quantlab/broker.py",
+      "symbol": "BrokerSession.__init__",
+      "exercised": true
+    },
+    {
+      "source_id": "17-ibkr/python-02",
+      "source": "quantlab/broker.py",
+      "symbol": "BrokerSession.connect",
+      "exercised": true
+    },
+    {
+      "source_id": "17-ibkr/python-03",
+      "source": "quantlab/broker.py",
+      "symbol": "BrokerSession.session_info",
+      "exercised": true
+    },
+    {
+      "source_id": "17-ibkr/python-04",
+      "source": "quantlab/broker.py",
+      "symbol": "BrokerSession.preview_order",
+      "exercised": true
+    },
+    {
+      "source_id": "17-ibkr/python-05",
+      "source": "quantlab/broker.py",
+      "symbol": "BrokerSession.positions",
+      "exercised": true
+    },
+    {
+      "source_id": "17-ibkr/python-06",
+      "source": "quantlab/broker.py",
+      "symbol": "BrokerSession.account_summary",
+      "exercised": true
+    },
+    {
+      "source_id": "22-hmm-pipeline-complete/python-01",
+      "source": "quantlab/data.py",
+      "symbol": "download_ohlcv",
+      "exercised": true
+    },
+    {
+      "source_id": "22-hmm-pipeline-complete/python-02",
+      "source": "hmm_demo.py",
+      "symbol": "features",
+      "exercised": true
+    },
+    {
+      "source_id": "22-hmm-pipeline-complete/python-03",
+      "source": "quantlab/data.py",
+      "symbol": "scale_training_only",
+      "exercised": true
+    },
+    {
+      "source_id": "22-hmm-pipeline-complete/python-04",
+      "source": "quantlab/regime.py",
+      "symbol": "pipeline_direction",
+      "exercised": true
+    },
+    {
+      "source_id": "23-sac-rl-preview/python-01",
+      "source": "quantlab/training.py",
+      "symbol": "make_environment",
+      "exercised": true
+    },
+    {
+      "source_id": "24-production-validation/python-01",
+      "source": "quantlab/training.py",
+      "symbol": "SafeSignal",
+      "exercised": true
+    },
+    {
+      "source_id": "26-distributional-rl-cvar/python-01",
+      "source": "quantlab/distribution.py",
+      "symbol": "QuantileNet",
+      "exercised": true
+    },
+    {
+      "source_id": "26-distributional-rl-cvar/python-02",
+      "source": "quantlab/distribution.py",
+      "symbol": "QuantileAgent.act",
+      "exercised": true
+    },
+    {
+      "source_id": "26-distributional-rl-cvar/python-03",
+      "source": "quantlab/distribution.py",
+      "symbol": "QuantileAgent.cvar",
+      "exercised": true
+    },
+    {
+      "source_id": "26-distributional-rl-cvar/python-04",
+      "source": "quantlab/distribution.py",
+      "symbol": "cvar_position_scaler",
+      "exercised": true
+    },
+    {
+      "source_id": "26-distributional-rl-cvar/python-05",
+      "source": "quantlab/distribution.py",
+      "symbol": "CVaRSizer",
+      "exercised": true
+    },
+    {
+      "source_id": "26-distributional-rl-cvar/python-06",
+      "source": "quantlab/distribution.py",
+      "symbol": "apply_cvar_to_signal",
+      "exercised": true
+    },
+    {
+      "source_id": "27-mlflow-serving/python-02",
+      "source": "quantlab/serving.py",
+      "symbol": "MlflowTracker",
+      "exercised": true
+    },
+    {
+      "source_id": "27-mlflow-serving/python-03",
+      "source": "quantlab/serving.py",
+      "symbol": "train_and_track",
+      "exercised": true
+    },
+    {
+      "source_id": "27-mlflow-serving/python-04",
+      "source": "quantlab/serving.py",
+      "symbol": "predict_actor",
+      "exercised": true
+    },
+    {
+      "source_id": "27-mlflow-serving/python-05",
+      "source": "quantlab/serving.py",
+      "symbol": "compile_jit",
+      "exercised": true
+    },
+    {
+      "source_id": "27-mlflow-serving/python-06",
+      "source": "quantlab/serving.py",
+      "symbol": "SACServingState",
+      "exercised": true
+    },
+    {
+      "source_id": "27-mlflow-serving/python-07",
+      "source": "quantlab/serving.py",
+      "symbol": "download_and_reload",
+      "exercised": true
+    }
+  ]
+}

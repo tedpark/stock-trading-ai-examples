@@ -1,6 +1,4 @@
-[ ] Can I explain what data goes into the model?
-[ ] Can I explain what feature is created from that data?
-[ ] Can I separate training data from inference data?
-[ ] Can I point to the OOS region?
-[ ] Can I say what the model outputs?
-[ ] Can I say what risk check happens before an order?
+training creates the model file
+serving loads the model file
+inference sends new features into the loaded model
+risk decides whether the model output can become an order

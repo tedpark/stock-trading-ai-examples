@@ -1,0 +1,5 @@
+def compile_jit(model):
+    """Compile a compatible torch module, not an arbitrary SAC checkpoint."""
+    import copy
+    scripted = torch.jit.script(copy.deepcopy(model).eval())
+    return torch.jit.freeze(scripted)

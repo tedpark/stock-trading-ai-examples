@@ -1,1 +1,4 @@
-entry_score = abs(z_now) * (1.0 / max(hl, 1.0)) * corr * ivr_mult * conv_boost * vol_mult
+def compute_entry_score(z, hl, corr, vol=1.0):
+    if not np.isfinite([z, hl, corr, vol]).all() or hl <= 0:
+        raise ValueError("finite inputs and positive half-life required")
+    return abs(z) / max(hl, 1.0) * corr * vol

@@ -1,0 +1,7 @@
+async def session_info(self, symbol):
+    if not self.connected or not symbol:
+        raise ValueError("connected session and symbol required")
+    rows = await asyncio.wait_for(self.backend.contract_details(symbol), 10)
+    if len(rows) != 1:
+        raise ValueError("one resolved contract required")
+    return {key: rows[0][key] for key in ("symbol", "timezone", "trading_hours", "liquid_hours")}

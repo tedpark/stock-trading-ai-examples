@@ -1,47 +1,32 @@
-import numpy as np
-import statsmodels.api as sm
-from statsmodels.stats.multitest import multipletests
-from statsmodels.tsa.stattools import coint
-
-def find_cointegrated_pairs(self, symbols) -> list:
-    tested = []
-    for sector, sector_symbols in SECTOR_SYMBOLS.items():
-        prices = self._load_prices(sector_symbols, period="3y")
-        corr_matrix = prices.pct_change().dropna().corr()
-
-        for i, sym_a in enumerate(corr_matrix.columns):
-            for sym_b in corr_matrix.columns[i+1:]:
-                
-                corr = corr_matrix.loc[sym_a, sym_b]
-                if corr < self.min_correlation:
+def find_cointegrated_pairs(prices, sectors, min_correlation=0.4, alpha=0.05, max_halflife=60):
+    """Apply BH once to every tested pair in the supplied training universe."""
+    if not 0 < alpha < 1 or not -1 <= min_correlation <= 1 or max_halflife <= 0:
+        raise ValueError("invalid selection thresholds")
+    tested, seen = [], set()
+    for symbols in sectors.values():
+        for i, a in enumerate(symbols):
+            for b in symbols[i+1:]:
+                key = tuple(sorted((a, b)))
+                if a == b or key in seen:
                     continue
-
-                pair = prices[[sym_a, sym_b]].dropna()
-                price_a = pair[sym_a]
-                price_b = pair[sym_b]
-
-                
-                _, pvalue, _ = coint(price_a.values, price_b.values)
-                X = sm.add_constant(price_b.to_numpy())
-                fit = sm.OLS(price_a.to_numpy(), X).fit()
+                seen.add(key)
+                pair = prices[[a, b]].dropna()
+                if len(pair) < 20 or not np.isfinite(pair.to_numpy()).all() or (pair <= 0).any().any():
+                    continue
+                corr = float(pair.pct_change().dropna().corr().iloc[0, 1])
+                if not np.isfinite(corr) or corr < min_correlation:
+                    continue
+                pvalue = cointegration_pvalue(pair[a], pair[b])
+                if not np.isfinite(pvalue):
+                    continue
+                fit = sm.OLS(pair[a], sm.add_constant(pair[b])).fit()
                 intercept, beta = fit.params
-                spread = price_a - (intercept + beta * price_b)
-                tested.append({
-                    "symbols": (sym_a, sym_b), "corr": corr,
-                    "pvalue": pvalue, "beta": beta,
-                    "halflife": calc_halflife(spread.to_numpy()),
-                })
-
+                spread = pair[a] - (intercept + beta * pair[b])
+                tested.append(dict(symbols=(a, b), corr=corr, pvalue=pvalue,
+                                   beta=float(beta), halflife=calc_halflife(spread)))
     if not tested:
         return []
-
-    
-    reject, qvalues, _, _ = multipletests(
-        [x["pvalue"] for x in tested], alpha=self.coint_pvalue, method="fdr_bh"
-    )
-    selected = []
-    for row, keep, qvalue in zip(tested, reject, qvalues):
-        hl = row["halflife"]
-        if keep and np.isfinite(hl) and hl <= self.max_halflife:
-            selected.append({**row, "qvalue": qvalue})
-    return sorted(selected, key=lambda x: (x["qvalue"], x["halflife"]))
+    reject, qvalues, _, _ = multipletests([p['pvalue'] for p in tested], alpha=alpha, method='fdr_bh')
+    return sorted([{**p, 'qvalue':float(q)} for p, keep, q in zip(tested, reject, qvalues)
+                   if keep and np.isfinite(p['halflife']) and p['halflife'] <= max_halflife],
+                  key=lambda p:(p['qvalue'], p['halflife']))

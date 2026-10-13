@@ -1,1 +1,2 @@
-print(["hold", "cash"])
+def decision_demo():
+    return [model([0.01]), model([-0.01])]

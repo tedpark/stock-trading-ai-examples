@@ -1,4 +1,2 @@
-study = optuna.create_study(
-    direction="maximize",
-    sampler=optuna.samplers.TPESampler(seed=42),
-)
+def create_study():
+    return optuna.create_study(direction="maximize", sampler=optuna.samplers.TPESampler(seed=42))

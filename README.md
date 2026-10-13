@@ -48,7 +48,7 @@ The chapter scripts remain offline examples. A separate [integrated paper servic
 
 ## Repository-first book workflow
 
-The repository is authoritative. `book_contract.json` maps 107 Python slots per edition to source: 34 runnable mappings read the actual chapter/helper `.py` files, and 73 explanatory/counterexample slots read `book_snippets/`. Change and test those files first. Never fix a manuscript or derived archive instead of the source.
+The repository is authoritative. `book_contract.json` maps 107 Python slots per edition to source: 34 runnable mappings read the actual chapter/helper `.py` files, and 73 excerpts are selected by named functions, classes or source regions from executable `.py` implementation. Change and test those files first. Never fix a manuscript or derived archive instead of the source.
 
 With a private book checkout available, run `python sync_book.py --book-root /path/to/stock-trading-ai --write --refresh-index`, then `python sync_book.py --book-root /path/to/stock-trading-ai --check`. The tool updates all three editions and refuses missing, added, or reordered source anchors. Default mode only checks. Index refresh refuses manuscript drift and never rewrites canonical source. The book build also checks its repository commit/hash lock.
 
@@ -120,3 +120,5 @@ See [REVIEW.md](REVIEW.md) for numerical fixes, input checks, and comment clarif
 [GitHub: tedpark/stock-trading-ai-examples](https://github.com/tedpark/stock-trading-ai-examples)
 
 The repository contains learning examples, installation instructions, and tests. It excludes book manuscripts/PDFs, sales and deployment configuration, account information, and real trading data. See [BOOK_COVERAGE.md](BOOK_COVERAGE.md) for the mapping and review notes.
+
+Every Python source must compile as a module and may not contain Ellipsis placeholders. Excerpts are extracted with AST symbols; `.txt` archives cannot serve as implementation sources. Shell/JSON listings use `command_contract.json`. Run `python verify_runtime_sources.py` for measured callable execution evidence from regression tests. `quantlab/` contains the actual learning components; its broker interface previews orders with a local backend and does not submit live orders.
