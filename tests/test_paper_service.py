@@ -72,7 +72,16 @@ class PaperServiceTests(unittest.TestCase):
             self.assertEqual(prediction.status_code,200,prediction.text)
             self.assertEqual(prediction.json()['forecast_units'],'log_return_per_bar')
             self.assertAlmostEqual(sum(prediction.json()['state_probabilities']),1)
-            (Path(d)/'models'/'demo'/'model.joblib').unlink()
+            model_file=Path(d)/'models'/'demo'/'model.joblib'
+            model_file.write_bytes(b'\x80')  # Truncated pickle header.
+            corrupt=restarted.post('/runs/demo/predict',json={'bars':rows(make_bars())})
+            self.assertEqual(corrupt.status_code,503)
+            self.assertEqual(restarted.get('/runs/demo').json()['status'],'completed')
+            import joblib
+            joblib.dump({'schema_version':999},model_file)
+            wrong_schema=restarted.post('/runs/demo/predict',json={'bars':rows(make_bars())})
+            self.assertEqual(wrong_schema.status_code,503)
+            model_file.unlink()
             missing=restarted.post('/runs/demo/predict',json={'bars':rows(make_bars())})
             self.assertEqual(missing.status_code,503)
             self.assertNotIn(d,missing.text)
