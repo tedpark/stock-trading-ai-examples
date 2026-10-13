@@ -1,0 +1,9 @@
+A spread that just keeps widening (not cointegrated)
+   ↑
+   │              ╱
+   │           ╱
+   │       ╱
+   │    ╱
+   │ ╱
+   │
+   └─────────────────→ time

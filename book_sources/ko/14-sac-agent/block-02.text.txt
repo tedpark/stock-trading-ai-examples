@@ -1,0 +1,9 @@
+예시 A
+z_score = 2.5
+HMM = [MR 0.80, Trend 0.15, Volatile 0.05]
+Actor 출력 ≈ 진입 또는 비중 확대
+
+예시 B
+z_score = 2.5
+HMM = [MR 0.10, Trend 0.25, Volatile 0.65]
+Actor 출력 ≈ 관망 또는 비중 축소

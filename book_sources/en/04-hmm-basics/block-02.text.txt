@@ -1,0 +1,9 @@
+Regime found by HMM
+[MR 70%, Trend 20%, Volatile 10%]
+        |
+        v
+Part of the RL state vector
+[z_score, position, pnl, MR_prob, Trend_prob, Volatile_prob, ...]
+        |
+        v
+SAC decides position size

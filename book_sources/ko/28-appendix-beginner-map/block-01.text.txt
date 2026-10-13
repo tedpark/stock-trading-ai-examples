@@ -1,0 +1,8 @@
+시장 데이터
+→ 피처
+→ HMM 레짐
+→ Pairs / Z-score
+→ SAC / Kelly 사이징
+→ Risk
+→ Broker
+→ Monitoring / MLflow

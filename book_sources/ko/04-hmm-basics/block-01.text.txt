@@ -1,0 +1,9 @@
+아직 학습 전:
+GaussianHMM(n_components=3)
+상태 3개로 나눌 준비만 된 빈 틀
+
+학습:
+빈 틀 + X_train --fit()--> 학습된 HMM 모델
+
+추론:
+학습된 HMM 모델 + 오늘 피처 --> [MR 70%, Trend 20%, Volatile 10%]

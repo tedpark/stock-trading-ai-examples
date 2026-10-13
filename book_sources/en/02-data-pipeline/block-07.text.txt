@@ -1,0 +1,9 @@
+cache/historical_data/ohlcv/
+├── AAPL/
+│   ├── 1d/
+│   │   ├── 2023-01.parquet
+│   │   ├── 2023-02.parquet
+│   │   └── ...
+│   └── 1h/
+│       └── 2024-11.parquet
+└── MSFT/...

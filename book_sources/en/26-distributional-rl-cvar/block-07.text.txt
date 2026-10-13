@@ -1,0 +1,1 @@
+final_size = base_size × cvar_multiplier

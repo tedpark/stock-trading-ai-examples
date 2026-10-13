@@ -1,0 +1,12 @@
+X = 모델이 읽는 피처 행렬
+
+과거                                                        최근
+|--------------------------------|----------------------------|
+              X_train                         X_oos
+              학습 데이터                       검증/추론 데이터
+
+scaler.fit(X_train)
+hmm.fit(X_train)
+
+for x in X_oos:
+    proba = hmm.step_forward(x)   # 모델을 새로 학습하지 않고 판단만 한다

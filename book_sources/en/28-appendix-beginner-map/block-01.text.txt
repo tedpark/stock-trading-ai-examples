@@ -1,0 +1,8 @@
+Market data
+→ Features
+→ HMM regimes
+→ Pairs / Z-score
+→ SAC / Kelly sizing
+→ Risk
+→ Broker
+→ Monitoring / MLflow

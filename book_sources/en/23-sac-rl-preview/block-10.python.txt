@@ -1,0 +1,24 @@
+class PairsTradingEnv(gym.Env):
+    """Pair-trading Gymnasium environment for a SAC agent."""
+
+    def __init__(self, spreads, alpha_proba, market_features, episode_length=252):
+        
+        self.observation_space = spaces.Box(
+            low=-np.inf, high=np.inf, shape=(28,), dtype=np.float32
+        )
+        
+        self.action_space = spaces.Box(
+            low=-1.0, high=1.0, shape=(N_PAIRS,), dtype=np.float32
+        )
+        ...
+
+    def _compute_reward(self, prev_val, new_val, turnover):
+        pnl = (new_val - prev_val) / (prev_val + 1e-8)
+        drawdown = 1.0 - (new_val / (self._peak_value + 1e-8))
+
+        score_term      = pnl_rolling_mean / (pnl_rolling_std + 1e-8)
+        dd_penalty       = 0.3 * max(0.0, drawdown - 0.05)
+        trade_cost       = COMMISSION * turnover
+        leverage_penalty = 0.5 * max(0.0, leverage - MAX_LEVERAGE)
+
+        return score_term - dd_penalty - trade_cost - leverage_penalty

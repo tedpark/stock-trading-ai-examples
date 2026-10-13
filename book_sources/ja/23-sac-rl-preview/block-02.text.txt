@@ -1,0 +1,2 @@
+HMMレジーム確率 α(t)
+[MR 0.72, Trend 0.18, Volatile 0.10]

@@ -1,0 +1,2 @@
+[─── Train (HMM training) ───][── Validation (what Optuna sees) ──][── Final test (only the human sees) ──]
+        past                       recent past                          most recent

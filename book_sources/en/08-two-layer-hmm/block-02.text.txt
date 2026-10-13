@@ -1,0 +1,1 @@
+final signal = e_sym (Layer B direction) × regime_mult (Layer A size)

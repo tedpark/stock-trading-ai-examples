@@ -1,0 +1,14 @@
+Chapter 11 output
+candidate pair: KO / PEP
+        |
+        v
+Chapter 12 input
+current spread, Z-score, half-life, correlation, volume
+        |
+        v
+Signal generation
+enter / wait / exit
+        |
+        v
+Chapters 13-14 RL
+read the signal and adjust position size

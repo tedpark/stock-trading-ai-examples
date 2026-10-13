@@ -1,0 +1,6 @@
+from statsmodels.tsa.stattools import coint
+
+_, pvalue, _ = coint(price_a.values, price_b.values)
+
+if pvalue >= self.coint_pvalue:    # default = 0.05
+    continue

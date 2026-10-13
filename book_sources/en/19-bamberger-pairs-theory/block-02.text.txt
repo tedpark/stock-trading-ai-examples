@@ -1,0 +1,3 @@
+spread_t = price_A(t) - β × price_B(t)
+
+where β is the hedge ratio

@@ -1,0 +1,3 @@
+state vector -> Actor -> action proposal
+state + action -> Critic -> quality estimate
+Alpha -> controls exploration during training

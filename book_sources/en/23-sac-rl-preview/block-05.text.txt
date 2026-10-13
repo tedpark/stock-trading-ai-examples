@@ -1,0 +1,7 @@
+pair signal: z_score = 2.3
+
+case A: HMM says MR is high
+  -> RL may increase size
+
+case B: HMM says Volatile is high
+  -> RL may reduce size or wait

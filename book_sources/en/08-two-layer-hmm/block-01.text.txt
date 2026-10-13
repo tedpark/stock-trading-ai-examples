@@ -1,0 +1,8 @@
+Layer A asks:
+  What kind of market are we in overall?
+
+Layer B asks:
+  Given that market, what short-term signal do we see now?
+
+Final combination asks:
+  Should this signal become a position, and how large?

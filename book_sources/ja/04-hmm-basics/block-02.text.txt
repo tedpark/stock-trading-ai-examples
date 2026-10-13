@@ -1,0 +1,9 @@
+HMMが見つけたレジーム
+[MR 70%, Trend 20%, Volatile 10%]
+        |
+        v
+RL状態ベクトルの一部
+[z_score, position, pnl, MR_prob, Trend_prob, Volatile_prob, ...]
+        |
+        v
+SACがポジションサイズを決める

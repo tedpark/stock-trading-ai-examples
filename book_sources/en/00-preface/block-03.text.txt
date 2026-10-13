@@ -1,0 +1,1 @@
+feature row today -> trained model -> regime probability / action proposal

@@ -1,0 +1,8 @@
+Order lifecycle
+signal generation
+  -> risk approval
+  -> order object creation
+  -> broker acceptance confirmation
+  -> fill status check
+  -> compare internal position with broker position
+  -> alert or synchronize if they differ

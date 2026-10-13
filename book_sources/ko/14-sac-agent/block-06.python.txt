@@ -1,0 +1,2 @@
+agent  = SACAgent.load("cache/models/rl/stat_pair/model_2025-01-01.pt")
+action = agent.act(state, deterministic=True)

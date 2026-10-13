@@ -1,0 +1,5 @@
+Model's question:
+Is this trade favorable?
+
+Risk's question:
+If this trade is wrong, can we still survive?

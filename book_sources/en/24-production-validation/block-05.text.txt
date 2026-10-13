@@ -1,0 +1,6 @@
+[ ] Check the rolling-30-day performance alert thresholds
+[ ] Review the regime distribution chart (one regime above 95% is suspicious)
+[ ] IBKR connection logs — track the reconnect count over time
+[ ] Review the alert history (a repeating alert means the root cause is unsolved)
+[ ] Feature distribution chart — mean/stdev differences vs. training
+[ ] Check adjusted-price restatement detection logs

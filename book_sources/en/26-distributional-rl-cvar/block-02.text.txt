@@ -1,0 +1,10 @@
+HMM regime + pairs signal + current position
+        |
+        v
+RL evaluates candidate actions
+        |
+        +-- Expected reward: how good is this in normal conditions?
+        +-- CVaR: how deep can the loss get in bad conditions?
+        |
+        v
+If tail loss is large, shrink the position

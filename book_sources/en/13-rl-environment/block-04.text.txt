@@ -1,0 +1,9 @@
+Training stage:
+simulate many actions inside historical data
+reward good actions and penalize bad ones
+SAC repeatedly adjusts the policy network weights
+
+Inference stage:
+feed today's state vector into the trained SAC Actor
+the Actor does not train again
+it only outputs a position action

@@ -1,0 +1,11 @@
+def kelly_fraction(p_up, macro_bias, asset_class):
+    import math
+    if not (math.isfinite(p_up) and 0.0 <= p_up <= 1.0):
+        raise ValueError("p_up must be in [0, 1]")
+    if not (math.isfinite(macro_bias) and -1.0 <= macro_bias <= 1.0):
+        raise ValueError("macro_bias must be in [-1, 1]")
+    # Illustrative long-only, unit-payoff-odds allocation.
+    base = max(p_up - 0.5, 0.0)
+    sensitivity = {"equity": 0.5, "safe_haven": -0.5}.get(asset_class, 0.0)
+    multiplier = max(0.0, 1.0 + macro_bias * sensitivity)
+    return min(base * multiplier, 1.0)

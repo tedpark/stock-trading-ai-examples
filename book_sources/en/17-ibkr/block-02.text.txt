@@ -1,0 +1,3 @@
+Did the model's numeric decision become
+the broker account's real position
+accurately, exactly once, and in a verifiable way?

@@ -1,0 +1,12 @@
+X = feature matrix read by the model
+
+past                                                        recent
+|--------------------------------|----------------------------|
+              X_train                         X_oos
+              training data                   validation / inference data
+
+scaler.fit(X_train)
+hmm.fit(X_train)
+
+for x in X_oos:
+    proba = hmm.step_forward(x)   # judge only; do not train again

@@ -1,0 +1,8 @@
+Good tuning:
+create candidates on the training window,
+compare them on the validation window,
+and look at the final test window only once at the end.
+
+Bad tuning:
+keep watching the final test result
+and change values little by little until the number looks better.

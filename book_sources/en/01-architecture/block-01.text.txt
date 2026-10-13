@@ -1,0 +1,8 @@
+1. Record the market        Data
+2. Turn it into numbers     Features
+3. Read the state           HMM
+4. Find an opportunity      Pairs / Z-score
+5. Choose the size          SAC / RL
+6. Block bad risk           Risk
+7. Send the order           Broker
+8. Keep watching            Monitoring

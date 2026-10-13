@@ -1,0 +1,12 @@
+X = モデルが読む特徴量行列
+
+過去                                                        直近
+|--------------------------------|----------------------------|
+              X_train                         X_oos
+              学習データ                       検証 / 推論データ
+
+scaler.fit(X_train)
+hmm.fit(X_train)
+
+for x in X_oos:
+    proba = hmm.step_forward(x)   # 判断だけ。再学習はしない

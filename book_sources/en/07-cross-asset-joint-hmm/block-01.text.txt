@@ -1,0 +1,11 @@
+Single-asset HMM
+Watch only SPY and infer the market state
+        |
+        v
+May notice risk only after stocks have already moved
+
+Joint HMM
+Watch SPY + TLT + HYG + VIX + GLD together
+        |
+        v
+Includes early warnings from bonds, credit, and volatility

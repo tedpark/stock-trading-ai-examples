@@ -1,0 +1,6 @@
+model file is normal
+code runs
+no exception is raised
+
+but if feature order, missing-value handling, or regime mapping changes,
+the actual judgment can become completely different

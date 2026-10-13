@@ -1,0 +1,8 @@
+市場データ
+→ 特徴量
+→ HMM レジーム
+→ Pairs / Z-score
+→ SAC / Kelly サイジング
+→ Risk
+→ Broker
+→ Monitoring / MLflow

@@ -1,0 +1,13 @@
+Next day's input state
+z_score             = 2.6
+current position    = 0.40
+holding period      = 1 day
+unrealized PnL      = -0.3%
+HMM regime probs    = [MR 0.20, Trend 0.30, Volatile 0.50]
+recent volatility   = high
+
+SAC Actor output
+action = +0.10
+
+Interpretation
+candidate to reduce the existing position because riskier regimes grew

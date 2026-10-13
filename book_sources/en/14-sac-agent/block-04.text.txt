@@ -1,0 +1,13 @@
+Today's input state
+z_score             = 2.4
+current position    = 0.0
+holding period      = 0 days
+unrealized PnL      = 0.0
+HMM regime probs    = [MR 0.75, Trend 0.15, Volatile 0.10]
+recent volatility   = low
+
+SAC Actor output
+action = +0.40
+
+Interpretation
+candidate to enter long up to 40% of allowed size

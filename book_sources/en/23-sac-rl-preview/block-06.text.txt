@@ -1,0 +1,20 @@
+1. Data pipeline
+   Record the market as numbers.
+
+2. Feature engineering
+   Turn raw data into questions the model can read.
+
+3. HMM
+   Read the current market regime as probabilities.
+
+4. Pairs / Z-score
+   Measure how far two stocks have spread apart.
+
+5. Regime Z-score
+   Judge whether that spread matters under the current regime.
+
+6. SAC RL
+   Read all of the above and choose the position size.
+
+7. Risk / Broker
+   Send only actions that pass the risk limits as real orders.

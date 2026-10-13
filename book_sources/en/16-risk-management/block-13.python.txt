@@ -1,0 +1,8 @@
+def _save_high_watermark(self, symbol, price):
+    self._high_watermarks[symbol] = price                
+    if self._mongo_collection is not None:
+        self._mongo_collection.update_one(
+            {"symbol": symbol},
+            {"$set": {"high_watermark": price}},
+            upsert=True,
+        )

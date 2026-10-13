@@ -1,0 +1,21 @@
+All candidates
+many noisy stock combinations
+        |
+        v
+Liquidity filter
+remove stocks that are hard to trade
+        |
+        v
+Economic relationship filter
+keep same-sector or substitute relationships
+        |
+        v
+Cointegration / half-life filter
+check whether the relationship actually reverts
+        |
+        v
+HMM regime filter
+check whether the relationship still works in the current market state
+        |
+        v
+trade candidates that can be passed to RL

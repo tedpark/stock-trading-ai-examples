@@ -1,0 +1,30 @@
+
+
+def fit(self, features: np.ndarray) -> bool:
+    X = features[~np.any(np.isnan(features), axis=1)]   
+    if len(X) < 60:                                     
+        return False
+
+    scaler = StandardScaler()
+    Xs = scaler.fit_transform(X)                        
+
+    model = GaussianHMM(
+        n_components=HMM_N_STATES,
+        covariance_type="full",                         
+        n_iter=HMM_N_ITER,
+        random_state=SEED,
+        tol=1e-4,
+        min_covar=1e-3,                                 
+    )
+    model.fit(Xs)                                       
+
+    
+    total_var = [float(np.trace(model.covars_[i])) for i in range(HMM_N_STATES)]
+    order = np.argsort(total_var)
+    self._state_map = {
+        int(order[0]): self.REGIME_MR,        
+        int(order[1]): self.REGIME_TREND,
+        int(order[2]): self.REGIME_VOLATILE,  
+    }
+    self.model, self._scaler = model, scaler
+    return True

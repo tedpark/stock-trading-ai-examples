@@ -1,0 +1,1 @@
+This layer receives ___, changes it into ___, and passes it to ___.

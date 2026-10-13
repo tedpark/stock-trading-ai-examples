@@ -1,0 +1,6 @@
+alpha[t] = [0.72, 0.15, 0.13]
+
+→ 72% probability of regime 0 (low volatility, mean-reverting)
+→ 15% probability of regime 1 (transition)
+→ 13% probability of regime 2 (high volatility, trending)
+→ confidence = max(alpha[t]) = 0.72

@@ -1,0 +1,10 @@
+Layer A: 시장 전체 판단
+오늘은 Risk-On인가, Risk-Off인가, 추세인가, 위기인가?
+        │
+        ▼
+Layer B: 개별 신호 판단
+VWAP, Kalman, 거래량, 모멘텀 서브모델들이 방향 의견을 냄
+        │
+        ▼
+결합
+방향 의견 e_sym × 시장 배율 regime_mult = 최종 신호

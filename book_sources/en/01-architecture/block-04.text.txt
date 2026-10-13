@@ -1,0 +1,8 @@
+stock_trading_ai_py/
++-- app/trading/
+|   +-- backtest/         # The engine that validates strategies
+|   +-- backtest/signals/ # HMM, StatArb, and RL signal definitions
+|   +-- rl/               # SAC reinforcement learning implementation
+|   +-- cache/            # Price data cache
++-- refresh_cache.py      # Refresh the data cache
++-- pyproject.toml        # Python dependencies

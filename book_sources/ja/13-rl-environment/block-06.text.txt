@@ -1,0 +1,11 @@
+今日の状態ベクトル
+[z_score, position, pnl, MR_prob, Trend_prob, Volatile_prob, ...]
+        |
+        v
+学習済みSAC Actor
+        |
+        v
+action = +0.35
+        |
+        v
+リスクレイヤーが注文可能かを最終判断

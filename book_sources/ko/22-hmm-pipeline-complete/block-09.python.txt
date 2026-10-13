@@ -1,0 +1,20 @@
+# Start flat on each decision; no stale direction from the previous bar.
+direction = 0
+# i 시점: 가장 확률 높은 레짐과 그 확률
+current_regime = int(np.argmax(alpha[i]))
+max_prob       = alpha[i].max()
+
+# 1단계: 레짐이 확실하지 않으면 관망
+if max_prob < CONFIDENCE_THRESHOLD:        # 예: 0.65
+    continue
+
+# 2단계: 레짐별 분기
+if current_regime == 0:                    # 저변동: 평균 회귀
+    if z < -Z_ENTRY:   direction = +1
+    elif z > +Z_ENTRY: direction = -1
+
+elif current_regime == 2:                  # 고변동: 모멘텀 추종
+    if z > +1.0:       direction = +1
+    elif z < -1.0:     direction = -1
+
+# 레짐 1은 분기에 없음 — 관망

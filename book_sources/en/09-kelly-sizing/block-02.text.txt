@@ -1,0 +1,8 @@
+Prediction model's job:
+find a slightly favorable direction.
+
+Kelly's job:
+if the edge is small, make the position small.
+
+Risk management's job:
+if it is still too large, shrink or block it again.

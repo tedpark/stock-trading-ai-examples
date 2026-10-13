@@ -1,0 +1,11 @@
+
+
+total_var = [np.trace(model.covars_[i]) for i in range(3)]
+
+
+order = np.argsort(total_var)         
+state_map = {
+    int(order[0]): _DailyHMM.REGIME_MR,
+    int(order[1]): _DailyHMM.REGIME_TREND,
+    int(order[2]): _DailyHMM.REGIME_VOLATILE,
+}

@@ -1,0 +1,2 @@
+KELLY_MIN = 0.10   
+KELLY_MAX = 1.0

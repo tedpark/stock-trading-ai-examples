@@ -1,0 +1,7 @@
+
+if pnl_pct <= self.hard_stop_threshold:           
+    return TradingSignal(
+        action=SignalAction.SELL,
+        reason=f"hard stop {pnl_pct*100:.1f}%",
+        metadata={"sell_type": "hard_stop"},
+    )

@@ -1,0 +1,7 @@
+# 잘못된 코드
+scaler = StandardScaler()
+scaler.fit(X_all)            # 미래 분포가 과거 스케일에 영향
+
+# 올바른 코드
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled  = scaler.transform(X_test)

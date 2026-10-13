@@ -1,0 +1,6 @@
+on_bar(bar_idx):
+    update_hmm(bar_idx)              # 1) 10봉 주기 재학습 + 레짐 확률 갱신
+    for 보유 중인 종목:               # 2) 청산 먼저 — _check_exit()
+        if 청산 조건 만족: 포지션 닫기
+    for 미보유 종목:                  # 3) 그다음 신규 진입 — _check_entry()
+        if 진입 조건 만족: 포지션 열기

@@ -1,0 +1,2 @@
+raw_alpha = (previous_alpha × A) * e_t
+new_alpha = raw_alpha / sum(raw_alpha)

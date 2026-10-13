@@ -1,0 +1,8 @@
+Time axis:     ... t-3  t-2  t-1   t   t+1  t+2  t+3 ...
+
+predict_proba:  ─────────────────[ t ]─────────────────   (looks at both sides)
+                     ← past →          ← future →
+                                  ↑ look-ahead!
+
+Forward-only:   ─────────────────[ t ]                    (past + present only)
+                     ← past →

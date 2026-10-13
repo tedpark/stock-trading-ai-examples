@@ -1,0 +1,10 @@
+class SafeSignal:
+    def __init__(self):
+        self._model = GaussianHMM(...)
+        self._lock  = threading.RLock()
+
+    def retrain(self, X_new):
+        new_model = GaussianHMM(n_components=3, n_iter=200, random_state=42)
+        new_model.fit(X_new)           # 기존 _model은 건드리지 않음
+        with self._lock:               # 교체만 lock으로 보호
+            self._model = new_model

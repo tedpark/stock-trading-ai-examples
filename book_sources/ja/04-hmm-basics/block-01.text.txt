@@ -1,0 +1,10 @@
+学習前:
+GaussianHMM(n_components=3)
+市場を3状態に分ける準備だけできた空の器
+
+学習:
+空の器 + X_train --fit()--> 学習済みHMMモデル
+
+推論:
+学習済みHMMモデル + 今日の特徴量
+    -> [MR 70%, Trend 20%, Volatile 10%]

@@ -1,0 +1,4 @@
+Half-life 2 days: reversion too fast → slippage may eat the profit
+Half-life 10 days: practical range (about 1–2 weeks)
+Half-life 60 days: slow reversion, capital tied up for a long time
+Half-life 180+ days: not suitable for trading

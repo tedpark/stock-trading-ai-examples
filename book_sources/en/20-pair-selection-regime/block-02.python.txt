@@ -1,0 +1,68 @@
+from itertools import combinations
+from scipy.stats import linregress
+from statsmodels.stats.multitest import multipletests
+from statsmodels.tsa.stattools import coint
+
+import numpy as np
+import pandas as pd
+
+
+def _half_life(spread):
+    values = np.asarray(spread, dtype=float)
+    slope = linregress(values[:-1], np.diff(values)).slope
+    phi = 1 + slope
+    return -np.log(2) / np.log(phi) if 0 < phi < 1 else float("inf")
+
+
+def _yearly_signal_count(spread, half_life):
+    series = pd.Series(spread, dtype=float)
+    window = max(20, int(2 * half_life))
+    past = series.shift(1).rolling(window)
+    z = (series - past.mean()) / past.std()
+    valid = z.notna()
+    outside = z.abs() > 1.5
+    crossings = outside & ~outside.shift(1, fill_value=False) & valid
+    return float(crossings.sum() * 252 / valid.sum()) if valid.any() else 0.0
+
+
+rng = np.random.default_rng(42)
+common = 100 + np.cumsum(rng.normal(0, 0.5, 500))
+noise = np.zeros(500)
+for t in range(1, len(noise)):
+    noise[t] = 0.95 * noise[t-1] + rng.normal(0, 0.1)
+prices_train = pd.DataFrame({"A": 1.2 * common + noise, "B": common})
+symbols = list(prices_train.columns)
+
+tested = []
+for sym_a, sym_b in combinations(symbols, 2):
+    pa, pb = prices_train[sym_a], prices_train[sym_b]
+
+    # (1) OLS hedge ratio with an intercept, then calculate the spread
+    slope, intercept, *_ = linregress(pb.values, pa.values)
+    spread = pa - (intercept + slope * pb)
+
+    # (2) Engle-Granger p-value for the cointegrating regression
+    _, eg_p, _ = coint(pa.values, pb.values)
+    tested.append((sym_a, sym_b, slope, spread, eg_p))
+
+# (3) Apply FDR correction after collecting all raw p-values
+candidates = []
+if tested:
+    reject, qvalues, _, _ = multipletests(
+        [row[4] for row in tested], alpha=0.05, method="fdr_bh"
+    )
+    for row, keep, qvalue in zip(tested, reject, qvalues):
+        if not keep:
+            continue
+        sym_a, sym_b, beta, spread, eg_p = row
+        hl = _half_life(spread)
+        if not (5.0 <= hl <= 60.0):
+            continue
+        if _yearly_signal_count(spread, hl) < 20:
+            continue
+
+        candidates.append({"symbols": (sym_a, sym_b), "beta": beta,
+                           "eg_p": eg_p, "qvalue": qvalue, "halflife": hl})
+
+print("tested", len(tested), "candidates", len(candidates))
+assert len(tested) == 1

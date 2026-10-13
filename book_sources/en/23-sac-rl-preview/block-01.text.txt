@@ -1,0 +1,3 @@
+market data -> feature generation -> HMM training / inference
+            -> pairs signal -> RL state vector
+            -> SAC training / inference -> position

@@ -1,8 +1,8 @@
 # Implementing AI Quant Trading with Python — Dummy Data Examples
 
-This repository contains **33 runnable scripts** covering the quick start in Chapter 00 through Chapter 27, plus a learning guide in Chapter 28. They follow the concepts shared by the Korean, English, and Japanese editions of the book. All repository documentation, code comments, docstrings, and program messages are in English.
+This repository contains **33 runnable scripts** covering the quick start in Chapter 00 through Chapter 27, plus a learning guide in Chapter 28. They follow the concepts shared by the Korean, English, and Japanese editions of the book. Runnable examples and repository documentation use English. Exact archived book fragments preserve their edition-specific comments and docstrings.
 
-All prices, volumes, returns, and order events are **dummy data**, generated or hardcoded in the examples. These exercises are for learning and testing. No account, API key, broker connection, or market data download is required. Installing dependencies requires internet access; the examples run locally afterward. Reported returns describe synthetic experiments.
+In the chapter scripts, all prices, volumes, returns, and order events are **dummy data**, generated or hardcoded in the examples. These exercises are for learning and testing. No account, API key, broker connection, or market data download is required. Installing dependencies requires internet access; the examples run locally afterward. Reported returns describe synthetic experiments.
 
 ## 1. Quick start
 
@@ -45,6 +45,10 @@ SAC trains a small neural network on the CPU for just 128 steps. Torch is a larg
 ## Integrated paper-trading service
 
 The chapter scripts remain offline examples. A separate [integrated paper service](paper_service/README.md) now connects data, HMM training, causal signals, risk limits, simulated fills, persistent accounting, an HTTP API and optional MLflow recording. Start it with `python -m uvicorn paper_service.app:app --host 127.0.0.1 --port 8766` after installing `requirements-service.txt`. `verify_service.py` tests actual local HTTP servers. Optional Yahoo downloads require `requirements-market.txt`; broker orders are never submitted.
+
+## Complete printed-source inventory
+
+[book_sources/README.md](book_sources/README.md) and `book_sources/index.json` map every fenced code block from all three editions, including all 107 Python blocks per edition. Only 34 per edition map to runnable examples; the remaining 73 are explicitly classified fragments or counterexamples. Exact source inclusion is not a claim that every design is implemented. Run `python verify_book_sources.py` to check integrity and mappings.
 
 ## 3. How the examples map to the book
 
