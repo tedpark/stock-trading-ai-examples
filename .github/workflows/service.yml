@@ -1,0 +1,31 @@
+name: Verify paper service
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      OMP_NUM_THREADS: '1'
+      OPENBLAS_NUM_THREADS: '1'
+      MLFLOW_ENABLE_TELEMETRY: 'false'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: 'requirements*.txt'
+      - run: python -m pip install -r requirements-service.txt
+      - run: python -m pip check
+      - run: python -m unittest discover -s tests -p test_paper_service.py
+      - run: python verify_service.py --output service-test-data
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: paper-service-verification
+          path: service-test-data/

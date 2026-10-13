@@ -42,6 +42,10 @@ python verify.py            # Block outbound connections and run all examples/te
 
 SAC trains a small neural network on the CPU for just 128 steps. Torch is a large initial download, so install only `requirements.txt` to start with the core exercises. Random seeds are fixed, but library and operating-system differences can affect model results and the last decimal places.
 
+## Integrated paper-trading service
+
+The chapter scripts remain offline examples. A separate [integrated paper service](paper_service/README.md) now connects data, HMM training, causal signals, risk limits, simulated fills, persistent accounting, an HTTP API and optional MLflow recording. Start it with `python -m uvicorn paper_service.app:app --host 127.0.0.1 --port 8766` after installing `requirements-service.txt`. `verify_service.py` tests actual local HTTP servers. Optional Yahoo downloads require `requirements-market.txt`; broker orders are never submitted.
+
 ## 3. How the examples map to the book
 
 The scripts combine the book's standalone runnable blocks with any definitions they need. Chapters 04, 21, and 22 adapt explanatory or architectural excerpts into runnable dummy-data exercises. Chapter 28 prints a learning path and file list. Chapter 12 removes a duplicate function definition and rejects invalid half-lives, entry thresholds, correlations, and volume multipliers.

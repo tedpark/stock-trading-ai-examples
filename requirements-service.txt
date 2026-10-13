@@ -1,0 +1,5 @@
+-r requirements.txt
+# Needed to expose the FastAPI application over a real local HTTP socket.
+uvicorn>=0.30,<1
+# Optional experiment tracking is exercised by the integration test.
+mlflow==3.17.0

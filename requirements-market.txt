@@ -1,0 +1,3 @@
+-r requirements-service.txt
+# Optional public daily market-data download, separate from the offline examples.
+yfinance>=0.2.54,<2
