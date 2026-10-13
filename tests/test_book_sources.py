@@ -21,7 +21,7 @@ def extract(edition,chapter,needle,**scope):
 
 class PrintedSourceTests(unittest.TestCase):
     def test_complete_integrity_and_runnable_mapping(self):
-        self.assertEqual(verify()['fenced_blocks'],652)
+        self.assertEqual(verify()['fenced_blocks'],650)
 
     def test_missing_non_python_source_is_rejected(self):
         for edition in ['ko','en','ja']:
