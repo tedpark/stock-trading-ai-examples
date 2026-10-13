@@ -15,6 +15,7 @@ def dummy_bars(n=360, seed=42):
 
 
 def features(bars):
+    """Return uses log(close[t]/close[t-1]); it is not an arithmetic return."""
     close, volume = bars.close, bars.volume
     returns = np.log(close / close.shift())
     return pd.DataFrame({
@@ -38,16 +39,33 @@ def fit_model(x, train_len):
 
 def forward(model, x):
     """Filter in log space without future observations. Columns retain the original state order."""
+    x = np.asarray(x, dtype=float)
+    if x.ndim != 2 or len(x) == 0 or not np.isfinite(x).all():
+        raise ValueError('nonempty finite feature matrix required')
     emissions = np.column_stack([
         multivariate_normal.logpdf(x, mean=mean, cov=cov)
         for mean, cov in zip(model.means_, model.covars_)])
-    transition = np.log(np.maximum(model.transmat_, 1e-300))
-    log_alpha = np.log(np.maximum(model.startprob_, 1e-300))
+    transition_probs = np.asarray(model.transmat_, dtype=float)
+    start_probs = np.asarray(model.startprob_, dtype=float)
+    n_states = len(model.means_)
+    if (transition_probs.shape != (n_states, n_states) or start_probs.shape != (n_states,)
+            or not np.isfinite(transition_probs).all() or not np.isfinite(start_probs).all()
+            or (transition_probs < 0).any() or (start_probs < 0).any()
+            or not np.allclose(transition_probs.sum(axis=1), 1)
+            or not np.isclose(start_probs.sum(), 1)):
+        raise ValueError('normalized nonnegative HMM probabilities required')
+    # A structural zero means impossible, not a tiny positive probability.
+    with np.errstate(divide='ignore'):
+        transition = np.log(transition_probs)
+        log_alpha = np.log(start_probs)
     result = []
     for t, emission in enumerate(emissions):
         if t:
             log_alpha = logsumexp(log_alpha[:, None] + transition, axis=0)
         log_alpha += emission
-        log_alpha -= logsumexp(log_alpha)
+        normalizer = logsumexp(log_alpha)
+        if not np.isfinite(normalizer):
+            raise ValueError('observation has no finite likelihood in reachable states')
+        log_alpha -= normalizer
         result.append(np.exp(log_alpha))
     return np.asarray(result)

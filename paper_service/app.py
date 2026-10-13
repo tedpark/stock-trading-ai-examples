@@ -109,6 +109,7 @@ def create_app(home=None,tracking_uri=None):
             return {'as_of':feature_frame.index[-1].isoformat(),
                     'trained_through':bundle['trained_through'],
                     'target_fraction':float(targets[-1]),'next_return_mean':float(forecast[-1]),
+                    'forecast_units':'log_return_per_bar',
                     'state_probabilities':probability[-1].tolist(),
                     'contract':'raw HMM state order; fraction of configured cap, not an order'}
         except (ValueError,TypeError) as exc:raise HTTPException(422,str(exc)) from exc

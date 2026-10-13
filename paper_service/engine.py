@@ -50,7 +50,7 @@ def train(bars, fraction=.6):
     if split < 60 or len(frame)-split < 20:
         raise ValueError('at least 60 training and 20 held-out feature rows required')
     model,scaler,order=fit_model(frame.to_numpy(),split)
-    # Forecast the next state's raw-return mean, not the current mixture mean.
+    # Forecast the next state's unstandardized log-return mean, not the current mixture mean.
     bundle={'model':model,'scaler':scaler,'order':order,'columns':list(frame.columns),
             'trained_through':frame.index[split-1].isoformat(),'schema_version':1}
     return bundle,frame,split
@@ -131,5 +131,6 @@ def execute(bars, fraction, risk):
                      'feature_columns':bundle['columns'],
                      'converged':bool(bundle['model'].monitor_.converged)}
     out['data_sha256']=hashlib.sha256(bars.to_csv().encode()).hexdigest()
-    out['decision_rule']='long if next-state HMM return mean is positive; otherwise cash'
+    out['forecast_units']='log_return_per_bar'
+    out['decision_rule']='long if next-state HMM log-return mean is positive; otherwise cash'
     return out,bundle
