@@ -1,4 +1,5 @@
 """Independent boundary expectations for the chapter 25/26 calculations."""
+import sys
 import unittest
 from ch25_per import replay_weights
 from ch26_quantile_cvar import cvar_size
@@ -22,6 +23,14 @@ class TailReplayBoundaryTests(unittest.TestCase):
         tail, size = cvar_size([-1e308, -1e308], alpha=1, loss_budget=1e307)
         self.assertEqual(tail, -1e308)
         self.assertAlmostEqual(size, .1)
+
+    def test_tail_mean_at_float_limit_remains_finite(self):
+        tail, _ = cvar_size([-sys.float_info.max] * 3, alpha=1)
+        self.assertEqual(tail, -sys.float_info.max)
+
+    def test_unused_upper_atom_does_not_change_tail_scale(self):
+        tail, _ = cvar_size([-1e-308, -1e-308, 1e308], alpha=2/3)
+        self.assertEqual(tail, -1e-308)
 
     def test_subnormal_tail_mass_still_selects_lowest_atom(self):
         tail, size = cvar_size([-.4, .2], alpha=5e-324)

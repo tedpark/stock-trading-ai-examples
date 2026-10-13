@@ -20,11 +20,17 @@ def cvar_size(quantiles, alpha=0.2, loss_budget=0.175):
         cvar = ordered[0]
     else:
         whole = int(mass)
-        # Divide before summing to avoid overflowing a finite tail average.
-        terms = [value / mass for value in ordered[:whole]]
-        if whole < len(ordered):
-            terms.append(((mass - whole) / mass) * ordered[whole])
-        cvar = fsum(terms)
+        # Normalize returns before averaging: even a finite mean near the
+        # float limit can overflow when rounded partial sums are accumulated.
+        scale = max(abs(value) for value in ordered[:whole + (mass > whole)])
+        if scale == 0:
+            cvar = 0.0
+        else:
+            terms = [(value / scale) / mass for value in ordered[:whole]]
+            if mass > whole:
+                terms.append(((mass - whole) / mass) * (ordered[whole] / scale))
+            # A weighted mean cannot leave the normalized [-1, 1] interval.
+            cvar = max(-1.0, min(1.0, fsum(terms))) * scale
     loss = max(0.0, -cvar)
     size = min(1.0, loss_budget / loss) if loss else 1.0
     return cvar, size
