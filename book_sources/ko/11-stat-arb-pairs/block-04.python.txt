@@ -11,7 +11,7 @@ def find_cointegrated_pairs(self, symbols) -> list:
 
         for i, sym_a in enumerate(corr_matrix.columns):
             for sym_b in corr_matrix.columns[i+1:]:
-                # 1) 상관관계 ≥ 0.4
+                
                 corr = corr_matrix.loc[sym_a, sym_b]
                 if corr < self.min_correlation:
                     continue
@@ -20,7 +20,7 @@ def find_cointegrated_pairs(self, symbols) -> list:
                 price_a = pair[sym_a]
                 price_b = pair[sym_b]
 
-                # 2) 검정한 모든 페어의 raw p-value를 보관
+                
                 _, pvalue, _ = coint(price_a.values, price_b.values)
                 X = sm.add_constant(price_b.to_numpy())
                 fit = sm.OLS(price_a.to_numpy(), X).fit()
@@ -35,7 +35,7 @@ def find_cointegrated_pairs(self, symbols) -> list:
     if not tested:
         return []
 
-    # 3) Benjamini-Hochberg 방식으로 다중 검정의 FDR 제어
+    
     reject, qvalues, _, _ = multipletests(
         [x["pvalue"] for x in tested], alpha=self.coint_pvalue, method="fdr_bh"
     )

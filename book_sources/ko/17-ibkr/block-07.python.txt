@@ -4,7 +4,7 @@ async def _get_session_info_async(self, symbol: str) -> dict[str, str]:
     contract = Stock(symbol, "SMART", "USD")
     details = await self._ib.reqContractDetailsAsync(contract)
     if not details:
-        raise ValueError(f"계약 상세 정보를 찾을 수 없습니다: {symbol}")
+        raise ValueError(f"Contract details not found: {symbol}")
 
     cd = details[0]
     return {

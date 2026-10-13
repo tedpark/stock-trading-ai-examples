@@ -1,0 +1,14 @@
+
+if mr_prob < 0.3 or rp[_DailyHMM.REGIME_VOLATILE] > 0.4:
+    return None
+
+
+if z < -self._entry_z:        action = SignalAction.BUY         # -1.5
+elif z > self._short_entry_z: action = SignalAction.SHORT_SELL  # +2.0
+else:                         return None
+
+return TradingSignal(
+    symbol=symbol,
+    action=action,
+    confidence=mr_prob * abs(z),
+)

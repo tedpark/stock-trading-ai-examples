@@ -7,11 +7,11 @@ for bar_idx in range(train_bars, len(df_5m)):
         regime_state=layer_a.dominant_state,
     )
 
-    # Layer A × Layer B 결합
+    
     regime_mult = _REGIME_A_SCALE.get(layer_a.dominant_state, 1.0)
     signal      = e_sym * regime_mult
 
-    # 의견이 갈리면 포지션을 비운다 (안전장치)
+    
     vote_ratio = v_long / n_voted if n_voted > 0 else 0.5
     if vote_ratio < VOTE_THRESH and vote_ratio > (1 - VOTE_THRESH):
         signal = 0.0

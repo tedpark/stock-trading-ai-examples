@@ -1,5 +1,3 @@
-
-
 def forward_proba_causal(self, features: np.ndarray) -> None:
     Xs = self._scaler.transform(features)
 

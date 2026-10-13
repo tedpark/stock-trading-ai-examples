@@ -3,10 +3,10 @@ def predict_proba(self, features: np.ndarray) -> Optional[np.ndarray]:
     if self.model is None or len(X) < 3:
         return None
 
-    Xs = self._scaler.transform(X)              # 스케일러 재사용
-    raw = self.model.predict_proba(Xs)          # (T, 3) — 원본 상태 순서
+    Xs = self._scaler.transform(X)              
+    raw = self.model.predict_proba(Xs)          
 
     mapped = np.zeros_like(raw)
     for raw_s, logical in self._state_map.items():
-        mapped[:, logical] = raw[:, raw_s]      # 열 재배치
+        mapped[:, logical] = raw[:, raw_s]      
     return mapped                               # 0=MR, 1=Trend, 2=Volatile

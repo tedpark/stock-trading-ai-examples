@@ -1,9 +1,7 @@
-# covars_.shape = (3, 4, 4) — 3개 상태 × 4×4 공분산
-
 total_var = [np.trace(model.covars_[i]) for i in range(3)]
-# 예: [0.42, 1.87, 3.61]
 
-order = np.argsort(total_var)         # 분산 오름차순 인덱스
+
+order = np.argsort(total_var)         
 state_map = {
     int(order[0]): _DailyHMM.REGIME_MR,
     int(order[1]): _DailyHMM.REGIME_TREND,

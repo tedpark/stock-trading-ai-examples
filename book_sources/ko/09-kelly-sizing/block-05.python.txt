@@ -1,4 +1,3 @@
-# run_rentec_joint_hmm_v7.py (요약 발췌)
 KELLY_MIN, KELLY_MAX = 0.10, 1.0
 THRESHOLD = 0.53          # p_up > THRESHOLD → long entry
 
@@ -6,24 +5,24 @@ def calculate_kelly_size(
     p_up, direction,
     vol_mult=1.0, macro_gate=1.0, novelty_gate=1.0,
 ) -> float:
-    # ① edge: direction에 따른 p_up 우위
+    
     if not np.isfinite(p_up) or not 0 <= p_up <= 1 or direction not in (-1, 1):
         raise ValueError("probability in [0, 1] and direction -1 or 1 required")
     edge = (p_up - 0.5) if direction > 0 else ((1.0 - p_up) - 0.5)
     if edge <= 0:
         return 0.0
 
-    # ② Half-Kelly baseline (edge 그대로)
+    
     f = edge
 
-    # ③ 보정 인자들을 곱해서 줄이거나 키움
+    
     if not np.isfinite([vol_mult, macro_gate, novelty_gate]).all():
         return 0.0
     if min(vol_mult, macro_gate, novelty_gate) <= 0:
         return 0.0
     f *= vol_mult * macro_gate * novelty_gate
-    # (ER amplifier와 macro_bias 조정은 생략 — 9.6, 9.7에서 설명)
+    
 
-    # 정규화 후 클리핑
+    
     edge_max = max(THRESHOLD - 0.5, 1e-6)
     return float(np.clip(f / edge_max, KELLY_MIN, KELLY_MAX))

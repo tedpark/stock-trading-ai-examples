@@ -1,4 +1,3 @@
-
 if mr_prob < 0.3 or rp[_DailyHMM.REGIME_VOLATILE] > 0.4:
     return None
 

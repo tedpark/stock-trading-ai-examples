@@ -20,7 +20,7 @@ async def _place_order_async(
     if not await self._is_session_open(symbol, allow_outside_rth):
         return {"success": False, "error": "session_closed"}
 
-    # 1. 계약 검증
+    
     contract = Stock(symbol, exchange, currency)
     qualified = await self._ib.qualifyContractsAsync(contract)
     if (len(qualified) != 1 or qualified[0] is None
@@ -28,14 +28,14 @@ async def _place_order_async(
         return {"success": False, "error": "contract_not_qualified"}
     contract = qualified[0]
 
-    # 2. 주문 유형 선택
+    
     order = LimitOrder(action, qty, limit_price) if limit_price is not None else MarketOrder(action, qty)
     order.outsideRth = allow_outside_rth
 
-    # 3. 주문 제출
+    
     trade = self._ib.placeOrder(contract, order)
 
-    # 4. 초기 접수 확인 대기 (최대 3초). 체결 완료 대기가 아니다.
+    
     deadline = asyncio.get_running_loop().time() + 3.0
     accepted = {"PreSubmitted", "Submitted", "Filled"}
     rejected = {"ApiCancelled", "Cancelled", "Inactive"}

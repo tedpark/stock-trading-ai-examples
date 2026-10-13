@@ -1,7 +1,7 @@
 # hmm_v5_core.py (excerpt)
 def fractional_kelly(mu, sigma2, kelly_frac=0.25, max_size=1.0) -> float:
     """f* = kelly_frac × |μ| / σ²
-    분산이 크면(불확실하면) 작게, 신호가 강하면 크게.
+    Reduce size for higher uncertainty; increase it for stronger signals.
     """
     if (not np.isfinite([mu, sigma2, kelly_frac, max_size]).all()
             or sigma2 <= 1e-12 or not 0 <= kelly_frac <= 1

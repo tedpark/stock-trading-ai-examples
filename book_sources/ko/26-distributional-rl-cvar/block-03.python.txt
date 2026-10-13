@@ -1,4 +1,3 @@
-# app/trading/rl/agents/qr_dqn.py — 핵심 발췌
 class QuantileNet(nn.Module):
     def __init__(self, state_dim=28, n_actions=3, n_quantiles=51, hidden=256):
         super().__init__()

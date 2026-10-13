@@ -1,0 +1,16 @@
+# app/trading/backtest/features.py
+
+class KalmanFilter1D:
+    """Scalar Kalman filter for feature smoothing."""
+
+    def __init__(self, Q: float = 1e-4, R: float = 1e-2):
+        self.Q, self.R = Q, R
+        self.x = 0.0   
+        self.P = 1.0   
+
+    def update(self, z: float) -> float:
+        self.P += self.Q                 
+        K = self.P / (self.P + self.R)  
+        self.x += K * (z - self.x)      
+        self.P *= 1 - K                  
+        return self.x

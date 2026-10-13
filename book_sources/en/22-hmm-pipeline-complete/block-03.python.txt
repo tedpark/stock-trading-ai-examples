@@ -1,4 +1,3 @@
-
 raw = yf.download(symbol, start=start, end=end, auto_adjust=True, progress=False)
 
 
