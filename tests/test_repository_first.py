@@ -28,9 +28,19 @@ class RepositoryFirstTests(unittest.TestCase):
                 text=''.join(f"<!-- repository-source: {e['id']} -->\n```python\n{sync_book.source_text(e,self.repo)}```\n" for e in self.entries if e['chapter']==chapter)
                 (self.book/folder/chapter).write_text(text)
         self.entry=next(e for e in self.entries if e['source']=='ch01_pipeline.py')
+        sync_book.synchronize(self.book,write=True,root=self.repo)
     def test_clean_and_idempotent(self):
         self.assertEqual(sync_book.synchronize(self.book,root=self.repo),[])
         self.assertEqual(sync_book.synchronize(self.book,write=True,root=self.repo),[])
+    def test_source_label_drift_is_reported_and_repaired(self):
+        path=self.book/'manuscript'/self.entry['chapter']
+        original=path.read_text()
+        path.write_text(original.replace('/blob/runtime-book-2026-10-13-r2/', '/blob/nonexistent/', 1))
+        self.assertEqual(len(sync_book.synchronize(self.book,root=self.repo)),1)
+        sync_book.synchronize(self.book,write=True,root=self.repo)
+        self.assertEqual(path.read_text(),original)
+        self.assertEqual(sync_book.synchronize(self.book,root=self.repo),[])
+
     def test_repository_change_updates_every_edition(self):
         source=self.repo/self.entry['source'];source.write_text(source.read_text().replace('fee_bps=10','fee_bps=11'))
         self.assertEqual(len(sync_book.synchronize(self.book,root=self.repo)),3)

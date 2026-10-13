@@ -5,13 +5,13 @@ from dataclasses import dataclass, field
 
 # source-region: kelly
 KELLY_MIN, KELLY_MAX = 0.10, 1.0
-THRESHOLD = 0.53          # p_up > THRESHOLD → long entry
+THRESHOLD = 0.53  # Positive-edge normalization reference, not an entry gate.
 
 def calculate_kelly_size(
     p_up, direction,
     vol_mult=1.0, macro_gate=1.0, novelty_gate=1.0,
 ) -> float:
-
+    """Return a normalized size allowance; the caller supplies an exposure budget."""
     if not np.isfinite(p_up) or not 0 <= p_up <= 1 or direction not in (-1, 1):
         raise ValueError("probability in [0, 1] and direction -1 or 1 required")
     edge = (p_up - 0.5) if direction > 0 else ((1.0 - p_up) - 0.5)
