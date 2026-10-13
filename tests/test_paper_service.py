@@ -72,6 +72,10 @@ class PaperServiceTests(unittest.TestCase):
             self.assertEqual(prediction.status_code,200,prediction.text)
             self.assertEqual(prediction.json()['forecast_units'],'log_return_per_bar')
             self.assertAlmostEqual(sum(prediction.json()['state_probabilities']),1)
+            (Path(d)/'models'/'demo'/'model.joblib').unlink()
+            missing=restarted.post('/runs/demo/predict',json={'bars':rows(make_bars())})
+            self.assertEqual(missing.status_code,503)
+            self.assertNotIn(d,missing.text)
             bad=rows(make_bars());bad[1]['timestamp']=bad[0]['timestamp']
             self.assertEqual(client.post('/runs',json={'request_id':'bad','source':'uploaded','bars':bad}).status_code,422)
             self.assertEqual(client.post('/runs',json={'request_id':'../bad'}).status_code,422)

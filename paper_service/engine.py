@@ -30,12 +30,15 @@ def make_bars(count=360, seed=42):
     return bars[['open', 'close', 'volume']]
 
 
-def validate_bars(bars):
+def validate_bars(bars, min_rows=100):
+    if (not isinstance(bars, pd.DataFrame) or bars.columns.has_duplicates
+            or not isinstance(bars.index, pd.DatetimeIndex)):
+        raise ValueError('DatetimeIndex and unique bar columns required')
     if not {'open','close','volume'} <= set(bars.columns):
         raise ValueError('open, close, volume columns required')
-    if (len(bars) < 100 or len(bars) > 2000 or bars.index.hasnans
+    if (len(bars) < min_rows or len(bars) > 2000 or bars.index.hasnans
             or bars.index.has_duplicates or not bars.index.is_monotonic_increasing):
-        raise ValueError('100..2000 unique chronological bars required')
+        raise ValueError(f'{min_rows}..2000 unique chronological bars required')
     values=bars[['open','close','volume']].to_numpy(dtype=float)
     if not np.isfinite(values).all() or (values <= 0).any():
         raise ValueError('positive finite prices and volume required')
@@ -45,6 +48,8 @@ def validate_bars(bars):
 def train(bars, fraction=.6):
     """Fit only a chronological prefix; the model never sees held-out prices."""
     bars=validate_bars(bars)
+    if not np.isfinite(fraction) or not .5 <= fraction <= .8:
+        raise ValueError("train fraction must be finite and between .5 and .8")
     frame=features(bars)
     split=int(len(frame)*fraction)
     if split < 60 or len(frame)-split < 20:
@@ -79,7 +84,9 @@ def simulate(bars, targets, risk):
     Gaps may exceed the loss threshold. Last close liquidates all remaining shares.
     Fees/slippage are charged on each fill; fractional shares simplify arithmetic.
     """
-    if len(bars)!=len(targets) or len(bars)<2:
+    bars=validate_bars(bars, min_rows=2)
+    targets=np.asarray(targets, dtype=float)
+    if targets.ndim != 1 or len(bars)!=len(targets):
         raise ValueError('aligned bars and signals required')
     if not np.isfinite(targets).all() or np.any((np.asarray(targets)<0)|(np.asarray(targets)>1)):
         raise ValueError('target fractions must be in [0,1]')

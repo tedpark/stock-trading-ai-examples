@@ -8,13 +8,18 @@ class OrderLedger:
             raise ValueError("positive whole order quantity required")
         self.quantity, self.filled = quantity, 0
         self.status, self.executions = "submitted", set()
+        self.execution_quantities = {}
 
     def request_cancel(self):
         if self.status not in ("filled", "cancelled"):
             self.status = "cancel_pending"
 
     def on_fill(self, execution_id, quantity):
+        if not isinstance(execution_id, str) or not execution_id.strip():
+            raise ValueError("nonempty execution ID required")
         if execution_id in self.executions:
+            if self.execution_quantities[execution_id] != quantity:
+                raise ValueError("conflicting quantity for an existing execution ID")
             return
         # A delayed fill can arrive after a cancellation acknowledgement.
         # Keep it in the ledger, but never reopen the cancelled remainder.
@@ -22,6 +27,7 @@ class OrderLedger:
                 or self.filled + quantity > self.quantity):
             raise ValueError("invalid fill quantity")
         self.executions.add(execution_id)
+        self.execution_quantities[execution_id] = quantity
         self.filled += quantity
         if self.filled == self.quantity:
             self.status = "filled"

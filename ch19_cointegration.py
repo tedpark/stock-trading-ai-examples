@@ -5,9 +5,19 @@ import statsmodels.api as sm
 from statsmodels.tsa.stattools import coint
 
 def fit_and_test_pair(price_a, price_b):
+    # Align dates before fitting; never silently sort duplicate/reversed histories.
+    for prices in (price_a, price_b):
+        if (not isinstance(prices, pd.Series) or prices.index.has_duplicates
+                or prices.index.hasnans or not prices.index.is_monotonic_increasing):
+            raise ValueError("unique chronological price Series required")
     pair = pd.concat(
         [price_a.rename("a"), price_b.rename("b")], axis=1
     ).dropna()
+
+    values = pair.to_numpy(dtype=float)
+    if (len(pair) < 20 or not np.isfinite(values).all() or (values <= 0).any()
+            or (np.std(values, axis=0) <= 1e-12).any()):
+        raise ValueError("at least 20 aligned positive nonconstant prices required")
 
     # price_a = alpha + beta * price_b + ε
     X = sm.add_constant(pair["b"])
@@ -15,8 +25,14 @@ def fit_and_test_pair(price_a, price_b):
     alpha, beta = fit.params
     spread = pair["a"] - (alpha + beta * pair["b"])
 
+    # An (almost) exact copy is numerically degenerate, not tradable evidence.
+    if fit.rsquared >= 1 - 100 * np.sqrt(np.finfo(float).eps):
+        raise ValueError("near-perfect collinearity makes the cointegration test unreliable")
+
     # MacKinnon approximate p-value for the Engle-Granger test
     eg_stat, eg_pvalue, critical_values = coint(pair["a"], pair["b"])
+    if not np.isfinite(eg_stat) or not np.isfinite(eg_pvalue):
+        raise ValueError("cointegration test did not produce finite statistics")
     return {
         "alpha": float(alpha),
         "beta": float(beta),
