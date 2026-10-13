@@ -1,5 +1,5 @@
 """Chapter 25 learning example; dummy data only. Source: 25-rl-algorithm-comparison.md"""
-from math import isfinite
+from math import exp, fsum, isfinite, log
 
 
 def replay_weights(errors, alpha=0.6, beta=0.4):
@@ -12,12 +12,14 @@ def replay_weights(errors, alpha=0.6, beta=0.4):
         raise ValueError("alpha and beta must be between zero and one")
     if not errors or any(not isfinite(e) for e in errors):
         raise ValueError("finite TD errors required")
-    priority = [(abs(e) + 1e-6)**alpha for e in errors]
-    total = sum(priority)
-    probabilities = [p / total for p in priority]
-    raw = [(len(errors) * p)**(-beta) for p in probabilities]
-    maximum = max(raw)
-    weights = [w / maximum for w in raw]
+    # A common log offset prevents overflow without changing relative priorities.
+    log_priority = [alpha * log(abs(e) + 1e-6) for e in errors]
+    largest, smallest = max(log_priority), min(log_priority)
+    scaled = [exp(value - largest) for value in log_priority]
+    total = fsum(scaled)
+    probabilities = [value / total for value in scaled]
+    # Buffer size cancels when normalizing by the maximum importance weight.
+    weights = [exp(-beta * (value - smallest)) for value in log_priority]
     return probabilities, weights
 
 
