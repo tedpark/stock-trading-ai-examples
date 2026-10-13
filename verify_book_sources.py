@@ -14,8 +14,8 @@ def tree(source):
         parsed.body.pop(0)
     return ast.dump(parsed)
 
-def verify():
-    rows=json.loads((ROOT/'book_sources/index.json').read_text())
+def verify(rows=None):
+    rows=json.loads((ROOT/'book_sources/index.json').read_text()) if rows is None else rows
     seen=set();counts={}
     for row in rows:
         key=(row['edition'],row['chapter'],row['block'])
@@ -38,7 +38,10 @@ def verify():
             counts[row['edition']]['python']+=1
             counts[row['edition']]['runnable']+=bool(row['runnable_file'])
             counts[row['edition']]['context']+=bool(error)
-    for edition in ['ko','en','ja']:
+    for edition, expected in [('ko',256),('en',227),('ja',228)]:
+        edition_rows=[row for row in rows if row['edition']==edition]
+        assert len(edition_rows)==expected,(edition,'fenced block count',len(edition_rows))
+        assert len({row['chapter'] for row in edition_rows})==30,(edition,'chapter count')
         assert counts[edition]==dict(python=107,runnable=34,context=5),counts
     return dict(fenced_blocks=len(rows),editions=counts,
                 scope='Integrity, syntax/context classification and runnable AST equivalence; not full execution of fragments')

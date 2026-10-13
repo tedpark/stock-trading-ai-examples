@@ -521,7 +521,13 @@
   "non_runnable_mappings_per_edition": 73,
   "context_only_per_edition": 5,
   "repository_examples": 33,
-  "repository_tests": 35,
+  "repository_tests": 36,
   "network": "outbound blocked",
-  "source_index": "book_sources/index.json"
+  "source_index": "book_sources/index.json",
+  "fenced_blocks_by_edition": {
+    "ko": 256,
+    "en": 227,
+    "ja": 228
+  },
+  "latest_inventory_check": "Independent line-based scanner matched all 711 blocks to the manuscript; missing non-Python block regression added."
 }

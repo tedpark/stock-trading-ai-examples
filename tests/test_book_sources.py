@@ -22,6 +22,13 @@ class PrintedSourceTests(unittest.TestCase):
     def test_complete_integrity_and_runnable_mapping(self):
         self.assertEqual(verify()['fenced_blocks'],711)
 
+    def test_missing_non_python_source_is_rejected(self):
+        for edition in ['ko','en','ja']:
+            index=next(i for i,r in enumerate(ROWS)
+                       if r['edition']==edition and r['language']!='python')
+            with self.subTest(edition=edition), self.assertRaises(AssertionError):
+                verify(ROWS[:index]+ROWS[index+1:])
+
     def test_validation_objective_costs_and_holdout(self):
         # +1 -> -1 -> flat: turnover 1+2+1, gross .1-.2=-.1.
         # A second case stays long until final liquidation: two one-unit fills.

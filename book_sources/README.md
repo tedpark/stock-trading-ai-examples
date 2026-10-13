@@ -1,6 +1,6 @@
 # Exact printed source inventory
 
-This directory archives code and configuration blocks, not book prose. The index covers all 711 fenced blocks across three editions (237 per edition), including all 321 Python blocks. Identical blocks share an artifact. Files end in `.txt` intentionally: an archived block is not necessarily an executable program. Korean comment/docstring variants are preserved exactly.
+This directory archives code and configuration blocks, not book prose. The index covers all 711 fenced blocks across three editions (Korean 256, English 227, Japanese 228), including all 321 Python blocks. Identical blocks share an artifact. Files end in `.txt` intentionally: an archived block is not necessarily an executable program. Korean comment/docstring variants are preserved exactly.
 
 For each edition, 34 of 107 Python blocks map to runnable files (33 distinct files, including the shared HMM helper). The other 73 are reference fragments, including five function/loop bodies that cannot compile independently. Some are intentional unsafe counterexamples. Do not execute every artifact or interpret source inclusion as completion of an external integration.
 
