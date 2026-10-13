@@ -1,0 +1,11 @@
+Before the open
+Infrastructure alerts: is the IBKR connection healthy?
+Data check: did yesterday's data and today's open arrive?
+
+During the session
+Live execution: did job logs stop moving?
+Order check: were submitted orders accepted and filled?
+
+After the close
+Strategy profitability: are today's PnL, recent 5-day performance, and MDD acceptable?
+Report storage: did we save the baseline for tomorrow's comparison?

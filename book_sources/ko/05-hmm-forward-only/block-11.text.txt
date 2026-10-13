@@ -1,0 +1,3 @@
+>>> hmm.step_forward(x_new)
+# Timing depends on hardware and model dimensions; benchmark locally.
+# 반환값:   array([0.76, 0.18, 0.06])   ← MR/Trend/Volatile 확률

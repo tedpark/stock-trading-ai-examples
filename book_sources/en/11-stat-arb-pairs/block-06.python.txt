@@ -1,0 +1,1 @@
+spread = log_price_a - beta_arr * log_price_b

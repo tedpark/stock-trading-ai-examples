@@ -1,0 +1,4 @@
+When a new observation arrives, the Kalman filter asks:
+1. How certain was my previous estimate?
+2. How trustworthy is the new observation?
+3. How much of the new value should I accept?

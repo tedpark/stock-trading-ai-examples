@@ -1,0 +1,6 @@
+Symptom: a strategy working fine through Tuesday flips direction on Wednesday's opening bar
+Cause:   on Monday night, yfinance retroactively updated adjusted prices →
+         the three months of closing prices stored in DuckDB all shifted slightly →
+         the HMM retrained with different parameters → the regime label order flipped
+Fix:     compare cached values with new values on the same date →
+         if they differ by more than 1%, invalidate the cache + rebuild the affected window

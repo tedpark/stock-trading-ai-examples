@@ -1,0 +1,9 @@
+HMM이 찾은 레짐
+[MR 70%, Trend 20%, Volatile 10%]
+        │
+        ▼
+RL 상태 벡터의 일부
+[z_score, position, pnl, MR_prob, Trend_prob, Volatile_prob, ...]
+        │
+        ▼
+SAC가 포지션 크기 결정

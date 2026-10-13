@@ -1,0 +1,13 @@
+데이터 / 피처
+        │
+        ▼
+Layer A + Layer B HMM Ensemble
+시장 분위기와 단기 방향을 함께 판단
+        │
+        ▼
+Kelly / Risk
+신호를 포지션 크기와 안전 한도로 변환
+        │
+        ▼
+Broker / Monitoring
+주문 실행과 운영 감시

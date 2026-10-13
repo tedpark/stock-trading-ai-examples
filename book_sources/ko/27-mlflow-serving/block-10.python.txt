@@ -1,0 +1,15 @@
+# 배포 스크립트 예시
+import mlflow.artifacts as art
+
+# MLflow UI에서 고른 run_id
+run_id = "ab12cd34..."
+local_path = art.download_artifacts(
+    run_id=run_id, 
+    artifact_path="checkpoints/sac_final.pt",
+)
+
+# 서빙 라우터에 새 경로 전달
+requests.post(
+    "http://localhost:8000/sac/reload",
+    json={"checkpoint_path": local_path},
+)

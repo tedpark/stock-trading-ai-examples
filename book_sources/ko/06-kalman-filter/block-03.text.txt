@@ -1,0 +1,1 @@
+K_t = P_pred / (P_pred + R)

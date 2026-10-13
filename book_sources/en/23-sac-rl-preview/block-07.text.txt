@@ -1,0 +1,5 @@
+Bad design:
+raw prices -> RL -> decide buy / sell / size all at once
+
+This book's design:
+clean data -> HMM regime -> pairs signal -> RL sizing -> risk filter -> order

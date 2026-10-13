@@ -1,0 +1,10 @@
+trained state
+HMM model file, SAC Actor, scaler, and feature order are already fixed
+        |
+        v
+OOS backtest loop
+reveal one day -> build features -> run model inference -> create signal -> assume fill -> record PnL
+        |
+        v
+performance evaluation
+return, MDD, trade count, win rate, cost-adjusted result

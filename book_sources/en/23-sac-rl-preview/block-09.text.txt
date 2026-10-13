@@ -1,0 +1,4 @@
+r(t) = pnl(t) / rolling_sigma(20)            # volatility-adjusted PnL reward
+     - 0.3 × max(0, DD(t) - 0.05)            # penalty when drawdown exceeds 5%
+     - 0.01 × |turnover(t)|                  # trading cost (slippage/commissions)
+     - 0.5 × max(0, leverage(t) - 1.5)       # penalty when leverage exceeds 1.5x

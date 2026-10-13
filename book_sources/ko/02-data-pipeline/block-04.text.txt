@@ -1,0 +1,8 @@
+X 전체
+|-----------------------|-------------------------------|
+        X_train                         X_oos
+        학습용                          검증/추론용
+
+model.fit(X_train)
+for x_today in X_oos:
+    model.predict(x_today)

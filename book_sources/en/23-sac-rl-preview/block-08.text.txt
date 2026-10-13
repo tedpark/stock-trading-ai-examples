@@ -1,0 +1,4 @@
+action ∈ [-1.0, +1.0]
+  -1.0: maximum short position
+   0.0: no position
+  +1.0: maximum long position

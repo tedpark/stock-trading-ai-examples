@@ -1,0 +1,14 @@
+# run_sac_stat_pair.py
+with MlflowTracker(
+    experiment="sac_rl_stat_pair",
+    run_name=f"sac_{datetime.now():%Y%m%d_%H%M}",
+    params={"gamma": 0.99, "tau": 0.005, "lr_actor": 1e-4},
+    tags={"algo": "sac", "n_pairs": 32},
+) as tracker:
+    for ep in range(n_episodes):
+        # ... SACTrainer step ...
+        tracker.log_metrics(
+            {"train_reward": r, "critic_loss": cl, "alpha": alpha},
+            step=ep,
+        )
+    tracker.log_artifact(checkpoint_path)

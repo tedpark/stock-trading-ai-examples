@@ -1,0 +1,5 @@
+def _calculate_atr_stop_loss(self, symbol: str, entry_price: float) -> float:
+    """ATR × 1.5를 손절로, [2%, 5%] 범위로 잘라낸다."""
+    atr = compute_atr(symbol, n=14)              # 최근 14봉 평균 진폭
+    atr_pct = atr / entry_price
+    return -min(max(atr_pct * 1.5, 0.02), 0.05)

@@ -1,0 +1,58 @@
+async def _place_order_async(
+    self,
+    symbol: str,
+    action: str,        # "BUY" / "SELL"
+    qty: int,
+    limit_price: Optional[float],
+    exchange: str = "SMART",
+    currency: str = "USD",
+    allow_outside_rth: bool = False,
+) -> Dict[str, Any]:
+    from math import isfinite
+
+    if (action not in ("BUY", "SELL") or not isfinite(qty)
+            or qty <= 0 or int(qty) != qty):
+        raise ValueError("valid side and positive whole quantity required")
+    if limit_price is not None and (not isfinite(limit_price) or limit_price <= 0):
+        raise ValueError("positive finite limit price required")
+    from ib_async import LimitOrder, MarketOrder, Stock
+
+    if not await self._is_session_open(symbol, allow_outside_rth):
+        return {"success": False, "error": "session_closed"}
+
+    # 1. 계약 검증
+    contract = Stock(symbol, exchange, currency)
+    qualified = await self._ib.qualifyContractsAsync(contract)
+    if (len(qualified) != 1 or qualified[0] is None
+            or not getattr(qualified[0], "conId", 0)):
+        return {"success": False, "error": "contract_not_qualified"}
+    contract = qualified[0]
+
+    # 2. 주문 유형 선택
+    order = LimitOrder(action, qty, limit_price) if limit_price is not None else MarketOrder(action, qty)
+    order.outsideRth = allow_outside_rth
+
+    # 3. 주문 제출
+    trade = self._ib.placeOrder(contract, order)
+
+    # 4. 초기 접수 확인 대기 (최대 3초). 체결 완료 대기가 아니다.
+    deadline = asyncio.get_running_loop().time() + 3.0
+    accepted = {"PreSubmitted", "Submitted", "Filled"}
+    rejected = {"ApiCancelled", "Cancelled", "Inactive"}
+
+    while asyncio.get_running_loop().time() < deadline:
+        await asyncio.sleep(0.3)
+        status = trade.orderStatus.status
+        if status in accepted | rejected:
+            break
+
+    status = trade.orderStatus.status
+    remaining = trade.orderStatus.remaining
+    return {
+        "success": status in accepted,
+        "order_id": str(trade.order.orderId),
+        "status": status,
+        "filled": float(trade.orderStatus.filled or 0),
+        "remaining": float(qty if remaining is None else remaining),
+        "error": None if status in accepted else f"order_not_accepted:{status}",
+    }

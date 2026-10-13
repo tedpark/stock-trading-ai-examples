@@ -1,0 +1,7 @@
+Correlation:
+Do the two assets move in the same direction?
+
+Cointegration:
+When the gap between them stretches too far, does it tend to return?
+
+Pairs trading needs cointegration.

@@ -1,0 +1,5 @@
+Standard RL asks:
+How much can this action make on average?
+
+Distributional RL + CVaR asks:
+If this action goes badly on the worst days, how much can it lose?

@@ -1,0 +1,8 @@
+Feature matrix X: 5 years
+
+|--------------------------|--------------------------------------|
+          training data                     validation / inference data
+          first 2 years                     next 3 years
+
+X_train -> fit(model)
+X_oos   -> step forward one row at a time

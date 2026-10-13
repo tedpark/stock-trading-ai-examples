@@ -1,0 +1,7 @@
+# risk_management_signal.py 발췌
+if pnl_pct <= self.hard_stop_threshold:           # 예: -0.02
+    return TradingSignal(
+        action=SignalAction.SELL,
+        reason=f"하드스탑 {pnl_pct*100:.1f}%",
+        metadata={"sell_type": "hard_stop"},
+    )

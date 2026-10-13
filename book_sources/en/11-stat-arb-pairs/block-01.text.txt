@@ -1,0 +1,18 @@
+Full stock universe
+hundreds of candidates
+        |
+        v
+Sector filter
+keep stocks with an economic reason to move together
+        |
+        v
+Cointegration test
+check whether the spread tends to return to its mean
+        |
+        v
+Half-life / quality filters
+check whether the relationship reverts fast enough to trade
+        |
+        v
+candidate trading pairs
+Chapter 12 turns them into entry and exit signals

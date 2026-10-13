@@ -1,0 +1,6 @@
+Review the table and Python code together.
+1. Calculate equity and maximum drawdown by hand.
+2. Explain what risk is missed if only cash is recorded.
+3. Calculate the final cash if buying and selling each incur a 10 bp fee.
+4. Do not add a broker, external data, or new packages.
+After answering, identify the table values you used to verify your answer.

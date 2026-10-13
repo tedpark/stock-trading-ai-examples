@@ -1,0 +1,4 @@
+training creates the model file
+serving loads the model file
+inference sends new features into the loaded model
+risk decides whether the model output can become an order

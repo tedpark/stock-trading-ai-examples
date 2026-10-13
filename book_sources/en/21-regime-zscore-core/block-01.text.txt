@@ -1,0 +1,3 @@
+Question 1: Is this a market where mean reversion tends to work?  -> HMM
+Question 2: Has this pair stretched farther than usual?           -> Z-score
+Question 3: Is this stretch worth trading in this regime?         -> Regime Z-score

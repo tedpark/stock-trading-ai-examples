@@ -1,0 +1,3 @@
+f* = 2p - 1
+edge = p_up - 0.5
+f* = 2 * edge

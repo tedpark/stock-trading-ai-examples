@@ -1,0 +1,5 @@
+Backtest OOS validation
+Check whether the model survives on a hidden historical window
+
+Live monitoring
+Check whether today's data, orders, and performance are still normal

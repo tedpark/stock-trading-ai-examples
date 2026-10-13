@@ -1,0 +1,8 @@
+1. 市場を記録する        Data
+2. 読める数値に変える    Features
+3. 状態を読む            HMM
+4. 機会を探す            Pairs / Z-score
+5. サイズを決める        SAC / RL
+6. 悪いリスクを止める    Risk
+7. 注文を送る            Broker
+8. 監視を続ける          Monitoring

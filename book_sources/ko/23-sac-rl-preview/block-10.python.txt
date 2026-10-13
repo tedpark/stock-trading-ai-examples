@@ -1,0 +1,24 @@
+class PairsTradingEnv(gym.Env):
+    """SAC Agent를 위한 페어 트레이딩 Gymnasium 환경."""
+
+    def __init__(self, spreads, alpha_proba, market_features, episode_length=252):
+        # 관측: 28차원 실수 벡터
+        self.observation_space = spaces.Box(
+            low=-np.inf, high=np.inf, shape=(28,), dtype=np.float32
+        )
+        # 행동: 페어별 목표 포지션 비율 (-1.0 ~ +1.0)
+        self.action_space = spaces.Box(
+            low=-1.0, high=1.0, shape=(N_PAIRS,), dtype=np.float32
+        )
+        ...
+
+    def _compute_reward(self, prev_val, new_val, turnover):
+        pnl = (new_val - prev_val) / (prev_val + 1e-8)
+        drawdown = 1.0 - (new_val / (self._peak_value + 1e-8))
+
+        score_term      = pnl_rolling_mean / (pnl_rolling_std + 1e-8)
+        dd_penalty       = 0.3 * max(0.0, drawdown - 0.05)
+        trade_cost       = COMMISSION * turnover
+        leverage_penalty = 0.5 * max(0.0, leverage - MAX_LEVERAGE)
+
+        return score_term - dd_penalty - trade_cost - leverage_penalty

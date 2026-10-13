@@ -1,0 +1,7 @@
+def _get_tiered_trailing_stop(self, pnl_pct: float) -> float:
+    if pnl_pct >= 0.10:    # +10% 이상 → -3% 허용 (긴 호흡)
+        return -0.03
+    elif pnl_pct >= 0.03:  # +3% ~ +10% → -2%
+        return -0.02
+    else:                  # +0.75% ~ +3% → -1% (수익 확정)
+        return -0.01

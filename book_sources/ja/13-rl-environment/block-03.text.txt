@@ -1,0 +1,2 @@
+RL状態ベクトルの一部:
+[z_score, half_life, position, unrealized_pnl, MR_prob, Trend_prob, Volatile_prob, ...]

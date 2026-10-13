@@ -1,0 +1,10 @@
+HMM regime
+Is this a market where mean reversion tends to work?
+        |
+        v
+Pairs / Z-score
+Has the price gap between two stocks stretched farther than usual?
+        |
+        v
+RL / SAC
+How much position should we take on this opportunity?

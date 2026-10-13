@@ -1,0 +1,4 @@
+What is the input?
+What is the output?
+What changes when the output rises or falls?
+When can it be wrong or dangerous?

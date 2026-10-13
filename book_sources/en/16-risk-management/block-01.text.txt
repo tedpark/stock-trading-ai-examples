@@ -1,0 +1,18 @@
+HMM
+What kind of market are we in?
+        |
+        v
+Pairs / Z-score
+Is there a trading opportunity now?
+        |
+        v
+SAC RL
+How large should the position be?
+        |
+        v
+Risk Management
+Can the live account survive if this trade is wrong?
+        |
+        v
+Broker
+Only approved orders are sent

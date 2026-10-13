@@ -1,0 +1,5 @@
+def _calculate_atr_stop_loss(self, symbol: str, entry_price: float) -> float:
+    """Use ATR times 1.5, clipped to a 2–5% stop distance."""
+    atr = compute_atr(symbol, n=14)              
+    atr_pct = atr / entry_price
+    return -min(max(atr_pct * 1.5, 0.02), 0.05)

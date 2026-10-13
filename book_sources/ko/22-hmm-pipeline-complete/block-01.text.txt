@@ -1,0 +1,9 @@
+HMM 파이프라인 산출물
+alpha(t) = [MR_prob, Trend_prob, Volatile_prob]
+        │
+        ▼
+RL 상태 벡터에 추가
+state(t) = [pair_features, position_features, alpha(t), macro_features]
+        │
+        ▼
+SAC Agent가 포지션 크기 결정

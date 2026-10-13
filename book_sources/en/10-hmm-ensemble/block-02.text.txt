@@ -1,0 +1,7 @@
+Good ensemble:
+Models that read different information
+become more trustworthy when they point the same way.
+
+Bad ensemble:
+Many copies of similar models
+count the same mistake several times.

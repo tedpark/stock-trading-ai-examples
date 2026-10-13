@@ -1,0 +1,15 @@
+Model A: tomorrow may be +0.15%
+Model B: tomorrow may be -0.05%
+Model C: tomorrow may be +0.20%
+        |
+        v
+Ensemble
+Give a little more weight to models that worked well recently
+        |
+        v
+Final signal E[r]
+Example: +0.10%
+        |
+        v
+Kelly / Risk
+Decide position size and whether an order is allowed

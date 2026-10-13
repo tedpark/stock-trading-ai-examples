@@ -1,0 +1,11 @@
+# 학습 직후
+hmm.fit(X_train)
+hmm.forward_proba_causal(X_train)
+save_model("hmm_model.pkl", hmm)
+
+# 추론/서빙 시작 시
+hmm = load_model("hmm_model.pkl")
+
+# 새 봉마다
+x_today = compute_today_features(...)
+regime_proba = hmm.step_forward(x_today)

@@ -1,0 +1,11 @@
+today's state vector
+[z_score, position, pnl, MR_prob, Trend_prob, Volatile_prob, ...]
+        |
+        v
+trained SAC Actor
+        |
+        v
+action = +0.35
+        |
+        v
+risk layer decides whether this can become an order

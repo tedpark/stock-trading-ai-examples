@@ -1,0 +1,4 @@
+What kind of action does my trading problem require?
+How often does new data accumulate?
+Is average return enough, or do I need tail risk?
+Do I need to choose position size continuously?

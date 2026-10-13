@@ -1,0 +1,33 @@
+import numpy as np
+from hmmlearn.hmm import GaussianHMM
+
+SEED, T = 42, 500
+N_MACRO_STATES = 3
+rng = np.random.default_rng(SEED)
+
+# 500 synthetic observation vectors with 20 features each
+X = rng.normal(0, 1, size=(T, 20))
+
+# 60% training, 40% out-of-sample
+train_len = int(T * 0.6)
+macro_hmm = GaussianHMM(
+    n_components=N_MACRO_STATES,
+    covariance_type="full",
+    n_iter=200,
+    random_state=SEED,
+)
+macro_hmm.fit(X[:train_len])
+
+# Reveal one OOS observation at a time and read only the last row.
+# No observations follow that row, so inference cannot use future data.
+alpha_oos = []
+for t in range(train_len, T):
+    alpha_t = macro_hmm.predict_proba(X[:t + 1])[-1]
+    alpha_oos.append(alpha_t)
+
+alpha_oos = np.asarray(alpha_oos)
+regime_oos = alpha_oos.argmax(axis=1)
+
+print(f"Observation shape: {X.shape}")
+print(f"Training complete: {N_MACRO_STATES} states")
+print(f"OOS regime counts: {np.bincount(regime_oos)} (OOS {T - train_len} bars)")

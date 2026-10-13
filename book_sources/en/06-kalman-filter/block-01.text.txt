@@ -1,0 +1,10 @@
+Raw prices / raw features
+noise, jumps, temporary outliers
+        |
+        v
+Kalman Filter
+separates real movement from temporary noise
+        |
+        v
+HMM / Z-score / RL input
+the model reads more stable numbers

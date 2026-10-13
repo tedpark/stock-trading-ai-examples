@@ -1,0 +1,54 @@
+from contextlib import AbstractContextManager
+import logging
+import os
+
+class MlflowTracker(AbstractContextManager):
+    """Single-threaded optional tracking; never suppress training errors."""
+    def __init__(self, experiment, run_name, params, tags, backend=None):
+        self.experiment, self.run_name = experiment, run_name
+        self.params, self.tags = params, tags
+        self.failed, self._active = False, False
+        self._backend = backend
+        if backend is None and os.environ.get("MLFLOW_TRACKING_URI", "").strip():
+            try:
+                import mlflow
+                self._backend = mlflow
+            except ImportError:
+                self.failed = True
+                logging.warning("MLflow unavailable; tracking disabled")
+
+    def _call(self, method, *args, **kwargs):
+        if self._backend is None or self.failed:
+            return None
+        try:
+            return getattr(self._backend, method)(*args, **kwargs)
+        except Exception:
+            self.failed = True
+            logging.exception("Tracking failed; retain local training results")
+            return None
+
+    def __enter__(self):
+        self._call("set_experiment", self.experiment)
+        run = self._call("start_run", run_name=self.run_name)
+        self._active = run is not None
+        self._call("log_params", self.params)
+        self._call("set_tags", self.tags)
+        return self
+
+    def log_metrics(self, metrics, step):
+        self._call("log_metrics", metrics, step=step)
+
+    def log_artifact(self, path):
+        self._call("log_artifact", path)
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if self._active:
+            try:
+                status = "FAILED" if exc_type or self.failed else "FINISHED"
+                self._backend.end_run(status=status)
+            except Exception:
+                self.failed = True
+                logging.exception("Could not close tracking run")
+            finally:
+                self._active = False
+        return False

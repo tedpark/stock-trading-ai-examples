@@ -1,0 +1,2 @@
+training  = calibrate the model from past data
+inference = read today's row with the fixed model

@@ -1,0 +1,9 @@
+actor = load_actor("sac_actor.pt").to("cpu").eval()
+
+def predict(state_28d):
+    tensor = torch.as_tensor(state_28d, dtype=torch.float32)
+    if tensor.shape != (28,) or not torch.isfinite(tensor).all():
+        raise ValueError("28 finite features required by this adapter")
+    with torch.inference_mode():
+        action = actor(tensor.unsqueeze(0))
+    return action

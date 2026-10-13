@@ -1,0 +1,4 @@
+RL state s(t)
+= [pair z-score, half-life, current position, unrealized P&L,
+   MR probability, Trend probability, Volatile probability,
+   volatility, macro indicators, ...]

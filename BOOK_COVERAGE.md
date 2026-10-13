@@ -28,6 +28,12 @@ GitHub Actions installs dependencies on Python 3.12 and runs `python verify.py`.
 
 ## Current manuscript verification
 
-The revised Korean, English, and Japanese manuscripts each contain 34 marked blocks, including two copies of the shared HMM helper. All 34 blocks match the reviewed public source by AST. The 32 distinct chapter exercise scripts (excluding the appendix file-list guide) ran successfully for every edition: 96 script runs and 69 regression tests in total. Another seven isolated architecture checks per edition cover Kelly sizing, zero gates, CVaR tail mass, metadata, risk calculations, full-covariance filtering, and invalid order requests. Architecture excerpts are not standalone production applications. See `BOOK_VALIDATION.json`.
+The revised Korean, English, and Japanese manuscripts each contain 34 marked blocks, including two copies of the shared HMM helper. All 34 blocks match the reviewed public source by AST. The 32 distinct chapter exercise scripts (excluding the appendix file-list guide) ran successfully for every edition: 96 script runs and 69 regression tests in total. Ten isolated architecture checks per edition cover Kelly sizing, zero gates, invalid sizing inputs, Sortino boundaries, drawdown, CVaR tail mass, metadata, risk tails, full-covariance filtering, and invalid order requests. Architecture excerpts are not standalone production applications. See `BOOK_VALIDATION.json`.
 
 The book now includes the optional repository URL, complete helper definitions, local MLflow verification, and corrected source-review behavior. Reading and running the printed exercises does not require downloading this repository.
+
+## Complete source inventory audit (2026-10-13)
+
+The earlier reviews above executed the marked exercises and selected calculations; they did not cover every block as an executable program. The current [exact source inventory](book_sources/README.md) includes every fenced block from all three editions. Each edition has 107 Python blocks: 34 runnable mappings and 73 other fragments, of which five require an enclosing function or loop. Shell commands, configurations and diagrams are archived as text too. No claim is made that the architecture paths (`app/trading/...`) are complete production modules.
+
+This audit corrected a Korean Chapter 15 objective that still referenced an undefined transaction-cost placeholder. All editions now calculate entry, reversal and final liquidation costs explicitly. A regression test checks known totals and exclusion of held-out returns directly from the printed blocks. Additional repository tests execute printed Kalman, half-life, ATR, Kelly and Sortino functions with controlled inputs. Source integrity and runtime validation remain distinct.

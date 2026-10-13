@@ -1,0 +1,1 @@
+regime_mult = sum(alpha_k * scale_k for each regime k)

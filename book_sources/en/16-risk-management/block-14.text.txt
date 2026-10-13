@@ -1,0 +1,8 @@
+What the model does
+Judge whether the opportunity is good.
+
+What risk does
+Limit how much we lose when the judgment is wrong.
+
+What the operating system does
+Execute only orders that pass both the model judgment and the risk judgment.

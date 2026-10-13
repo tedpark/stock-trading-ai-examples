@@ -1,0 +1,14 @@
+def compute_sortino(bar_returns, periods_per_year=252, target_per_period=0.0):
+    returns = np.asarray(bar_returns, dtype=float)
+    if (returns.ndim != 1 or len(returns) < 2
+            or not np.isfinite(returns).all()
+            or not np.isfinite([periods_per_year, target_per_period]).all()
+            or periods_per_year <= 0):
+        raise ValueError("finite returns, target and positive annualization required")
+    excess = returns - target_per_period
+    downside = np.minimum(excess, 0.0)
+    downside_dev = np.sqrt(np.mean(downside ** 2))
+    if downside_dev == 0:
+        return None
+    return float(np.mean(excess) / downside_dev
+                 * np.sqrt(periods_per_year))

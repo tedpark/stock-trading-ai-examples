@@ -1,0 +1,7 @@
+Z-score is large
+        |
+        +-- Is the pair relationship still intact?
+        +-- Has reversion started?
+        +-- Are volume and liquidity acceptable?
+        +-- Have we held the trade too long?
+        +-- Has the loss limit been breached?

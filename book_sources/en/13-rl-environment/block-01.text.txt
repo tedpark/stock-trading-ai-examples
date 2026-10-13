@@ -1,0 +1,7 @@
+HMM: reads the market state
+input: returns, volatility, volume
+output: MR / Trend / Volatile probabilities
+
+RL/SAC: chooses action size
+input: HMM probabilities + pair signal + position state
+output: enter, exit, or how large to hold

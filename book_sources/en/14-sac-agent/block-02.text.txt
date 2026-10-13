@@ -1,0 +1,9 @@
+Example A
+z_score = 2.5
+HMM = [MR 0.80, Trend 0.15, Volatile 0.05]
+Actor output ~= enter or increase size
+
+Example B
+z_score = 2.5
+HMM = [MR 0.10, Trend 0.25, Volatile 0.65]
+Actor output ~= wait or reduce size

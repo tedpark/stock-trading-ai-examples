@@ -1,0 +1,18 @@
+[ ] Layer 1: locks on every shared object
+    □ Model replacement: train a new object, then swap the reference
+    □ Separate the IBKR event loop from the signal loop
+
+[ ] Layer 2: feature pipeline
+    □ Timezone consistency confirmed
+    □ Handling code at every point where NaN can occur
+    □ Adjusted-price restatement detection routine enabled
+
+[ ] Layer 3: regime detection
+    □ On retraining, compare regime mappings and detect flips
+    □ Regime entropy within the normal range
+    □ HMM convergence logged
+
+[ ] Layer 4: signal validation
+    □ validate_signal() gate sits in front of the execution engine
+    □ FlipDetector enabled
+    □ Duplicate-symbol filter enabled

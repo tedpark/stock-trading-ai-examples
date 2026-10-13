@@ -1,0 +1,2 @@
+import logging
+logging.getLogger("quant.data").setLevel(logging.DEBUG)

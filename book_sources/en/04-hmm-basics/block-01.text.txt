@@ -1,0 +1,10 @@
+Before training:
+GaussianHMM(n_components=3)
+an empty shell prepared to split the market into 3 states
+
+Training:
+empty shell + X_train --fit()--> trained HMM model
+
+Inference:
+trained HMM model + today's features
+    -> [MR 70%, Trend 20%, Volatile 10%]

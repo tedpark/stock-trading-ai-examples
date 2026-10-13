@@ -1,0 +1,18 @@
+HMM
+compute market regime probabilities
+        |
+        v
+Pairs / Z-score
+create entry candidates
+        |
+        v
+SAC RL
+propose position size
+        |
+        v
+Risk Management
+check limits and order permission
+        |
+        v
+IBKR connection
+qualify contract -> submit order -> confirm fill -> sync position

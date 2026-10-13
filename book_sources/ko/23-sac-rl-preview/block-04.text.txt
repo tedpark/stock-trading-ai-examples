@@ -1,0 +1,4 @@
+SAC Actor(s(t)) → action
+action = -1.0  최대 숏
+action =  0.0  관망
+action = +1.0  최대 롱

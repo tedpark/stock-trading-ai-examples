@@ -1,7 +1,7 @@
 {
-  "verified_at": "2026-10-12T09:04:44.337951+00:00",
+  "verified_at": "2026-10-12T22:25:45.622543+00:00",
   "python": "3.12.7",
-  "installation": "Existing Python 3.12.7 full-dependency environment; all examples and tests rerun after source review",
+  "installation": "Existing Python 3.12.7 full-dependency environment; 33 examples and 23 regression tests rerun on 2026-10-13",
   "example_scripts": 33,
   "additional_tests": 23,
   "checks": [
@@ -97,5 +97,6 @@
     "all_examples_passed": 33,
     "non_english_script_findings": 0,
     "secret_findings": 0
-  }
+  },
+  "record_scope": "Historical validation snapshot; current book/source inventory results are in BOOK_VALIDATION.json. Hashes and publication_audit below refer to the earlier snapshot, not the current tree."
 }

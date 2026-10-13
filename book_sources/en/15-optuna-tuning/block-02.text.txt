@@ -1,0 +1,5 @@
+What the model learns from data
+internal numbers such as HMM transition probabilities or SAC neural-network weights
+
+What humans set or Optuna searches for
+external settings such as learning rate, thresholds, window length, and voting rules

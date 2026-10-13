@@ -1,0 +1,8 @@
+stock_trading_ai_py/
++-- app/trading/
+|   +-- backtest/         # 戦略を検証するエンジン
+|   +-- backtest/signals/ # HMM、StatArb、RLシグナル一覧
+|   +-- rl/               # SAC強化学習の実装
+|   +-- cache/            # 価格データのキャッシュ
++-- refresh_cache.py      # データキャッシュの更新
++-- pyproject.toml        # Pythonの依存関係

@@ -1,0 +1,8 @@
+trustworthy data
+  -> feature table
+  -> train without future leakage
+  -> infer one row at a time
+  -> validate OOS
+  -> control risk
+  -> confirm broker execution
+  -> monitor in production

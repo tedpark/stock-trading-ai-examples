@@ -1,0 +1,15 @@
+
+class QuantileNet(nn.Module):
+    def __init__(self, state_dim=28, n_actions=3, n_quantiles=51, hidden=256):
+        super().__init__()
+        self.n_actions = n_actions
+        self.n_quantiles = n_quantiles
+        self.net = nn.Sequential(
+            nn.Linear(state_dim, hidden), nn.LayerNorm(hidden), nn.ReLU(),
+            nn.Linear(hidden, hidden), nn.LayerNorm(hidden), nn.ReLU(),
+            nn.Linear(hidden, n_actions * n_quantiles),
+        )
+
+    def forward(self, state):
+        logits = self.net(state)
+        return logits.view(-1, self.n_actions, self.n_quantiles)

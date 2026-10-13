@@ -1,0 +1,12 @@
+Last day of training
+α = [MR 0.60, Trend 0.25, Volatile 0.15]
+Save this value together with the model file.
+
+First OOS day
+Today's feature row x_today arrives.
+Use saved α, transition matrix A, and today's observation likelihood.
+New α = [MR 0.64, Trend 0.22, Volatile 0.14]
+
+Second OOS day
+Start again from yesterday's α.
+New α = [MR 0.58, Trend 0.30, Volatile 0.12]

@@ -1,0 +1,18 @@
+training
+  -> creates a model file
+
+serving / inference
+  -> loads the trained model
+  -> receives today's feature row
+  -> outputs an action proposal
+
+SAC Actor output
+action = +0.35
+        |
+        v
+Risk layer
+approved size = 35 shares of AAPL
+        |
+        v
+IBKR client
+qualify contract -> create order -> submit -> confirm status

@@ -1,0 +1,8 @@
+28 state numbers
+HMM probabilities, Z-score, holding period, PnL, volatility
+        |
+        v
+SAC Actor neural network
+        |
+        v
+position size [-1, +1]

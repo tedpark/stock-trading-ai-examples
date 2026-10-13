@@ -1,0 +1,6 @@
+HMM pipeline output
+alpha(t) = [MR_prob, Trend_prob, Volatile_prob]
+        |
+        v
+added to the RL state vector
+state(t) = [pair_features, position_features, alpha(t), macro_features]

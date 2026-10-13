@@ -1,0 +1,11 @@
+Regime 0 (low volatility, mean reversion):
+   z < -1.5  →  BUY    (buy the dip)
+   z > +1.5  →  SELL   (sell the top)
+   exit: when z returns near 0
+
+Regime 1 (transition):
+   no signal (stand aside)
+
+Regime 2 (high volatility, trending):
+   z > +1.0  →  BUY    (momentum follow)
+   z < -1.0  →  SELL   (short or stand aside)

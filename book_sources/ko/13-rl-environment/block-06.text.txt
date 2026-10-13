@@ -1,0 +1,11 @@
+오늘 상태 벡터
+[z_score, position, pnl, MR_prob, Trend_prob, Volatile_prob, ...]
+        │
+        ▼
+학습된 SAC Actor
+        │
+        ▼
+action = +0.35
+        │
+        ▼
+리스크 레이어가 주문 가능 여부를 최종 확인

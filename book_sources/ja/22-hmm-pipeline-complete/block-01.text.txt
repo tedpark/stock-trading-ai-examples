@@ -1,0 +1,6 @@
+HMMパイプラインの出力
+alpha(t) = [MR_prob, Trend_prob, Volatile_prob]
+        |
+        v
+RL状態ベクトルへ追加
+state(t) = [pair_features, position_features, alpha(t), macro_features]

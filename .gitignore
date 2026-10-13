@@ -12,3 +12,5 @@ mlruns/
 *.log
 .DS_Store
 dist/
+paper-data/
+service-test-data/

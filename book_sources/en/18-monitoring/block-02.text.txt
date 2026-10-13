@@ -1,0 +1,10 @@
+Three things to watch
+
+1. Is the data normal?
+   Are new prices arriving, and are missing values under control?
+
+2. Are orders normal?
+   Are broker connection, fills, and position sync correct?
+
+3. Is the strategy normal?
+   Are recent performance, MDD, and trade count within the expected range?

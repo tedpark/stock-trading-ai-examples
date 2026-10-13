@@ -1,0 +1,6 @@
+사람이 만든 규칙:
+price > moving_average 이면 BUY
+
+머신러닝 모델:
+today_features -> trained_model -> regime_probability
+오늘 시장 숫자들 -> 학습된 판단 계산기 -> 레짐 확률

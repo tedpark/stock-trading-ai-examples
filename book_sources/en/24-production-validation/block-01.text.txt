@@ -1,0 +1,6 @@
+Backtest validation
+check whether the strategy logic works on historical data
+
+Production validation
+check whether that logic still holds under live data,
+threads, model swaps, and order flow

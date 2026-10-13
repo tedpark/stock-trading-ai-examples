@@ -1,0 +1,4 @@
+SAC Actor(s(t)) -> action
+action = -1.0  最大ショート
+action =  0.0  待機
+action = +1.0  最大ロング

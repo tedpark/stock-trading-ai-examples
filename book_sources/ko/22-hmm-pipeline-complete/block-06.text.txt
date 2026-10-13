@@ -1,0 +1,1 @@
+z_t = (p_t - rolling_mean_t) / rolling_std_t

@@ -1,0 +1,6 @@
+on_bar(bar_idx):
+    update_hmm(bar_idx)              # 1) refit every 10 bars + refresh regime probabilities
+    for each held symbol:             # 2) exits first — _check_exit()
+        if exit condition met: close position
+    for each non-held symbol:         # 3) then new entries — _check_entry()
+        if entry condition met: open position

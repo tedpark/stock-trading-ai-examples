@@ -1,0 +1,11 @@
+Model output
+p_up = 0.53
+small edge toward the upside
+        |
+        v
+Kelly / Half-Kelly
+small edge -> only a small position is allowed
+        |
+        v
+Risk management
+check maximum size, stop rules, and portfolio limits again

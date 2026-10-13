@@ -1,0 +1,7 @@
+Per-symbol risk
+Cut the loss quickly when one position is wrong.
+Example: close the AAPL position if it reaches -2%.
+
+Portfolio-level risk
+Check whether the whole account is still within a tolerable range.
+Example: stop the strategy or reduce size if total MDD exceeds 20%.

@@ -1,0 +1,5 @@
+log_ret      = np.log(close / close.shift(1))                # dim 0: 방향성
+realized_vol = log_ret.rolling(5).std() * np.sqrt(252)       # dim 1: 변동성(연환산)
+momentum     = close / close.rolling(20).mean() - 1          # dim 2: 추세
+avg_vol      = volume.rolling(20).mean().replace(0, np.nan)
+vol_ratio    = np.log((volume / avg_vol).clip(lower=1e-6))   # dim 3: 거래량 변화

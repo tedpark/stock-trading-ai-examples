@@ -1,0 +1,2 @@
+RL 상태 벡터 일부:
+[z_score, half_life, position, unrealized_pnl, MR_prob, Trend_prob, Volatile_prob, ...]

@@ -1,0 +1,7 @@
+stock market
+  -> data
+  -> features
+  -> machine-learning model
+  -> deep-learning / RL agent
+  -> validation
+  -> order execution

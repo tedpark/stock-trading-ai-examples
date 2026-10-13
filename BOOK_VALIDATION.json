@@ -1,35 +1,533 @@
 {
-  "date": "2026-10-12",
-  "source_commit": "3acabfe0c47deb710edc5ad3df0aad0fd01530d6",
+  "date": "2026-10-13",
+  "scope": "All code archived; marked runnable exercises executed from actual manuscripts; other fragments only selectively executed with controlled inputs",
   "editions": [
     {
       "language": "ko",
       "python_blocks_parsed": 107,
       "runnable_blocks": 34,
       "unique_scripts_run": 32,
-      "regression_tests": 23,
+      "regression_tests": 35,
       "tests_exit_code": 0,
-      "repository_ast_matches": 34
+      "repository_ast_matches": 34,
+      "checks": [
+        {
+          "file": "ch00_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch01_pipeline.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch02_features.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch03_dsr.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch03_metrics.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch03_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch04_hmm.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch05_forward.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch06_kalman.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch07_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch08_ensemble.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch09_kelly.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch10_optuna.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch11_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch12_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch13_env.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch14_sac.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch15_optuna.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch16_metrics.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch17_order_events.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch18_lab.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch18_monitor.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch19_cointegration.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch20_regime_events.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch20_screening.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch21_regime_zscore.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch22_pipeline.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch23_sac.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch24_validation.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch25_per.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch26_quantile_cvar.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch27_mlflow.py",
+          "exit_code": 0
+        }
+      ],
+      "manuscript_sha256": {
+        "00-preface.md": "8c29f5bf2f2328a2858145af168a387fae7527cb29c7ad770a3d055a48229cc1",
+        "00a-vibe-coding-quickstart.md": "7d7bfa4ad9491dfd36390fcc245254c7f68bfa90de6e8523dc9c4b5251ffc7e1",
+        "01-architecture.md": "a4d8ae1f37bea66fe8a6431536588c8b66310d73fd5c08df931146ace3d212aa",
+        "02-data-pipeline.md": "d514edc2a52139d82f5aa16cf8863980365f32c5b158b0b8ac010567cceaf195",
+        "03-backtest-engine.md": "38fdaa5a3a6d23ce799cd58cdaf1995848f177e12c3b6d8b47da2942b31bf8b5",
+        "04-hmm-basics.md": "2af154d3590c2ac3c7c4116250fd2d6df615babc2ad142935b4ab1bca053bf99",
+        "05-hmm-forward-only.md": "af5c91ed77fef7b6466a64577df14fd33099265217148ba86555c043ed3f8392",
+        "06-kalman-filter.md": "afefe05c1f499c004656ba2a7a79448b8e986964ee7fb016c2184e50bec3f144",
+        "07-cross-asset-joint-hmm.md": "3be2b0630d63e1b49b51783b525b5ed5f95643b06923ab7b1af731bfb4ab6feb",
+        "08-two-layer-hmm.md": "22b3b694366ebc72ef3dddaba66f10d374df3a0ad6232be29fc72058a0c9df09",
+        "09-kelly-sizing.md": "39c38b009ece220897c7fe88ba289bc00abf00ddbebc70beb7cb7556b8f0573c",
+        "10-hmm-ensemble.md": "a7db1e79ffaf6c5ccee4c1d50e4751c931b036c1115de6421e6462681a89d7b5",
+        "11-stat-arb-pairs.md": "16ccfcf867b59903a9353bee25e32c838e78c7fe0062716092b2152bfa8b616b",
+        "12-stat-arb-signals.md": "576db42d1e54d6d7f20e7d05e7a5b535cf49f95a32c1b47e30fd7d331b4c8ff2",
+        "13-rl-environment.md": "c95a39d1f9ae4a6aa0a00749cefb00203a0ffaee415a78b1f416fc193a849a13",
+        "14-sac-agent.md": "3f3b5e1833ee9a175b18234823c177ee068a436c68b66cb13ad1a09a2df283d0",
+        "15-optuna-tuning.md": "5aabb08b162abec25f98db079d26a84b474f0e6007aa70f9ff15ecd6386f351d",
+        "16-risk-management.md": "f0358e02af206b149f1da3215d8cc64b9fd0fb7fbe10ec4cf995cee9537a07e6",
+        "17-ibkr.md": "aa3ba8b657305761c1568256cf57c231dad0ccb600a5790006328c0ee52c803b",
+        "18-monitoring.md": "3bddd3f1630aad5eaa1bb33a4ef0c658dd2cf27ecd94d52a8473f5d68e7403bf",
+        "19-bamberger-pairs-theory.md": "624412bc563a878de6f430337be294f4abb0203a64ad738eba9ecd63bc3ae2b3",
+        "20-pair-selection-regime.md": "43dd9752920c3540db1e511ce76ceceda194934e33fc1da2e5b312a726622b7b",
+        "21-regime-zscore-core.md": "b680ef254819ccbd17de7fdc192ea136209d492c09b78904459ddba011b8c673",
+        "22-hmm-pipeline-complete.md": "b59ca4baec4f6c57a06b66ce4f409d05c34d44b8bd499ee07ebe65538214337e",
+        "23-sac-rl-preview.md": "f6847eead6e626e15d5b1f9d6a8625db75d9975d9fb946c958bce54842dfc15b",
+        "24-production-validation.md": "ff0833ca7685d1f232974de3d38dc0cd689eff86591c6312eb93e5a6b064efb9",
+        "25-rl-algorithm-comparison.md": "49ddd768ea6c4381ca0e83526ada14fff4bb1e02cb4af951aaf666d03e30d54d",
+        "26-distributional-rl-cvar.md": "5e5201f300e04291b7e9e7a6fac1130bbb0362825d40aed21811a80e8b7fa7b2",
+        "27-mlflow-serving.md": "8a51e1c888d29aa4475f84b23572a0445aaeaa445a1571f91d4f24c923ad2d8c",
+        "28-appendix-beginner-map.md": "3eea9d2eff3dc313781466cfa01e2d721af58ba9563019d45a757ed8526ae39b"
+      }
     },
     {
       "language": "en",
       "python_blocks_parsed": 107,
       "runnable_blocks": 34,
       "unique_scripts_run": 32,
-      "regression_tests": 23,
+      "regression_tests": 35,
       "tests_exit_code": 0,
-      "repository_ast_matches": 34
+      "repository_ast_matches": 34,
+      "checks": [
+        {
+          "file": "ch00_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch01_pipeline.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch02_features.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch03_dsr.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch03_metrics.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch03_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch04_hmm.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch05_forward.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch06_kalman.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch07_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch08_ensemble.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch09_kelly.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch10_optuna.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch11_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch12_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch13_env.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch14_sac.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch15_optuna.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch16_metrics.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch17_order_events.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch18_lab.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch18_monitor.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch19_cointegration.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch20_regime_events.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch20_screening.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch21_regime_zscore.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch22_pipeline.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch23_sac.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch24_validation.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch25_per.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch26_quantile_cvar.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch27_mlflow.py",
+          "exit_code": 0
+        }
+      ],
+      "manuscript_sha256": {
+        "00-preface.md": "eb4a989e7cdfc240bc9a04e65090e6f5a807730fea476f33558a334d62926009",
+        "00a-vibe-coding-quickstart.md": "3378710cff1321a8d0ca6c2548f5b4437e2cfe694ccbbd8cd1e022f91fe0b20d",
+        "01-architecture.md": "957b45c1328798e23e44dee201582038fe1efa03ff5cbdf97f3a04ac3f843de3",
+        "02-data-pipeline.md": "98e0aeaffc8f1114c8db5a18bd8e2579de03bff84d31301c1c1f5b8070a50bd8",
+        "03-backtest-engine.md": "d0d0bd5117ffaf0ee50265a4f9f46bcab3fe902c9e1634c6a625e6fd46231477",
+        "04-hmm-basics.md": "b38e3474f9ee0ed9583b75658fa73edbb6c41501a414572983ef6bf6208fcc0f",
+        "05-hmm-forward-only.md": "18bf707d1682bc3454baa1496abeca3bfd873db4d31856d04c5d6ef5ae8bc336",
+        "06-kalman-filter.md": "4efedb5f70b20092427c6b1ee709c2516cbcb2c9c0ba555c9b7f5b31ea7c9da4",
+        "07-cross-asset-joint-hmm.md": "cbc472463ac87e845e9009070be5a6c8da5e86ebafde7277686dbd08ad8f3134",
+        "08-two-layer-hmm.md": "1105e6f02f19b26d5c043da4f94432377e33c95538bc666b4dd9db3dc46a0e92",
+        "09-kelly-sizing.md": "c251046cf48e9b6e65868499937a01929492ccd8ad3bf54433de6d7fe9b47e30",
+        "10-hmm-ensemble.md": "1ddf1d52f1363512ac25b37c49106fea3cdd706506f8e714e74ea44647674803",
+        "11-stat-arb-pairs.md": "e2afeceb8c9bc7212e77a3900c900232a7d8df1b8957642aa7c8384d3cca7358",
+        "12-stat-arb-signals.md": "c0e644e869eab584c02194dbe3f627e07fa6fdc72a463720df600611229d38de",
+        "13-rl-environment.md": "6495b6ca87871364bb16a1f38c51ca1962294bfa70a814fcf5f21f0d8c668399",
+        "14-sac-agent.md": "6925269e2e8361d7d4cffdf8a85d20fd59b653d5b6b568ae75b31cab66d16aa9",
+        "15-optuna-tuning.md": "a4d13e6457a7ae1e8e423fba20c5c9057b90294d0288bc84578e689d4a2d5b23",
+        "16-risk-management.md": "7c8f647e4e189e2bdd0bb53b5f18858b25916620538373e374653ac91649dc10",
+        "17-ibkr.md": "bf3c8bda2d707e49b8969b786137a129d4ed810acef86e1568c206c0aa6bd3a9",
+        "18-monitoring.md": "548ff0da65779bc9e80172e888f0b118ef455f3f06b77c858d2f8a23373ee549",
+        "19-bamberger-pairs-theory.md": "3195a5b1ab95f009c4cb63a16a9d6fa8011993c0f7164b518a67933433219af4",
+        "20-pair-selection-regime.md": "812d0b709786dbb535b1e212c0ae9a12610c41576ba035bb102d9515513c0fd3",
+        "21-regime-zscore-core.md": "f8d59a2ade647ebaac824f74130fcd111c73625a92dc66c9d8e05cfbd5acb1bd",
+        "22-hmm-pipeline-complete.md": "f40ddbd82974f7e1eeef826db4daeaa59e5bde6572565808ab7a8d08a1fb6dee",
+        "23-sac-rl-preview.md": "72aaf290b9adea98daebe179e61d797b244367cc26c83ff8e00c2de6bb6d031a",
+        "24-production-validation.md": "8c1a6558636309440e875ec0872273e6fba62d180e553f1b3991fe30890c0319",
+        "25-rl-algorithm-comparison.md": "56934d831239d0317daaff0c7960f3240ba652c768329150e0b7eed9af02f573",
+        "26-distributional-rl-cvar.md": "d1eb1efa8a528ed8426ee483c3e4c03cf7a0727a510ef6f80d10e999352a291a",
+        "27-mlflow-serving.md": "14bbe6ff8a4423208d7acc231f9171daa32cf9277a44519f457aac37f39c8e2a",
+        "28-appendix-beginner-map.md": "d3740b03dfc61c27e48fca56cddbb36852216850f3fa1e06a53f1e81594c1e33"
+      }
     },
     {
       "language": "ja",
       "python_blocks_parsed": 107,
       "runnable_blocks": 34,
       "unique_scripts_run": 32,
-      "regression_tests": 23,
+      "regression_tests": 35,
       "tests_exit_code": 0,
-      "repository_ast_matches": 34
+      "repository_ast_matches": 34,
+      "checks": [
+        {
+          "file": "ch00_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch01_pipeline.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch02_features.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch03_dsr.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch03_metrics.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch03_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch04_hmm.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch05_forward.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch06_kalman.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch07_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch08_ensemble.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch09_kelly.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch10_optuna.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch11_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch12_practice.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch13_env.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch14_sac.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch15_optuna.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch16_metrics.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch17_order_events.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch18_lab.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch18_monitor.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch19_cointegration.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch20_regime_events.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch20_screening.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch21_regime_zscore.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch22_pipeline.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch23_sac.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch24_validation.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch25_per.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch26_quantile_cvar.py",
+          "exit_code": 0
+        },
+        {
+          "file": "ch27_mlflow.py",
+          "exit_code": 0
+        }
+      ],
+      "manuscript_sha256": {
+        "00-preface.md": "86757c18c4f4344d3e5468f2aedecd0c40b31c4fa266f4798826404139adb779",
+        "00a-vibe-coding-quickstart.md": "002310f8e07d515c9b8fec7605c1a88b451f352913709f5ad926737a44741b67",
+        "01-architecture.md": "acaa76f32675686de71080e0946d34e32326f3059458d584a20f5bffce9f0f75",
+        "02-data-pipeline.md": "99d545b5d22fad89d5e6e62b6fb9b6ca8d98b27c92edc1bfaa6fa02b02d33863",
+        "03-backtest-engine.md": "4b7fa4f0cd8f8b79dac952d54ab55b6279fdef46f426c53d33a73156562a5ca1",
+        "04-hmm-basics.md": "5dc797fbe8f82dea9706842152e5952c192d59bd6ee729819c28001feff8c381",
+        "05-hmm-forward-only.md": "669c4dc24a30df20308ace456f6a0ee60ed97c725636539403425caf983e0354",
+        "06-kalman-filter.md": "8f9ab5b4dce6bcc460893559aa352699d10ca3debbc4b2fafa7d8d442f999321",
+        "07-cross-asset-joint-hmm.md": "120fba963aeb7e4158609411560fd4d2fb55909d81effd56a288e1b72fcb1aae",
+        "08-two-layer-hmm.md": "fed7d8aa15fa2b4bb59f252458a5a108babf26261a9795e4cc9f2bad56325075",
+        "09-kelly-sizing.md": "c360a85daf40126649ad5cd8d25f02174432e7e2e2f1dc9e57970bb51cffb7a0",
+        "10-hmm-ensemble.md": "25c8ad2bc7029662c445a55c8b34b895be531adf8b149bd15e1d9017ce9efca5",
+        "11-stat-arb-pairs.md": "cdd18a0f1104c160b4d00aee5830fab6ec5064f6d60c1a5ac37776a0458a9f8f",
+        "12-stat-arb-signals.md": "88cb62980bede0dc71d72481e7a0aa645ce29e16b21c43fba2466a0c5cc61075",
+        "13-rl-environment.md": "93fa6afd2a2b44bf09829cad2cbc202f040cb307c02a58d241c49704ef981235",
+        "14-sac-agent.md": "54cea8a57453db4ebf03be338578745278f22729c444067b00757506f2d0e09a",
+        "15-optuna-tuning.md": "5bd6e28b44944d74ebd5e9f5212786780f2e5d5ed0e99460e4949980f0a28ded",
+        "16-risk-management.md": "f49f2f729497f600af671ef19ea64ef9c2020479da25006dde34d25b5173ede0",
+        "17-ibkr.md": "abd19643c7aa6f2c7223c3d195f08bd0db64b19b13b13a9db3fd686636ca0105",
+        "18-monitoring.md": "f0daf127315f55cdb0aa214888302d05492c47fb665e3c336943c03673d23097",
+        "19-bamberger-pairs-theory.md": "9ed4a15435f152307a4037d49ff475e3a39c28cb9aa9b4f8ae19265bbbb240af",
+        "20-pair-selection-regime.md": "bc038fb89ca6ec3457f091c06bacd9a109cfb982e7279791ee87faa7931e1924",
+        "21-regime-zscore-core.md": "073494a7a4b8541303c4a3402632c4896326c6951350baaf669681b96d30aa6a",
+        "22-hmm-pipeline-complete.md": "6691917161ae968d7c22d85b13a899f93304402fb53756fd21c2529fb588a6fe",
+        "23-sac-rl-preview.md": "d33e1b592ee49ce2a4e08802bd7ebfa93de184cdc366956159bad73cb6895faa",
+        "24-production-validation.md": "a199d4fc14b1e8b5c317e586f204ab3309efd88c4b21a73ea1535cc5f86009ab",
+        "25-rl-algorithm-comparison.md": "37fd1c00c7e5ce9f16a51af022cfda6248dbe4f3ddd19a2e030f36d304bc1222",
+        "26-distributional-rl-cvar.md": "78c28aedafd4bd15dc29526dc7aa1543f6bec7508e6f19e755fcf6db141fb93f",
+        "27-mlflow-serving.md": "1adb035d272aba7c9711b32b7083d99d3162717d88600252052837ae659566fe",
+        "28-appendix-beginner-map.md": "1a995c92532f4fbdb1d935ef898ddefe560640bcde0ad585780a04fe2de3f9a5"
+      }
     }
   ],
-  "architecture_checks_per_edition": 7,
-  "notes": "Runnable code was extracted from each manuscript into temporary files, compared by AST with this source revision, and executed with Python socket connections blocked. Regression tests ran against extracted code. Selected architecture calculations were tested in isolation with dummy collaborators; broker/server excerpts were not executed live. Book manuscripts and PDFs are not included here."
+  "fenced_blocks": 711,
+  "python_blocks_per_edition": 107,
+  "non_runnable_mappings_per_edition": 73,
+  "context_only_per_edition": 5,
+  "repository_examples": 33,
+  "repository_tests": 36,
+  "network": "outbound blocked",
+  "source_index": "book_sources/index.json",
+  "fenced_blocks_by_edition": {
+    "ko": 256,
+    "en": 227,
+    "ja": 228
+  },
+  "latest_inventory_check": "Independent line-based scanner matched all 711 blocks to the manuscript; missing non-Python block regression added."
 }
