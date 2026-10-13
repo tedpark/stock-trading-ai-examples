@@ -63,13 +63,14 @@ class PaperServiceTests(unittest.TestCase):
             client=TestClient(create_app(d,tracking_uri=''))
             payload={'request_id':'demo'}
             response=client.post('/runs',json=payload);self.assertEqual(response.status_code,200,response.text)
-            result=response.json();self.assertEqual(result['tracking']['status'],'disabled')
+            result=response.json();self.assertEqual(result['forecast_units'],'log_return_per_bar');self.assertEqual(result['tracking']['status'],'disabled')
             self.assertEqual(client.post('/runs',json=payload).json(),result)
             self.assertEqual(client.post('/runs',json={**payload,'seed':10}).status_code,409)
             restarted=TestClient(create_app(d,tracking_uri=''))
             self.assertEqual(restarted.get('/runs/demo').json()['result'],result)
             prediction=restarted.post('/runs/demo/predict',json={'bars':rows(make_bars())})
             self.assertEqual(prediction.status_code,200,prediction.text)
+            self.assertEqual(prediction.json()['forecast_units'],'log_return_per_bar')
             self.assertAlmostEqual(sum(prediction.json()['state_probabilities']),1)
             bad=rows(make_bars());bad[1]['timestamp']=bad[0]['timestamp']
             self.assertEqual(client.post('/runs',json={'request_id':'bad','source':'uploaded','bars':bad}).status_code,422)

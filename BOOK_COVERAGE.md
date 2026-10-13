@@ -28,7 +28,7 @@ GitHub Actions installs dependencies on Python 3.12 and runs `python verify.py`.
 
 ## Current manuscript verification
 
-The revised Korean, English, and Japanese manuscripts each contain 34 marked blocks, including two copies of the shared HMM helper. All 34 blocks match the reviewed public source by AST. The 32 distinct chapter exercise scripts (excluding the appendix file-list guide) ran successfully for every edition: 96 script runs and 69 regression tests in total. Ten isolated architecture checks per edition cover Kelly sizing, zero gates, invalid sizing inputs, Sortino boundaries, drawdown, CVaR tail mass, metadata, risk tails, full-covariance filtering, and invalid order requests. Architecture excerpts are not standalone production applications. See `BOOK_VALIDATION.json`.
+The revised Korean, English, and Japanese manuscripts each contain 34 marked blocks, including two copies of the shared HMM helper. All 34 blocks match the reviewed public source by AST. The 32 distinct chapter exercise scripts (excluding the appendix file-list guide) ran successfully for every edition: 96 script runs and 150 regression test executions in total (50 per edition). Ten isolated architecture checks per edition cover Kelly sizing, zero gates, invalid sizing inputs, Sortino boundaries, drawdown, CVaR tail mass, metadata, risk tails, full-covariance filtering, and invalid order requests. Architecture excerpts are not standalone production applications. See `BOOK_VALIDATION.json`.
 
 The book now includes the optional repository URL, complete helper definitions, local MLflow verification, and corrected source-review behavior. Reading and running the printed exercises does not require downloading this repository.
 
@@ -41,3 +41,9 @@ This audit corrected a Korean Chapter 15 objective that still referenced an unde
 ## Repository-first synchronization
 
 The current workflow reverses the old manuscript-export direction. `book_contract.json` owns the mapping; runnable blocks read actual `.py` files, while explanatory fragments read canonical `book_snippets/` source. All three editions use identical Python code. `book_sources` is a derived snapshot. Source edits must be tested before `sync_book.py` updates the manuscript. Mismatched source anchors, unbound blocks and direct manuscript changes fail checks. The private book build checks a committed-source hash lock and canonical listing consistency before invoking the PDF compiler. This changes authorship and consistency controls; it does not turn architectural fragments into complete deployed features.
+
+## Content and code boundary audit (2026-10-13)
+
+The Chapter 11 runnable half-life calculation now uses the same exact discrete AR(1) equation as the printed explanation and Chapter 20. Invalid or degenerate screening inputs are rejected. The shared HMM filter preserves structural zero probabilities instead of making impossible states reachable. A new long-stop helper prevents a widening tier from lowering the previous stop. The IBKR connection design fragment returns failure if account initialization fails. The paper service identifies its forecast as log return per bar.
+
+Six new regression cases exercise these boundaries; the repository suite now has 50 tests, and all 33 chapter examples pass with outbound connections blocked. Seven real local HTTP integration groups pass, including SQLite restart recovery and MLflow outage behavior. Live market retrieval and broker connectivity were not rerun in this audit. The three editions clarify exit triggers versus guaranteed fills, stop-state persistence, MongoDB write exceptions, and forecast units. This remains a learning implementation, with architectural excerpts explicitly distinguished from the runnable paper service.

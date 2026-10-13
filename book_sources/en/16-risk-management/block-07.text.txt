@@ -3,6 +3,6 @@ price rises to 108
 high_watermark = 108
 
 trailing threshold -2%
-exit price = 108 × (1 - 0.02) = 105.84
+exit-trigger price = 108 × (1 - 0.02) = 105.84
 
 if price falls below 105.84, exit

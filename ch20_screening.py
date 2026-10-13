@@ -8,11 +8,23 @@ import numpy as np
 import pandas as pd
 
 
-def _half_life(spread):
+def _half_life(spread, min_obs=20):
     values = np.asarray(spread, dtype=float)
-    slope = linregress(values[:-1], np.diff(values)).slope
-    phi = 1 + slope
-    return -np.log(2) / np.log(phi) if 0 < phi < 1 else float("inf")
+    if not isinstance(min_obs, int) or min_obs < 3:
+        raise ValueError("min_obs must be an integer >= 3")
+    if (values.ndim != 1 or len(values) < min_obs
+            or not np.isfinite(values).all()):
+        return float("inf")
+    lag, change = values[:-1], np.diff(values)
+    x = lag - lag.mean()
+    denominator = float(x @ x)
+    if denominator <= 0:
+        return float("inf")
+    phi = float(x @ (change - change.mean()) / denominator)
+    # Positive, stationary AR(1): a = 1 + phi lies strictly in (0, 1).
+    if not -1 < phi < 0:
+        return float("inf")
+    return float(np.log(0.5) / np.log1p(phi))
 
 
 def _yearly_signal_count(spread, half_life):
