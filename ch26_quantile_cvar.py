@@ -1,5 +1,5 @@
 """Chapter 26 learning example; dummy data only. Source: 26-distributional-rl-cvar.md"""
-from math import isfinite
+from math import fsum, isfinite
 
 
 def cvar_size(quantiles, alpha=0.2, loss_budget=0.175):
@@ -14,10 +14,17 @@ def cvar_size(quantiles, alpha=0.2, loss_budget=0.175):
         raise ValueError("invalid quantiles or risk budget")
     ordered = sorted(quantiles)
     mass = alpha * len(ordered)
-    whole = int(mass)
-    # Weight the boundary bin fractionally so the tail has exactly alpha mass.
-    boundary = (mass - whole) * ordered[whole] if whole < len(ordered) else 0.0
-    cvar = (sum(ordered[:whole]) + boundary) / mass
+    if mass <= 1:
+        # Any tail inside the first equal-mass bin has that bin's return.
+        # Avoid multiplying and dividing by a potentially subnormal tail mass.
+        cvar = ordered[0]
+    else:
+        whole = int(mass)
+        # Divide before summing to avoid overflowing a finite tail average.
+        terms = [value / mass for value in ordered[:whole]]
+        if whole < len(ordered):
+            terms.append(((mass - whole) / mass) * ordered[whole])
+        cvar = fsum(terms)
     loss = max(0.0, -cvar)
     size = min(1.0, loss_budget / loss) if loss else 1.0
     return cvar, size
