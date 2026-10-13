@@ -95,9 +95,20 @@ def return_tail(bar_returns, alpha=0.05):
         raise ValueError("finite return vector and tail mass in (0,1] required")
     mass = alpha * len(ordered)
     whole = int(mass)
-    boundary = (mass - whole) * ordered[whole] if whole < len(ordered) else 0.0
     var = ordered[max(0, int(np.ceil(mass)) - 1)]
-    cvar = (ordered[:whole].sum() + boundary) / mass
+    if mass <= 1:
+        cvar = ordered[0]
+    else:
+        scale = max(abs(value) for value in ordered[:whole + (mass > whole)])
+        if scale == 0:
+            cvar = 0.0
+        else:
+            from math import fsum
+            terms = [(value / scale) / mass for value in ordered[:whole]]
+            if mass > whole:
+                terms.append((mass - whole) / mass * (ordered[whole] / scale))
+            cvar = max(-1., min(1., fsum(terms))) * scale
+
     return float(var), float(cvar)
 
 

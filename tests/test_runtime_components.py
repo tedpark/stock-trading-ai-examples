@@ -148,6 +148,17 @@ class RuntimeComponentTests(unittest.TestCase):
             if previous is not None:self.assertGreaterEqual(stop,previous)
             previous=stop
 
+    def test_runtime_tail_extremes(self):
+        from sys import float_info
+        extreme=float_info.max
+        self.assertEqual(risk.return_tail([-extreme]*4,1)[1],-extreme)
+        self.assertEqual(risk.return_tail([-extreme,extreme],5e-324)[1],-extreme)
+        class Atoms(torch.nn.Module):
+            def forward(self,state):return torch.full((1,3,4),-3e38)
+        agent=distribution.QuantileAgent(Atoms())
+        for alpha in [1.,.05,5e-324]:
+            self.assertTrue(torch.isfinite(agent.cvar(torch.zeros(1,11),0,alpha)).all())
+
     def test_source_must_be_executable_and_symbol_must_exist(self):
         from sync_book import source_text, contract
         e=dict(contract()[0]);e['source']='book_sources/index.json'

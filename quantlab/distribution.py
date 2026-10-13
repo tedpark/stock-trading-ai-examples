@@ -65,7 +65,7 @@ class QuantileAgent:
     def act(self, state):
         with torch.no_grad():
             q_dist = self.net(state)              # (B, 3, 51)
-            q_expectation = q_dist.mean(dim=-1)   # (B, 3)
+            q_expectation = q_dist.to(torch.float64).mean(dim=-1)   # (B, 3)
             return q_expectation.argmax(dim=-1)
 
     def cvar(self, state, action, alpha=0.05):
@@ -81,8 +81,13 @@ class QuantileAgent:
                 raise ValueError("finite nonempty Q atoms required")
             ordered = quantiles.sort(dim=-1).values
             mass = alpha * ordered.shape[-1]
+            if mass <= 1:
+                return ordered[:, 0]
             whole = int(mass)
-            tail = ordered[:, :whole].sum(dim=-1)
-            if whole < ordered.shape[-1]:
-                tail = tail + (mass - whole) * ordered[:, whole]
-            return tail / mass
+            tail_atoms = ordered[:, :whole + (mass > whole)].to(torch.float64)
+            scale = tail_atoms.abs().amax(dim=-1).clamp_min(torch.finfo(torch.float64).tiny)
+            normalized = tail_atoms / scale[:, None]
+            tail = (normalized[:, :whole] / mass).sum(dim=-1)
+            if mass > whole:
+                tail += ((mass - whole) / mass) * normalized[:, whole]
+            return tail.clamp(-1., 1.) * scale
