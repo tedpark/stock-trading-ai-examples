@@ -3,19 +3,19 @@ def return_tail(bar_returns, alpha=0.05):
     if ordered.ndim != 1 or not len(ordered) or not np.isfinite(ordered).all() or not 0 < alpha <= 1:
         raise ValueError("finite return vector and tail mass in (0,1] required")
     mass = alpha * len(ordered)
+    whole = int(mass)
     var = ordered[max(0, int(np.ceil(mass)) - 1)]
     if mass <= 1:
         cvar = ordered[0]
     else:
-        whole = int(mass)
-        # Scale the included atoms before averaging to keep finite tails finite.
-        scale = np.max(np.abs(ordered[:whole + (mass > whole)]))
+        scale = max(abs(value) for value in ordered[:whole + (mass > whole)])
         if scale == 0:
             cvar = 0.0
         else:
-            terms = (ordered[:whole] / scale) / mass
-            total = float(np.sum(terms))
+            from math import fsum
+            terms = [(value / scale) / mass for value in ordered[:whole]]
             if mass > whole:
-                total += ((mass - whole) / mass) * (ordered[whole] / scale)
-            cvar = np.clip(total, -1.0, 1.0) * scale
+                terms.append((mass - whole) / mass * (ordered[whole] / scale))
+            cvar = max(-1., min(1., fsum(terms))) * scale
+
     return float(var), float(cvar)

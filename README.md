@@ -56,7 +56,7 @@ With a private book checkout available, run `python sync_book.py --book-root /pa
 
 ## Complete printed-source inventory
 
-[book_sources/README.md](book_sources/README.md) and `book_sources/index.json` map every fenced code block from all three editions, including all 107 Python blocks per edition. Only 34 per edition map to runnable examples; the remaining 73 are explicitly classified fragments or counterexamples. Exact source inclusion is not a claim that every design is implemented. Run `python verify_book_sources.py` to check integrity and mappings.
+[book_sources/README.md](book_sources/README.md) and `book_sources/index.json` map every fenced code block from all three editions, including all 107 Python blocks per edition. Each edition contains 34 full-file runnable listings and 73 excerpts of executable implementation modules. Every excerpt callable is exercised by the regression suite. Imports and surrounding classes live in the linked source files; a method excerpt alone is not a standalone script. Run `python verify_book_sources.py` to check integrity and mappings.
 
 ## 3. How the examples map to the book
 
