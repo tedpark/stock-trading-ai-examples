@@ -60,7 +60,6 @@ def kelly_fraction(p_up, macro_bias, asset_class):
     return min(base * multiplier, 1.0)
 
 
-# hmm_v5_core.py (excerpt)
 def fractional_kelly(mu, sigma2, kelly_frac=0.25, max_size=1.0) -> float:
     """f* = kelly_frac × |μ| / σ²
     Reduce size for higher uncertainty; increase it for stronger signals.

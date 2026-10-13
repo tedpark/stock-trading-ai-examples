@@ -5,13 +5,13 @@ from dataclasses import dataclass, field
 
 # source-region: kelly
 KELLY_MIN, KELLY_MAX = 0.10, 1.0
-THRESHOLD = 0.53          # p_up > THRESHOLD → long entry
+THRESHOLD = 0.53  # Positive-edge normalization reference, not an entry gate.
 
 def calculate_kelly_size(
     p_up, direction,
     vol_mult=1.0, macro_gate=1.0, novelty_gate=1.0,
 ) -> float:
-
+    """Return a normalized size allowance; the caller supplies an exposure budget."""
     if not np.isfinite(p_up) or not 0 <= p_up <= 1 or direction not in (-1, 1):
         raise ValueError("probability in [0, 1] and direction -1 or 1 required")
     edge = (p_up - 0.5) if direction > 0 else ((1.0 - p_up) - 0.5)
@@ -94,10 +94,21 @@ def return_tail(bar_returns, alpha=0.05):
     if ordered.ndim != 1 or not len(ordered) or not np.isfinite(ordered).all() or not 0 < alpha <= 1:
         raise ValueError("finite return vector and tail mass in (0,1] required")
     mass = alpha * len(ordered)
-    whole = int(mass)
-    boundary = (mass - whole) * ordered[whole] if whole < len(ordered) else 0.0
     var = ordered[max(0, int(np.ceil(mass)) - 1)]
-    cvar = (ordered[:whole].sum() + boundary) / mass
+    if mass <= 1:
+        cvar = ordered[0]
+    else:
+        whole = int(mass)
+        # Scale the included atoms before averaging to keep finite tails finite.
+        scale = np.max(np.abs(ordered[:whole + (mass > whole)]))
+        if scale == 0:
+            cvar = 0.0
+        else:
+            terms = (ordered[:whole] / scale) / mass
+            total = float(np.sum(terms))
+            if mass > whole:
+                total += ((mass - whole) / mass) * (ordered[whole] / scale)
+            cvar = np.clip(total, -1.0, 1.0) * scale
     return float(var), float(cvar)
 
 

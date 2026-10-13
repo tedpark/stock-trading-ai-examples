@@ -1,21 +1,6 @@
-yfinance / FMP API
-        │
-        ▼  (최초 다운로드)
-   download_bars()
-        │
-        ├─ FMP 우선
-        │     │ 실패 또는 30% 미만
-        │     ▼
-        └─ yfinance / DuckDB 폴백
-        │
-        ▼
-   DuckDBCache.save_ohlcv_data()
-        │
-        ▼
-   cache/.../ohlcv/{symbol}/{interval}/YYYY-MM.parquet
-        │   (월별 파티션, Append-only)
-        ▼
-   compute_daily_features()
-        │
-        ▼
-   np.ndarray  shape=(T, 4)  →  HMM.fit()
+injected dummy OHLCV / optional yfinance download
+    -> download_ohlcv: validate one DataFrame
+    -> compute_daily_features: returns, volatility, volume features
+    -> discard_warmup: remove unavailable feature rows
+    -> training-only scaling
+    -> causal inference and evaluation after costs

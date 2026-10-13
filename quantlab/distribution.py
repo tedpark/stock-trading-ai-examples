@@ -81,8 +81,14 @@ class QuantileAgent:
                 raise ValueError("finite nonempty Q atoms required")
             ordered = quantiles.sort(dim=-1).values
             mass = alpha * ordered.shape[-1]
+            if mass <= 1:
+                return ordered[:, 0]
             whole = int(mass)
-            tail = ordered[:, :whole].sum(dim=-1)
-            if whole < ordered.shape[-1]:
-                tail = tail + (mass - whole) * ordered[:, whole]
-            return tail / mass
+            included = ordered[:, :whole + (mass > whole)]
+            scale = included.abs().amax(dim=-1)
+            divisor = torch.where(scale > 0, scale, torch.ones_like(scale))
+            # Normalize first so a finite mean cannot overflow its partial sum.
+            tail = ((ordered[:, :whole] / divisor[:, None]) / mass).sum(dim=-1)
+            if mass > whole:
+                tail = tail + ((mass - whole) / mass) * (ordered[:, whole] / divisor)
+            return tail.clamp(-1.0, 1.0) * scale

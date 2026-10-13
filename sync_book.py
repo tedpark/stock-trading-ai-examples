@@ -111,7 +111,7 @@ def synchronize(book_root,write=False,root=ROOT):
                 marker=f"<!-- repository-source: {entry['id']} -->\n"
                 label=(f"<!-- source-link:start -->[Source: `{entry['source']}`"
                        + (f" · `{entry['symbol']}`" if entry.get('symbol') else '')
-                       + f"](https://github.com/tedpark/stock-trading-ai-examples/blob/runtime-book-2026-10-13/{entry['source']})<!-- source-link:end -->\n\n")
+                       + f"](https://github.com/tedpark/stock-trading-ai-examples/blob/runtime-book-2026-10-13-r2/{entry['source']})<!-- source-link:end -->\n\n")
                 link=re.search(r'<!-- source-link:start -->.*?<!-- source-link:end -->\n\n$', prefix[:prior.start()] if prior else prefix)
                 if prior:
                     if link:
@@ -125,7 +125,7 @@ def synchronize(book_root,write=False,root=ROOT):
                     legacy=re.search(r'<!-- book-example: [^\n]+ -->\n$',prefix)
                     position=legacy.start() if legacy else match.start
                     changes.append((position,position,label+marker))
-                if not prior or match.code!=expected:differences.append(f'{edition}/{entry["id"]}')
+                if not prior or match.code!=expected or not link or link[0]!=label:differences.append(f'{edition}/{entry["id"]}')
             for start,end,value in sorted(changes,reverse=True):text=text[:start]+value+text[end:]
             if changes:planned.append((path,text))
     expected={(edition,e['chapter'],e['python_block']) for edition in EDITIONS for e in entries}
@@ -151,15 +151,10 @@ def synchronize_commands(book_root, write=False, root=ROOT):
                     raise ValueError('invalid command source')
                 if block.language!=entry['language']:raise ValueError('command language drift')
                 code=source.read_text()
-                label=f"<!-- command-source:start -->[Source: `{entry['source']}`](https://github.com/tedpark/stock-trading-ai-examples/blob/runtime-book-2026-10-13/{entry['source']})<!-- command-source:end -->\n\n"
-                prefix=text[:block.start]
-                prior=re.search(r'<!-- command-source:start -->.*?<!-- command-source:end -->\n\n$',prefix)
-                if not prior:changes.append((block.start,block.start,label))
-                elif prior[0]!=label:changes.append((prior.start(),prior.end(),label))
                 if block.code!=code:
                     changes.append((block.body_start,block.body_end,code))
                     differences.append(f"{edition}/{path.name}/{entry['source']}")
-            for a,b,value in sorted(changes,reverse=True):text=text[:a]+value+text[b:]
+            for a,b,value in reversed(changes):text=text[:a]+value+text[b:]
             if changes:plans.append((path,text))
     if write:
         for path,text in plans:path.write_text(text)
