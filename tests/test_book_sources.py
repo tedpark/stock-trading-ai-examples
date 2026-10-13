@@ -1,5 +1,6 @@
 """Execute selected printed functions with controlled inputs, not their design environment."""
 import json
+import copy
 from pathlib import Path
 import sys
 from types import SimpleNamespace
@@ -28,6 +29,31 @@ class PrintedSourceTests(unittest.TestCase):
                        if r['edition']==edition and r['language']!='python')
             with self.subTest(edition=edition), self.assertRaises(AssertionError):
                 verify(ROWS[:index]+ROWS[index+1:])
+
+    def test_duplicate_python_slot_cannot_hide_missing_source(self):
+        rows=copy.deepcopy(ROWS)
+        candidates=[i for i,r in enumerate(rows) if r['edition']=='ko'
+                    and r['language']=='python' and not r['runnable_file']
+                    and not r['compile_error']]
+        # Use two fragments from the same chapter, retaining unique display slots.
+        a,b=next((i,j) for i in candidates for j in candidates
+                 if i<j and rows[i]['chapter']==rows[j]['chapter'])
+        identity={k:rows[b][k] for k in ('edition','chapter','block','line')}
+        rows[b]=dict(rows[a],**identity)
+        with self.assertRaises(AssertionError):verify(rows)
+
+    def test_classification_must_match_canonical_contract(self):
+        for key,value in [('kind','invented_classification'),
+                          ('runnable_file','invented.py'),('execution','chapter_suite')]:
+            rows=copy.deepcopy(ROWS)
+            row=next(r for r in rows if r['language']=='python' and not r['runnable_file'])
+            row[key]=value
+            with self.subTest(field=key),self.assertRaises(AssertionError):verify(rows)
+
+    def test_unexpected_edition_is_rejected(self):
+        row=copy.deepcopy(next(r for r in ROWS if r['language']!='python'))
+        row['edition']='unknown'
+        with self.assertRaises(AssertionError):verify(ROWS+[row])
 
     def test_validation_objective_costs_and_holdout(self):
         # +1 -> -1 -> flat: turnover 1+2+1, gross .1-.2=-.1.

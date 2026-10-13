@@ -18,8 +18,10 @@ def tree(source):
 def verify(rows=None):
     rows=json.loads((ROOT/'book_sources/index.json').read_text()) if rows is None else rows
     entries={(e['chapter'],e['python_block']):e for e in contract(ROOT)}
-    seen=set();counts={}
+    seen=set();seen_sources=set();counts={}
+    editions={"ko","en","ja"}
     for row in rows:
+        assert row['edition'] in editions,('unexpected edition',row['edition'])
         key=(row['edition'],row['chapter'],row['block'])
         assert key not in seen,key
         seen.add(key)
@@ -28,7 +30,14 @@ def verify(rows=None):
         code=path.read_text()
         assert hashlib.sha256(code.encode()).hexdigest()==row['sha256'],key
         if row['language']=='python':
+            source_key=(row['edition'],row['chapter'],row['python_block'])
+            assert source_key not in seen_sources,('duplicate source slot',source_key)
+            seen_sources.add(source_key)
             entry=entries[(row['chapter'],row['python_block'])]
+            assert row['kind']==entry['kind'],(key,'classification drift')
+            assert row['runnable_file']==entry['runnable_file'],(key,'runnable mapping drift')
+            execution='chapter_suite' if entry['runnable_file'] else 'not_a_standalone_program'
+            assert row['execution']==execution,(key,'execution classification drift')
             assert row['repository_source']==entry['source'],key
             assert row['source_id']==entry['id'],key
             assert code==source_text(entry,ROOT),(key,'repository source drift')
@@ -44,6 +53,8 @@ def verify(rows=None):
             counts[row['edition']]['python']+=1
             counts[row['edition']]['runnable']+=bool(row['runnable_file'])
             counts[row['edition']]['context']+=bool(error)
+    expected_sources={(edition,*key) for edition in editions for key in entries}
+    assert seen_sources==expected_sources,('source coverage drift',expected_sources-seen_sources)
     for edition, expected in [('ko',256),('en',227),('ja',228)]:
         edition_rows=[row for row in rows if row['edition']==edition]
         assert len(edition_rows)==expected,(edition,'fenced block count',len(edition_rows))
