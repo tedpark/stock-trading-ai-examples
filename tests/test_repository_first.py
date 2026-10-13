@@ -45,6 +45,24 @@ class RepositoryFirstTests(unittest.TestCase):
     def test_new_unmapped_python_block_rejected_before_writing(self):
         path=self.book/'manuscript'/'99-new.md';path.write_text('```python\nprint(1)\n```\n')
         with self.assertRaises(ValueError):sync_book.synchronize(self.book,write=True,root=self.repo)
+    def test_alternative_python_fences_cannot_bypass_mapping(self):
+        path=self.book/'manuscript'/'99-new.md'
+        for opening, closing in [('~~~python','~~~'),('````python','````'),
+                                 ('```py','```'),('```python3','```'),
+                                 ('```{.python}','```'),('  ```python','  ```')]:
+            path.write_text(f'{opening}\nprint(1)\n{closing}\n')
+            with self.subTest(opening=opening):
+                with self.assertRaises(ValueError):
+                    sync_book.synchronize(self.book,write=True,root=self.repo)
+
+    def test_unclosed_fence_is_rejected(self):
+        (self.book/'manuscript'/'99-new.md').write_text('```text\nunclosed\n')
+        with self.assertRaises(ValueError):sync_book.synchronize(self.book,root=self.repo)
+
+    def test_python_text_inside_outer_fence_is_not_a_listing(self):
+        (self.book/'manuscript'/'99-new.md').write_text('````text\n```python\nexample markup\n```\n````\n')
+        self.assertEqual(sync_book.synchronize(self.book,root=self.repo),[])
+
     def test_missing_block_rejected(self):
         path=self.book/'manuscript'/self.entry['chapter'];path.write_text('')
         with self.assertRaises(ValueError):sync_book.synchronize(self.book,root=self.repo)

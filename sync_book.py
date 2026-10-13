@@ -4,6 +4,7 @@ python sync_book.py --book-root /path/to/stock-trading-ai --check
 python sync_book.py --book-root /path/to/stock-trading-ai --write --refresh-index
 """
 import argparse
+from dataclasses import dataclass
 import ast
 import hashlib
 import json
@@ -12,8 +13,43 @@ import re
 
 ROOT=Path(__file__).resolve().parent
 EDITIONS={'ko':'manuscript','en':'manuscript-en','ja':'manuscript-ja'}
-FENCE=re.compile(r'^```([^\n`]*)\n(.*?)^```[ \t]*$',re.M|re.S)
-PYTHON=re.compile(r'^```python\n(.*?)^```[ \t]*$',re.M|re.S)
+@dataclass(frozen=True)
+class Fence:
+    language: str
+    code: str
+    start: int
+    body_start: int
+    body_end: int
+
+
+def fences(text):
+    """Scan complete fences so nested examples cannot become executable listings.
+
+    Python listings use one canonical spelling. Alternate Markdown spellings
+    are rejected instead of silently escaping the repository mapping check.
+    """
+    active = None
+    offset = 0
+    for line in text.splitlines(keepends=True):
+        if active is None:
+            match = re.match(r'^ {0,3}(`{3,}|~{3,})([^\n]*)\n?$', line)
+            if match:
+                delimiter, info = match.groups()
+                language = info.strip() or 'text'
+                is_python = (re.match(r'^(python[23]?|py)(\s|$)', language, re.I)
+                             or re.search(r'(^|\s|\{)\.(python[23]?|py)(\s|\}|$)', language, re.I))
+                if is_python and line != '```python\n':
+                    raise ValueError('Use an anchored canonical ```python listing for repository code.')
+                active = (delimiter, language, offset, offset + len(line))
+        else:
+            delimiter, language, start, body_start = active
+            closing = r'^ {0,3}' + re.escape(delimiter[0]) + '{' + str(len(delimiter)) + r',}[ \t]*$'
+            if re.match(closing, line.rstrip('\n')):
+                yield Fence(language, text[body_start:offset], start, body_start, offset)
+                active = None
+        offset += len(line)
+    if active is not None:
+        raise ValueError('Unclosed Markdown fence; source inventory would be incomplete.')
 
 def contract(root=ROOT):
     entries=json.loads((root/'book_contract.json').read_text())
@@ -41,22 +77,22 @@ def synchronize(book_root,write=False,root=ROOT):
         if not directory.is_dir():raise ValueError(f'missing edition: {directory}')
         for path in sorted(directory.glob('*.md')):
             text=path.read_text();changes=[]
-            for number,match in enumerate(PYTHON.finditer(text),1):
+            for number,match in enumerate((f for f in fences(text) if f.language == 'python'),1):
                 key=(path.name,number)
                 if key not in by_key:raise ValueError(f'unmapped Python block: {edition}/{key}')
                 entry=by_key[key];seen.add((edition,*key))
                 # Explicit anchors prevent insertion/reordering from silently changing mappings.
-                prefix=text[:match.start()]
+                prefix=text[:match.start]
                 prior=re.search(r'<!-- repository-source: ([^\n]+) -->\n(?:<!-- book-example: [^\n]+ -->\n)?$',prefix)
                 marker=f"<!-- repository-source: {entry['id']} -->\n"
                 if prior and prior[1]!=entry['id']:raise ValueError(f'wrong source anchor: {path}:{number}')
                 expected=source_text(entry,root)
-                if match[1]!=expected:changes.append((match.start(1),match.end(1),expected))
+                if match.code!=expected:changes.append((match.body_start,match.body_end,expected))
                 if not prior:
                     legacy=re.search(r'<!-- book-example: [^\n]+ -->\n$',prefix)
-                    position=legacy.start() if legacy else match.start()
+                    position=legacy.start() if legacy else match.start
                     changes.append((position,position,marker))
-                if not prior or match[1]!=expected:differences.append(f'{edition}/{entry["id"]}')
+                if not prior or match.code!=expected:differences.append(f'{edition}/{entry["id"]}')
             for start,end,value in sorted(changes,reverse=True):text=text[:start]+value+text[end:]
             if changes:planned.append((path,text))
     expected={(edition,e['chapter'],e['python_block']) for edition in EDITIONS for e in entries}
@@ -74,8 +110,8 @@ def refresh_index(book_root,root=ROOT):
     for edition,folder in EDITIONS.items():
         for path in sorted((book_root/folder).glob('*.md')):
             text=path.read_text();python_index=0
-            for number,match in enumerate(FENCE.finditer(text),1):
-                language,code=match.groups();language=language.strip() or 'text'
+            for number,match in enumerate(fences(text),1):
+                language,code=match.language,match.code
                 entry=None;error=None
                 if language=='python':
                     python_index+=1;entry=entries[(path.name,python_index)]
@@ -88,7 +124,7 @@ def refresh_index(book_root,root=ROOT):
                 artifact=same['artifact'] if same else f'book_sources/{edition}/{path.stem}/block-{number:02}.{language}.txt'
                 contents[artifact]=code
                 records.append(dict(edition=edition,chapter=path.name,block=number,
-                    python_block=python_index if entry else None,line=text[:match.start()].count('\n')+1,
+                    python_block=python_index if entry else None,line=text[:match.start].count('\n')+1,
                     language=language,kind=entry['kind'] if entry else 'reference_fragment',
                     artifact=artifact,runnable_file=entry['runnable_file'] if entry else None,
                     repository_source=entry['source'] if entry else None,
