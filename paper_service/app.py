@@ -102,7 +102,10 @@ def create_app(home=None,tracking_uri=None):
         if found['status']!='completed':raise HTTPException(409,'model is not available')
         # Identifier is resolved only from the database, never used as an arbitrary path.
         path=home/'models'/found['id']/'model.joblib'
-        bundle=joblib.load(path)  # Only load files produced by this service.
+        try:
+            bundle=joblib.load(path)  # Only load files produced by this service.
+        except (OSError, EOFError, ValueError) as exc:
+            raise HTTPException(503, 'saved model unavailable; create a new run') from exc
         try:
             bars=frame(request.bars)
             feature_frame,targets,forecast,probability=signals(bundle,bars)
