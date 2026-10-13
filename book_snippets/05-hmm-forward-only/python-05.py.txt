@@ -1,0 +1,17 @@
+
+def step(self, bar_idx: int) -> float:
+    if not self._hmm.is_fitted:
+        return 1.0                              
+
+    feat_row = self._feats[bar_idx]
+    alpha    = self._hmm.step_forward(feat_row) 
+    if alpha is None:
+        return 1.0
+    self._last_alpha = alpha
+
+    
+    n    = len(alpha)
+    mult = sum(float(alpha[i]) * _regime_mult_from_rank(i, n) for i in range(n))
+
+    self._update_dominant_state(alpha)
+    return float(np.clip(mult, 0.0, 2.0))

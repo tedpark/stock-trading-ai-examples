@@ -1,4 +1,3 @@
-
 def step(self, bar_idx: int) -> float:
     if not self._hmm.is_fitted:
         return 1.0                              

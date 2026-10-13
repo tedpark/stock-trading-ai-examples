@@ -2,6 +2,7 @@
 import ast
 import hashlib
 import json
+from sync_book import contract, source_text
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -16,6 +17,7 @@ def tree(source):
 
 def verify(rows=None):
     rows=json.loads((ROOT/'book_sources/index.json').read_text()) if rows is None else rows
+    entries={(e['chapter'],e['python_block']):e for e in contract(ROOT)}
     seen=set();counts={}
     for row in rows:
         key=(row['edition'],row['chapter'],row['block'])
@@ -26,6 +28,10 @@ def verify(rows=None):
         code=path.read_text()
         assert hashlib.sha256(code.encode()).hexdigest()==row['sha256'],key
         if row['language']=='python':
+            entry=entries[(row['chapter'],row['python_block'])]
+            assert row['repository_source']==entry['source'],key
+            assert row['source_id']==entry['id'],key
+            assert code==source_text(entry,ROOT),(key,'repository source drift')
             ast.parse(code)
             error=None
             try:compile(code,str(path),'exec')

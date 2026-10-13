@@ -1,8 +1,7 @@
-# HMM 게이트 — 둘 중 하나라도 만족하면 차단
 if mr_prob < 0.3 or rp[_DailyHMM.REGIME_VOLATILE] > 0.4:
     return None
 
-# Z-score 게이트 — 비대칭 임계값
+
 if z < -self._entry_z:        action = SignalAction.BUY         # -1.5
 elif z > self._short_entry_z: action = SignalAction.SHORT_SELL  # +2.0
 else:                         return None

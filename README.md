@@ -1,6 +1,6 @@
 # Implementing AI Quant Trading with Python — Dummy Data Examples
 
-This repository contains **33 runnable scripts** covering the quick start in Chapter 00 through Chapter 27, plus a learning guide in Chapter 28. They follow the concepts shared by the Korean, English, and Japanese editions of the book. Runnable examples and repository documentation use English. Exact archived book fragments preserve their edition-specific comments and docstrings.
+This repository contains **33 runnable scripts** covering the quick start in Chapter 00 through Chapter 27, plus a learning guide in Chapter 28. They follow the concepts shared by the Korean, English, and Japanese editions of the book. Runnable examples and repository documentation use English. All Python listings share canonical English source; surrounding explanations and non-Python illustrations may be translated.
 
 In the chapter scripts, all prices, volumes, returns, and order events are **dummy data**, generated or hardcoded in the examples. These exercises are for learning and testing. No account, API key, broker connection, or market data download is required. Installing dependencies requires internet access; the examples run locally afterward. Reported returns describe synthetic experiments.
 
@@ -45,6 +45,14 @@ SAC trains a small neural network on the CPU for just 128 steps. Torch is a larg
 ## Integrated paper-trading service
 
 The chapter scripts remain offline examples. A separate [integrated paper service](paper_service/README.md) now connects data, HMM training, causal signals, risk limits, simulated fills, persistent accounting, an HTTP API and optional MLflow recording. Start it with `python -m uvicorn paper_service.app:app --host 127.0.0.1 --port 8766` after installing `requirements-service.txt`. `verify_service.py` tests actual local HTTP servers. Optional Yahoo downloads require `requirements-market.txt`; broker orders are never submitted.
+
+## Repository-first book workflow
+
+The repository is authoritative. `book_contract.json` maps 107 Python slots per edition to source: 34 runnable mappings read the actual chapter/helper `.py` files, and 73 explanatory/counterexample slots read `book_snippets/`. Change and test those files first. Never fix a manuscript or derived archive instead of the source.
+
+With a private book checkout available, run `python sync_book.py --book-root /path/to/stock-trading-ai --write --refresh-index`, then `python sync_book.py --book-root /path/to/stock-trading-ai --check`. The tool updates all three editions and refuses missing, added, or reordered source anchors. Default mode only checks. Index refresh refuses manuscript drift and never rewrites canonical source. The book build also checks its repository commit/hash lock.
+
+`tests/test_repository_first.py` proves source changes reach all editions, manuscript edits cannot rewrite source, and unbound/missing/wrongly anchored code is rejected. The source archive below is a derived view, not the editing source.
 
 ## Complete printed-source inventory
 

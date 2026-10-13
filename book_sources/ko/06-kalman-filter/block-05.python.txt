@@ -1,16 +1,16 @@
 # app/trading/backtest/features.py
 
 class KalmanFilter1D:
-    """단변량 1-D 칼만 필터 (피처 평활화용)."""
+    """Scalar Kalman filter for feature smoothing."""
 
     def __init__(self, Q: float = 1e-4, R: float = 1e-2):
         self.Q, self.R = Q, R
-        self.x = 0.0   # 상태 추정치
-        self.P = 1.0   # 추정치 분산
+        self.x = 0.0   
+        self.P = 1.0   
 
     def update(self, z: float) -> float:
-        self.P += self.Q                 # 1단계: 예측 (분산 증가)
-        K = self.P / (self.P + self.R)  # 칼만 이득
-        self.x += K * (z - self.x)      # 2단계: 상태 갱신
-        self.P *= 1 - K                  # 분산 축소
+        self.P += self.Q                 
+        K = self.P / (self.P + self.R)  
+        self.x += K * (z - self.x)      
+        self.P *= 1 - K                  
         return self.x

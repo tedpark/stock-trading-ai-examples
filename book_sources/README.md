@@ -1,6 +1,6 @@
-# Exact printed source inventory
+# Derived printed source inventory
 
-This directory archives code and configuration blocks, not book prose. The index covers all 711 fenced blocks across three editions (Korean 256, English 227, Japanese 228), including all 321 Python blocks. Identical blocks share an artifact. Files end in `.txt` intentionally: an archived block is not necessarily an executable program. Korean comment/docstring variants are preserved exactly.
+This directory archives code and configuration blocks, not book prose. The index covers all 711 fenced blocks across three editions (Korean 256, English 227, Japanese 228), including all 321 Python blocks. Identical blocks share an artifact. Files end in `.txt` intentionally: an archived block is not necessarily an executable program. Python listings are generated from one shared repository source across editions. Translated prose/configuration illustrations remain edition-specific.
 
 For each edition, 34 of 107 Python blocks map to runnable files (33 distinct files, including the shared HMM helper). The other 73 are reference fragments, including five function/loop bodies that cannot compile independently. Some are intentional unsafe counterexamples. Do not execute every artifact or interpret source inclusion as completion of an external integration.
 
@@ -40,3 +40,5 @@ Run `python verify_book_sources.py` to check all hashes, Python parsing, context
 | 26-distributional-rl-cvar.md | 7 | 1 | 6 |
 | 27-mlflow-serving.md | 7 | 1 | 6 |
 | 28-appendix-beginner-map.md | 0 | 0 | 0 |
+
+Canonical source is defined in `../book_contract.json`: actual runnable `.py` files or maintained `../book_snippets/` fragments. Do not edit these derived artifacts. Run `sync_book.py --write --refresh-index` against the book checkout after reviewing a source change. `verify_book_sources.py` compares all Python snapshots to their canonical source as well as hashes.

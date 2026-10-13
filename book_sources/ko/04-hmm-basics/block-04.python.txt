@@ -1,30 +1,28 @@
-# app/trading/backtest/signals/hmm_daily_mr.py — 핵심 발췌
-
 def fit(self, features: np.ndarray) -> bool:
-    X = features[~np.any(np.isnan(features), axis=1)]   # ① NaN 행 제거
-    if len(X) < 60:                                     # ② 60봉 미만이면 포기
+    X = features[~np.any(np.isnan(features), axis=1)]   
+    if len(X) < 60:                                     
         return False
 
     scaler = StandardScaler()
-    Xs = scaler.fit_transform(X)                        # ③ 훈련 데이터에만 fit
+    Xs = scaler.fit_transform(X)                        
 
     model = GaussianHMM(
         n_components=HMM_N_STATES,
-        covariance_type="full",                         # ④ 4×4 공분산
+        covariance_type="full",                         
         n_iter=HMM_N_ITER,
         random_state=SEED,
         tol=1e-4,
-        min_covar=1e-3,                                 # Initial covariance diagonal regularization
+        min_covar=1e-3,                                 
     )
-    model.fit(Xs)                                       # ⑥ Baum-Welch 실행
+    model.fit(Xs)                                       
 
-    # ⑦ 상태별 총분산 = trace(Σ_k), 오름차순 정렬 (4.4절 참조)
+    
     total_var = [float(np.trace(model.covars_[i])) for i in range(HMM_N_STATES)]
     order = np.argsort(total_var)
     self._state_map = {
-        int(order[0]): self.REGIME_MR,        # 가장 낮은 분산
+        int(order[0]): self.REGIME_MR,        
         int(order[1]): self.REGIME_TREND,
-        int(order[2]): self.REGIME_VOLATILE,  # 가장 높은 분산
+        int(order[2]): self.REGIME_VOLATILE,  
     }
     self.model, self._scaler = model, scaler
     return True

@@ -1,0 +1,13 @@
+class CVaRSizer:
+    def __init__(self, agent, config):
+        self.agent = agent
+        self.config = config
+        self.last_cvar = None
+
+    def scale(self, state, action):
+        # This signal hook accepts one state, not a batch of different trades.
+        value = self.agent.cvar(state, action, alpha=0.05)
+        if value.numel() != 1:
+            raise ValueError("one state required")
+        self.last_cvar = float(value.item())
+        return cvar_position_scaler(self.last_cvar, self.config)

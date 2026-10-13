@@ -1,6 +1,5 @@
-# app/trading/rl/agents/sac.py 발췌
 def compile_jit(self):
-    """추론용 JIT 컴파일된 복사본 반환."""
+    """Return a JIT-compiled inference copy."""
     import copy
     inference_model = copy.deepcopy(self).eval()
     scripted = torch.jit.script(inference_model)

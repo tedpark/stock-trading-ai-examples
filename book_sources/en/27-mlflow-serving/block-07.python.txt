@@ -1,4 +1,3 @@
-
 def compile_jit(self):
     """Return a JIT-compiled inference copy."""
     import copy

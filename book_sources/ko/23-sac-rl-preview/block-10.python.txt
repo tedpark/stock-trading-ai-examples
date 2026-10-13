@@ -1,12 +1,12 @@
 class PairsTradingEnv(gym.Env):
-    """SAC Agent를 위한 페어 트레이딩 Gymnasium 환경."""
+    """Pair-trading Gymnasium environment for a SAC agent."""
 
     def __init__(self, spreads, alpha_proba, market_features, episode_length=252):
-        # 관측: 28차원 실수 벡터
+        
         self.observation_space = spaces.Box(
             low=-np.inf, high=np.inf, shape=(28,), dtype=np.float32
         )
-        # 행동: 페어별 목표 포지션 비율 (-1.0 ~ +1.0)
+        
         self.action_space = spaces.Box(
             low=-1.0, high=1.0, shape=(N_PAIRS,), dtype=np.float32
         )

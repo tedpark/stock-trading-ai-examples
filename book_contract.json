@@ -1,0 +1,965 @@
+[
+  {
+    "id": "00-preface/python-01",
+    "chapter": "00-preface.md",
+    "python_block": 1,
+    "source": "book_snippets/00-preface/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "00a-vibe-coding-quickstart/python-01",
+    "chapter": "00a-vibe-coding-quickstart.md",
+    "python_block": 1,
+    "source": "ch00_practice.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch00_practice.py"
+  },
+  {
+    "id": "01-architecture/python-01",
+    "chapter": "01-architecture.md",
+    "python_block": 1,
+    "source": "book_snippets/01-architecture/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "01-architecture/python-02",
+    "chapter": "01-architecture.md",
+    "python_block": 2,
+    "source": "book_snippets/01-architecture/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "intentional_counterexample",
+    "runnable_file": null
+  },
+  {
+    "id": "01-architecture/python-03",
+    "chapter": "01-architecture.md",
+    "python_block": 3,
+    "source": "ch01_pipeline.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch01_pipeline.py"
+  },
+  {
+    "id": "01-architecture/python-04",
+    "chapter": "01-architecture.md",
+    "python_block": 4,
+    "source": "book_snippets/01-architecture/python-04.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "02-data-pipeline/python-01",
+    "chapter": "02-data-pipeline.md",
+    "python_block": 1,
+    "source": "book_snippets/02-data-pipeline/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "02-data-pipeline/python-02",
+    "chapter": "02-data-pipeline.md",
+    "python_block": 2,
+    "source": "book_snippets/02-data-pipeline/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "02-data-pipeline/python-03",
+    "chapter": "02-data-pipeline.md",
+    "python_block": 3,
+    "source": "book_snippets/02-data-pipeline/python-03.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "02-data-pipeline/python-04",
+    "chapter": "02-data-pipeline.md",
+    "python_block": 4,
+    "source": "book_snippets/02-data-pipeline/python-04.py.txt",
+    "strip_module_docstring": false,
+    "kind": "intentional_counterexample",
+    "runnable_file": null
+  },
+  {
+    "id": "02-data-pipeline/python-05",
+    "chapter": "02-data-pipeline.md",
+    "python_block": 5,
+    "source": "book_snippets/02-data-pipeline/python-05.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "02-data-pipeline/python-06",
+    "chapter": "02-data-pipeline.md",
+    "python_block": 6,
+    "source": "ch02_features.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch02_features.py"
+  },
+  {
+    "id": "03-backtest-engine/python-01",
+    "chapter": "03-backtest-engine.md",
+    "python_block": 1,
+    "source": "ch03_practice.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch03_practice.py"
+  },
+  {
+    "id": "03-backtest-engine/python-02",
+    "chapter": "03-backtest-engine.md",
+    "python_block": 2,
+    "source": "ch03_metrics.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch03_metrics.py"
+  },
+  {
+    "id": "03-backtest-engine/python-03",
+    "chapter": "03-backtest-engine.md",
+    "python_block": 3,
+    "source": "ch03_dsr.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch03_dsr.py"
+  },
+  {
+    "id": "04-hmm-basics/python-01",
+    "chapter": "04-hmm-basics.md",
+    "python_block": 1,
+    "source": "book_snippets/04-hmm-basics/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "04-hmm-basics/python-02",
+    "chapter": "04-hmm-basics.md",
+    "python_block": 2,
+    "source": "book_snippets/04-hmm-basics/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "04-hmm-basics/python-03",
+    "chapter": "04-hmm-basics.md",
+    "python_block": 3,
+    "source": "book_snippets/04-hmm-basics/python-03.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "04-hmm-basics/python-04",
+    "chapter": "04-hmm-basics.md",
+    "python_block": 4,
+    "source": "book_snippets/04-hmm-basics/python-04.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "04-hmm-basics/python-05",
+    "chapter": "04-hmm-basics.md",
+    "python_block": 5,
+    "source": "book_snippets/04-hmm-basics/python-05.py.txt",
+    "strip_module_docstring": false,
+    "kind": "context_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "04-hmm-basics/python-06",
+    "chapter": "04-hmm-basics.md",
+    "python_block": 6,
+    "source": "hmm_demo.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "hmm_demo.py"
+  },
+  {
+    "id": "04-hmm-basics/python-07",
+    "chapter": "04-hmm-basics.md",
+    "python_block": 7,
+    "source": "ch04_hmm.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch04_hmm.py"
+  },
+  {
+    "id": "05-hmm-forward-only/python-01",
+    "chapter": "05-hmm-forward-only.md",
+    "python_block": 1,
+    "source": "book_snippets/05-hmm-forward-only/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "05-hmm-forward-only/python-02",
+    "chapter": "05-hmm-forward-only.md",
+    "python_block": 2,
+    "source": "book_snippets/05-hmm-forward-only/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "intentional_counterexample",
+    "runnable_file": null
+  },
+  {
+    "id": "05-hmm-forward-only/python-03",
+    "chapter": "05-hmm-forward-only.md",
+    "python_block": 3,
+    "source": "book_snippets/05-hmm-forward-only/python-03.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "05-hmm-forward-only/python-04",
+    "chapter": "05-hmm-forward-only.md",
+    "python_block": 4,
+    "source": "book_snippets/05-hmm-forward-only/python-04.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "05-hmm-forward-only/python-05",
+    "chapter": "05-hmm-forward-only.md",
+    "python_block": 5,
+    "source": "book_snippets/05-hmm-forward-only/python-05.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "05-hmm-forward-only/python-06",
+    "chapter": "05-hmm-forward-only.md",
+    "python_block": 6,
+    "source": "ch05_forward.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch05_forward.py"
+  },
+  {
+    "id": "06-kalman-filter/python-01",
+    "chapter": "06-kalman-filter.md",
+    "python_block": 1,
+    "source": "book_snippets/06-kalman-filter/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "06-kalman-filter/python-02",
+    "chapter": "06-kalman-filter.md",
+    "python_block": 2,
+    "source": "book_snippets/06-kalman-filter/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "06-kalman-filter/python-03",
+    "chapter": "06-kalman-filter.md",
+    "python_block": 3,
+    "source": "book_snippets/06-kalman-filter/python-03.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "06-kalman-filter/python-04",
+    "chapter": "06-kalman-filter.md",
+    "python_block": 4,
+    "source": "book_snippets/06-kalman-filter/python-04.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "06-kalman-filter/python-05",
+    "chapter": "06-kalman-filter.md",
+    "python_block": 5,
+    "source": "ch06_kalman.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch06_kalman.py"
+  },
+  {
+    "id": "07-cross-asset-joint-hmm/python-01",
+    "chapter": "07-cross-asset-joint-hmm.md",
+    "python_block": 1,
+    "source": "book_snippets/07-cross-asset-joint-hmm/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "07-cross-asset-joint-hmm/python-02",
+    "chapter": "07-cross-asset-joint-hmm.md",
+    "python_block": 2,
+    "source": "ch07_practice.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch07_practice.py"
+  },
+  {
+    "id": "08-two-layer-hmm/python-01",
+    "chapter": "08-two-layer-hmm.md",
+    "python_block": 1,
+    "source": "book_snippets/08-two-layer-hmm/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "08-two-layer-hmm/python-02",
+    "chapter": "08-two-layer-hmm.md",
+    "python_block": 2,
+    "source": "ch08_ensemble.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch08_ensemble.py"
+  },
+  {
+    "id": "09-kelly-sizing/python-01",
+    "chapter": "09-kelly-sizing.md",
+    "python_block": 1,
+    "source": "book_snippets/09-kelly-sizing/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "09-kelly-sizing/python-02",
+    "chapter": "09-kelly-sizing.md",
+    "python_block": 2,
+    "source": "book_snippets/09-kelly-sizing/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "09-kelly-sizing/python-03",
+    "chapter": "09-kelly-sizing.md",
+    "python_block": 3,
+    "source": "book_snippets/09-kelly-sizing/python-03.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "09-kelly-sizing/python-04",
+    "chapter": "09-kelly-sizing.md",
+    "python_block": 4,
+    "source": "ch09_kelly.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch09_kelly.py"
+  },
+  {
+    "id": "10-hmm-ensemble/python-01",
+    "chapter": "10-hmm-ensemble.md",
+    "python_block": 1,
+    "source": "book_snippets/10-hmm-ensemble/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "10-hmm-ensemble/python-02",
+    "chapter": "10-hmm-ensemble.md",
+    "python_block": 2,
+    "source": "ch10_optuna.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch10_optuna.py"
+  },
+  {
+    "id": "11-stat-arb-pairs/python-01",
+    "chapter": "11-stat-arb-pairs.md",
+    "python_block": 1,
+    "source": "book_snippets/11-stat-arb-pairs/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "context_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "11-stat-arb-pairs/python-02",
+    "chapter": "11-stat-arb-pairs.md",
+    "python_block": 2,
+    "source": "book_snippets/11-stat-arb-pairs/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "11-stat-arb-pairs/python-03",
+    "chapter": "11-stat-arb-pairs.md",
+    "python_block": 3,
+    "source": "book_snippets/11-stat-arb-pairs/python-03.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "11-stat-arb-pairs/python-04",
+    "chapter": "11-stat-arb-pairs.md",
+    "python_block": 4,
+    "source": "book_snippets/11-stat-arb-pairs/python-04.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "11-stat-arb-pairs/python-05",
+    "chapter": "11-stat-arb-pairs.md",
+    "python_block": 5,
+    "source": "book_snippets/11-stat-arb-pairs/python-05.py.txt",
+    "strip_module_docstring": false,
+    "kind": "context_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "11-stat-arb-pairs/python-06",
+    "chapter": "11-stat-arb-pairs.md",
+    "python_block": 6,
+    "source": "ch11_practice.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch11_practice.py"
+  },
+  {
+    "id": "12-stat-arb-signals/python-01",
+    "chapter": "12-stat-arb-signals.md",
+    "python_block": 1,
+    "source": "book_snippets/12-stat-arb-signals/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "12-stat-arb-signals/python-02",
+    "chapter": "12-stat-arb-signals.md",
+    "python_block": 2,
+    "source": "ch12_practice.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch12_practice.py"
+  },
+  {
+    "id": "13-rl-environment/python-01",
+    "chapter": "13-rl-environment.md",
+    "python_block": 1,
+    "source": "ch13_env.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch13_env.py"
+  },
+  {
+    "id": "13-rl-environment/python-02",
+    "chapter": "13-rl-environment.md",
+    "python_block": 2,
+    "source": "book_snippets/13-rl-environment/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "13-rl-environment/python-03",
+    "chapter": "13-rl-environment.md",
+    "python_block": 3,
+    "source": "book_snippets/13-rl-environment/python-03.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "13-rl-environment/python-04",
+    "chapter": "13-rl-environment.md",
+    "python_block": 4,
+    "source": "book_snippets/13-rl-environment/python-04.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "14-sac-agent/python-01",
+    "chapter": "14-sac-agent.md",
+    "python_block": 1,
+    "source": "ch14_sac.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch14_sac.py"
+  },
+  {
+    "id": "14-sac-agent/python-02",
+    "chapter": "14-sac-agent.md",
+    "python_block": 2,
+    "source": "book_snippets/14-sac-agent/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "15-optuna-tuning/python-01",
+    "chapter": "15-optuna-tuning.md",
+    "python_block": 1,
+    "source": "book_snippets/15-optuna-tuning/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "15-optuna-tuning/python-02",
+    "chapter": "15-optuna-tuning.md",
+    "python_block": 2,
+    "source": "book_snippets/15-optuna-tuning/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "15-optuna-tuning/python-03",
+    "chapter": "15-optuna-tuning.md",
+    "python_block": 3,
+    "source": "book_snippets/15-optuna-tuning/python-03.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "15-optuna-tuning/python-04",
+    "chapter": "15-optuna-tuning.md",
+    "python_block": 4,
+    "source": "ch15_optuna.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch15_optuna.py"
+  },
+  {
+    "id": "16-risk-management/python-01",
+    "chapter": "16-risk-management.md",
+    "python_block": 1,
+    "source": "book_snippets/16-risk-management/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "context_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "16-risk-management/python-02",
+    "chapter": "16-risk-management.md",
+    "python_block": 2,
+    "source": "book_snippets/16-risk-management/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "16-risk-management/python-03",
+    "chapter": "16-risk-management.md",
+    "python_block": 3,
+    "source": "book_snippets/16-risk-management/python-03.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "16-risk-management/python-04",
+    "chapter": "16-risk-management.md",
+    "python_block": 4,
+    "source": "book_snippets/16-risk-management/python-04.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "16-risk-management/python-05",
+    "chapter": "16-risk-management.md",
+    "python_block": 5,
+    "source": "book_snippets/16-risk-management/python-05.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "16-risk-management/python-06",
+    "chapter": "16-risk-management.md",
+    "python_block": 6,
+    "source": "book_snippets/16-risk-management/python-06.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "16-risk-management/python-07",
+    "chapter": "16-risk-management.md",
+    "python_block": 7,
+    "source": "ch16_metrics.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch16_metrics.py"
+  },
+  {
+    "id": "16-risk-management/python-08",
+    "chapter": "16-risk-management.md",
+    "python_block": 8,
+    "source": "book_snippets/16-risk-management/python-08.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "17-ibkr/python-01",
+    "chapter": "17-ibkr.md",
+    "python_block": 1,
+    "source": "book_snippets/17-ibkr/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "17-ibkr/python-02",
+    "chapter": "17-ibkr.md",
+    "python_block": 2,
+    "source": "book_snippets/17-ibkr/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "17-ibkr/python-03",
+    "chapter": "17-ibkr.md",
+    "python_block": 3,
+    "source": "book_snippets/17-ibkr/python-03.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "17-ibkr/python-04",
+    "chapter": "17-ibkr.md",
+    "python_block": 4,
+    "source": "book_snippets/17-ibkr/python-04.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "17-ibkr/python-05",
+    "chapter": "17-ibkr.md",
+    "python_block": 5,
+    "source": "book_snippets/17-ibkr/python-05.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "17-ibkr/python-06",
+    "chapter": "17-ibkr.md",
+    "python_block": 6,
+    "source": "book_snippets/17-ibkr/python-06.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "17-ibkr/python-07",
+    "chapter": "17-ibkr.md",
+    "python_block": 7,
+    "source": "ch17_order_events.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch17_order_events.py"
+  },
+  {
+    "id": "18-monitoring/python-01",
+    "chapter": "18-monitoring.md",
+    "python_block": 1,
+    "source": "ch18_monitor.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch18_monitor.py"
+  },
+  {
+    "id": "18-monitoring/python-02",
+    "chapter": "18-monitoring.md",
+    "python_block": 2,
+    "source": "ch18_lab.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch18_lab.py"
+  },
+  {
+    "id": "19-bamberger-pairs-theory/python-01",
+    "chapter": "19-bamberger-pairs-theory.md",
+    "python_block": 1,
+    "source": "ch19_cointegration.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch19_cointegration.py"
+  },
+  {
+    "id": "20-pair-selection-regime/python-01",
+    "chapter": "20-pair-selection-regime.md",
+    "python_block": 1,
+    "source": "ch20_screening.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch20_screening.py"
+  },
+  {
+    "id": "20-pair-selection-regime/python-02",
+    "chapter": "20-pair-selection-regime.md",
+    "python_block": 2,
+    "source": "ch20_regime_events.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch20_regime_events.py"
+  },
+  {
+    "id": "21-regime-zscore-core/python-01",
+    "chapter": "21-regime-zscore-core.md",
+    "python_block": 1,
+    "source": "ch21_regime_zscore.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch21_regime_zscore.py"
+  },
+  {
+    "id": "22-hmm-pipeline-complete/python-01",
+    "chapter": "22-hmm-pipeline-complete.md",
+    "python_block": 1,
+    "source": "book_snippets/22-hmm-pipeline-complete/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "22-hmm-pipeline-complete/python-02",
+    "chapter": "22-hmm-pipeline-complete.md",
+    "python_block": 2,
+    "source": "book_snippets/22-hmm-pipeline-complete/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "22-hmm-pipeline-complete/python-03",
+    "chapter": "22-hmm-pipeline-complete.md",
+    "python_block": 3,
+    "source": "book_snippets/22-hmm-pipeline-complete/python-03.py.txt",
+    "strip_module_docstring": false,
+    "kind": "intentional_counterexample",
+    "runnable_file": null
+  },
+  {
+    "id": "22-hmm-pipeline-complete/python-04",
+    "chapter": "22-hmm-pipeline-complete.md",
+    "python_block": 4,
+    "source": "book_snippets/22-hmm-pipeline-complete/python-04.py.txt",
+    "strip_module_docstring": false,
+    "kind": "context_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "22-hmm-pipeline-complete/python-05",
+    "chapter": "22-hmm-pipeline-complete.md",
+    "python_block": 5,
+    "source": "hmm_demo.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "hmm_demo.py"
+  },
+  {
+    "id": "22-hmm-pipeline-complete/python-06",
+    "chapter": "22-hmm-pipeline-complete.md",
+    "python_block": 6,
+    "source": "ch22_pipeline.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch22_pipeline.py"
+  },
+  {
+    "id": "23-sac-rl-preview/python-01",
+    "chapter": "23-sac-rl-preview.md",
+    "python_block": 1,
+    "source": "book_snippets/23-sac-rl-preview/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "23-sac-rl-preview/python-02",
+    "chapter": "23-sac-rl-preview.md",
+    "python_block": 2,
+    "source": "ch23_sac.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch23_sac.py"
+  },
+  {
+    "id": "24-production-validation/python-01",
+    "chapter": "24-production-validation.md",
+    "python_block": 1,
+    "source": "book_snippets/24-production-validation/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "24-production-validation/python-02",
+    "chapter": "24-production-validation.md",
+    "python_block": 2,
+    "source": "ch24_validation.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch24_validation.py"
+  },
+  {
+    "id": "25-rl-algorithm-comparison/python-01",
+    "chapter": "25-rl-algorithm-comparison.md",
+    "python_block": 1,
+    "source": "ch25_per.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch25_per.py"
+  },
+  {
+    "id": "26-distributional-rl-cvar/python-01",
+    "chapter": "26-distributional-rl-cvar.md",
+    "python_block": 1,
+    "source": "book_snippets/26-distributional-rl-cvar/python-01.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "26-distributional-rl-cvar/python-02",
+    "chapter": "26-distributional-rl-cvar.md",
+    "python_block": 2,
+    "source": "book_snippets/26-distributional-rl-cvar/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "26-distributional-rl-cvar/python-03",
+    "chapter": "26-distributional-rl-cvar.md",
+    "python_block": 3,
+    "source": "book_snippets/26-distributional-rl-cvar/python-03.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "26-distributional-rl-cvar/python-04",
+    "chapter": "26-distributional-rl-cvar.md",
+    "python_block": 4,
+    "source": "book_snippets/26-distributional-rl-cvar/python-04.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "26-distributional-rl-cvar/python-05",
+    "chapter": "26-distributional-rl-cvar.md",
+    "python_block": 5,
+    "source": "book_snippets/26-distributional-rl-cvar/python-05.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "26-distributional-rl-cvar/python-06",
+    "chapter": "26-distributional-rl-cvar.md",
+    "python_block": 6,
+    "source": "book_snippets/26-distributional-rl-cvar/python-06.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "26-distributional-rl-cvar/python-07",
+    "chapter": "26-distributional-rl-cvar.md",
+    "python_block": 7,
+    "source": "ch26_quantile_cvar.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch26_quantile_cvar.py"
+  },
+  {
+    "id": "27-mlflow-serving/python-01",
+    "chapter": "27-mlflow-serving.md",
+    "python_block": 1,
+    "source": "ch27_mlflow.py",
+    "strip_module_docstring": true,
+    "kind": "runnable_example",
+    "runnable_file": "ch27_mlflow.py"
+  },
+  {
+    "id": "27-mlflow-serving/python-02",
+    "chapter": "27-mlflow-serving.md",
+    "python_block": 2,
+    "source": "book_snippets/27-mlflow-serving/python-02.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "27-mlflow-serving/python-03",
+    "chapter": "27-mlflow-serving.md",
+    "python_block": 3,
+    "source": "book_snippets/27-mlflow-serving/python-03.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "27-mlflow-serving/python-04",
+    "chapter": "27-mlflow-serving.md",
+    "python_block": 4,
+    "source": "book_snippets/27-mlflow-serving/python-04.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "27-mlflow-serving/python-05",
+    "chapter": "27-mlflow-serving.md",
+    "python_block": 5,
+    "source": "book_snippets/27-mlflow-serving/python-05.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "27-mlflow-serving/python-06",
+    "chapter": "27-mlflow-serving.md",
+    "python_block": 6,
+    "source": "book_snippets/27-mlflow-serving/python-06.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  },
+  {
+    "id": "27-mlflow-serving/python-07",
+    "chapter": "27-mlflow-serving.md",
+    "python_block": 7,
+    "source": "book_snippets/27-mlflow-serving/python-07.py.txt",
+    "strip_module_docstring": false,
+    "kind": "reference_fragment",
+    "runnable_file": null
+  }
+]

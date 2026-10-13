@@ -1,7 +1,6 @@
-# 1) 수정주가로 다운로드 — 분할/배당 점프 제거
 raw = yf.download(symbol, start=start, end=end, auto_adjust=True, progress=False)
 
-# 2) 이 프로젝트의 저장 계약: UTC로 맞춘 뒤 naive로 저장
+
 idx = pd.to_datetime(raw.index)
 if idx.tz is not None:
     idx = idx.tz_convert("UTC").tz_localize(None)

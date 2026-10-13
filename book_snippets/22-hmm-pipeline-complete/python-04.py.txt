@@ -1,0 +1,18 @@
+# Start flat on each decision; no stale direction from the previous bar.
+direction = 0
+
+current_regime = int(np.argmax(alpha[i]))
+max_prob       = alpha[i].max()
+
+
+if max_prob < CONFIDENCE_THRESHOLD:        
+    continue
+
+
+if current_regime == 0:                    
+    if z < -Z_ENTRY:   direction = +1
+    elif z > +Z_ENTRY: direction = -1
+
+elif current_regime == 2:                  
+    if z > +1.0:       direction = +1
+    elif z < -1.0:     direction = -1

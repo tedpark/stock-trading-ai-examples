@@ -1,6 +1,6 @@
-# 잘못된 예 — 미래 데이터가 모델에 섞여 들어간다
+# Incorrect/unsafe example.
 model.fit(X_all)
 
-# 올바른 예 — 훈련 구간으로만 fit
-X_train = X[:train_len]            # 예: 전체의 60%
+# Correct pattern.
+X_train = X[:train_len]            
 model.fit(X_train)

@@ -1,6 +1,6 @@
 git clone https://github.com/tedpark/stock-trading-ai-examples.git
 cd stock-trading-ai-examples
-git checkout book-source-audit-2026-10-13
+git checkout repository-first-2026-10-13
 python -m venv .venv
 # macOS/Linux; Windows: .venv\Scripts\activate
 source .venv/bin/activate

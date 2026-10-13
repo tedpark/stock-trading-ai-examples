@@ -3,7 +3,7 @@ def connect(self) -> bool:
         if self._ib is not None and self._connected:
             return True
 
-        # 30초 쿨다운: 실패 직후 재시도를 막는다
+        
         now = time.monotonic()
         if now - self._last_connect_failed_at < self._connect_cooldown:
             return False
@@ -29,5 +29,5 @@ def connect(self) -> bool:
                     self._run(self._ib.reqAccountUpdatesAsync(account=accounts[0]), timeout=10)
         except Exception as e:
             self._last_connect_failed_at = time.monotonic()
-            logger.error("IBKR 연결 실패: %s", e)
+            logger.error("IBKR connection failed: %s", e)
     return self._connected

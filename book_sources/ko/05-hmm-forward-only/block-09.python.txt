@@ -1,10 +1,10 @@
-# 금지 — 전체 구간 predict_proba: t시점에서 미래 T까지 참조
+# Incorrect/unsafe example.
 proba = model.predict_proba(X_all)
 
-# 제한적 사용 — 4장 hmm_daily_mr.py: 최근 30봉만 잘라 마지막 행만 사용
-recent       = features[max(0, bar_idx - 30): bar_idx]   # bar_idx 미포함
-proba_recent = hmm.predict_proba(recent)
-# proba_recent[-1]만 읽는다. 창 안의 과거 행은 성과 계산에 쓰지 않는다.
 
-# 엄밀한 Forward-only — 이 장의 hmm_core.py: 직전 α + 현재 관측만
+recent       = features[max(0, bar_idx - 30): bar_idx]   
+proba_recent = hmm.predict_proba(recent)
+
+
+
 alpha = bwhmm.step_forward(feat_row)
