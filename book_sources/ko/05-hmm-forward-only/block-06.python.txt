@@ -1,0 +1,16 @@
+def step_forward(self, feat_row):
+    if self.model is None:
+        raise RuntimeError("fit first")
+    row = np.asarray(feat_row, dtype=float)
+    if row.shape != self.model.means_.shape[1:] or not np.isfinite(row).all():
+        raise ValueError("one finite feature row required")
+    x = self.scaler.transform(row.reshape(1, -1))[0]
+    emissions = np.array([multivariate_normal.logpdf(x, mean=mu, cov=cov)
+                          for mu, cov in zip(self.model.means_, self.model.covars_)])
+    with np.errstate(divide="ignore"):
+        log_alpha = np.log(self.alpha @ self.model.transmat_) + emissions
+    normalizer = logsumexp(log_alpha)
+    if not np.isfinite(normalizer):
+        return None
+    self.alpha = np.exp(log_alpha - normalizer)
+    return self.alpha[self.order].copy()

@@ -1,8 +1,0 @@
-def cvar_position_scaler(cvar, config):
-    """Map Q-tail reward to [size_floor, 1]; all thresholds use reward units."""
-    values = [cvar, config.cvar_target, config.cvar_scale, config.size_floor]
-    if (not np.isfinite(values).all() or config.cvar_scale <= 0
-            or not 0 <= config.size_floor <= 1):
-        raise ValueError("finite CVaR and valid scaling configuration required")
-    excess = max(0.0, config.cvar_target - cvar)
-    return max(config.size_floor, 1.0 - excess / config.cvar_scale)

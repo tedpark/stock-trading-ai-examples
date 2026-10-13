@@ -1,5 +1,5 @@
 def act(self, state):
     with torch.no_grad():
         q_dist = self.net(state)              # (B, 3, 51)
-        q_expectation = q_dist.mean(dim=-1)   # (B, 3)
+        q_expectation = q_dist.to(torch.float64).mean(dim=-1)   # (B, 3)
         return q_expectation.argmax(dim=-1)

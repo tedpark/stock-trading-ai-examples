@@ -1,5 +1,0 @@
-# Example: 3 bars x 3 regimes
-# [MR probability, Trend probability, Volatile probability]
-[[0.82,  0.11,  0.07],   # Strong mean reversion -> entry allowed
- [0.31,  0.55,  0.14],   # Trend dominant -> wait
- [0.08,  0.13,  0.79]]   # High volatility -> block new entries

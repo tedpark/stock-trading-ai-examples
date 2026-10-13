@@ -1,8 +1,4 @@
-git clone https://github.com/tedpark/stock-trading-ai-examples.git
-cd stock-trading-ai-examples
-git checkout final-book-2026-10-13
-python -m venv .venv
-# macOS/Linux; Windows: .venv\Scripts\activate
-source .venv/bin/activate
+#!/usr/bin/env bash
+set -euo pipefail
 python -m pip install -r requirements-full.txt
 python verify.py

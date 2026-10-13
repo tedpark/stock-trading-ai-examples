@@ -1,1 +1,5 @@
-spread = log_price_a - beta_arr * log_price_b
+def log_spread(log_a, log_b, beta):
+    a, b, beta = np.asarray(log_a), np.asarray(log_b), np.asarray(beta)
+    if a.shape != b.shape or beta.shape not in [(), a.shape] or not all(np.isfinite(x).all() for x in (a,b,beta)):
+        raise ValueError("aligned finite log prices and beta required")
+    return a - beta * b

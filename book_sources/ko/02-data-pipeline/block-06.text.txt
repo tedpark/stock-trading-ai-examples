@@ -1,2 +1,0 @@
-DEBUG: FMP coverage 18% < 30% for AAPL ... — falling back to yfinance
-WARNING: All sources failed for TSLA 2008-01-01 — returning empty DataFrame

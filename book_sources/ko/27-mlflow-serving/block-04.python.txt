@@ -1,0 +1,7 @@
+def predict_actor(actor, state, state_dim=11):
+    tensor = torch.as_tensor(state, dtype=torch.float32)
+    if tensor.shape != (state_dim,) or not torch.isfinite(tensor).all():
+        raise ValueError("finite state matching the saved schema required")
+    actor = actor.to("cpu").eval()
+    with torch.inference_mode():
+        return actor(tensor.unsqueeze(0))

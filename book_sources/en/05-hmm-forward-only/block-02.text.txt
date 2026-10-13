@@ -1,13 +1,12 @@
-|--------------------------|--------------------------------------|
-          2 years training                  3 years OOS inference / validation
+Last day of training
+α = [MR 0.60, Trend 0.25, Volatile 0.15]
+Save this value together with the model file.
 
-1) Training window
-   - Build features.
-   - Fit scaler and HMM.
-   - Save model parameters and the last α.
+First OOS day
+Today's feature row x_today arrives.
+Use saved α, transition matrix A, and today's observation likelihood.
+New α = [MR 0.64, Trend 0.22, Volatile 0.14]
 
-2) OOS window
-   - Pretend each feature row arrives one day at a time.
-   - Load the saved model.
-   - Do not call fit().
-   - Update only α with step_forward(x_today).
+Second OOS day
+Start again from yesterday's α.
+New α = [MR 0.58, Trend 0.30, Volatile 0.12]

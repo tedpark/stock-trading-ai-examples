@@ -1,3 +1,0 @@
->>> hmm.step_forward(x_new)
-# Timing depends on hardware and model dimensions; benchmark locally.
-# 戻り値:   array([0.76, 0.18, 0.06])   ← MR/Trend/Volatile の確率

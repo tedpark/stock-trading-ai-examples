@@ -1,8 +1,0 @@
-
-def compile_jit(self):
-    """Return a JIT-compiled inference copy."""
-    import copy
-    inference_model = copy.deepcopy(self).eval()
-    scripted = torch.jit.script(inference_model)
-    scripted = torch.jit.freeze(scripted)
-    return scripted

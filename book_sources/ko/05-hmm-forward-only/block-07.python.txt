@@ -1,0 +1,6 @@
+def regime_multiplier(probabilities, multipliers=(1.5, 1.0, 0.5)):
+    p, m = np.asarray(probabilities, dtype=float), np.asarray(multipliers, dtype=float)
+    if (p.ndim != 1 or p.shape != m.shape or not np.isfinite(p).all()
+            or not np.isfinite(m).all() or (p < 0).any() or not np.isclose(p.sum(), 1)):
+        raise ValueError("normalized probabilities and matching finite multipliers required")
+    return float(np.clip(p @ m, 0, 2))

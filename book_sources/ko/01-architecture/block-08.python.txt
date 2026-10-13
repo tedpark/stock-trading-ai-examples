@@ -1,7 +1,9 @@
-# Incorrect/unsafe example.
-scaler = StandardScaler()
-scaler.fit(X_all)            
-
-# Correct pattern.
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled  = scaler.transform(X_test)
+def scale_training_only(train, test):
+    """Fit statistics on training observations and reuse them for the holdout."""
+    train, test = np.asarray(train, dtype=float), np.asarray(test, dtype=float)
+    if train.ndim != 2 or test.ndim != 2 or train.shape[1] != test.shape[1]:
+        raise ValueError("matching two-dimensional feature arrays required")
+    if not len(train) or not np.isfinite(train).all() or not np.isfinite(test).all():
+        raise ValueError("finite observations required")
+    scaler = StandardScaler().fit(train)
+    return scaler.transform(train), scaler.transform(test), scaler

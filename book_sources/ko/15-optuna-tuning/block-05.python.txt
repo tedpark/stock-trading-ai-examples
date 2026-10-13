@@ -1,13 +1,17 @@
-def objective(trial):
-    vote_thresh = trial.suggest_float("vote_thresh", 0.50, 0.85)
-    signals = signals_from_votes(vote_thresh)
-    changes = np.abs(np.diff(np.r_[0.0, signals]))
-    changes[-1] += abs(signals[-1])  # Final liquidation.
-    strat = signals * next_returns - fee_rate * changes
-    downside = np.sqrt(np.mean(np.minimum(strat, 0.0) ** 2))
+def vote_objective(trial, vote_ratios, next_returns, fee_rate=0.001, periods_per_year=252):
+    votes, returns = np.asarray(vote_ratios, dtype=float), np.asarray(next_returns, dtype=float)
+    if (votes.ndim != 1 or len(votes) < 2 or votes.shape != returns.shape
+            or not np.isfinite(votes).all() or not np.isfinite(returns).all()
+            or ((votes < 0) | (votes > 1)).any()
+            or not np.isfinite([fee_rate, periods_per_year]).all() or fee_rate < 0 or periods_per_year <= 0):
+        raise ValueError("aligned votes and next returns required")
+    threshold = trial.suggest_float("vote_thresh", 0.50, 0.85)
+    signals = np.where(votes > threshold, 1., np.where(votes < 1-threshold, -1., 0.))
+    changes = np.abs(np.diff(np.r_[0., signals]))
+    changes[-1] += abs(signals[-1])
+    net = signals * returns - fee_rate * changes
+    downside = np.sqrt(np.mean(np.minimum(net, 0.) ** 2))
     if downside == 0:
-        return -float("inf")  # Undefined Sortino: reject this candidate.
-    sortino = strat.mean() / downside * annualization_factor
-    turnover = float(changes.mean())
-    turn_penalty = max(0, (turnover - 0.05) * 3)
-    return sortino - turn_penalty
+        return -float('inf')
+    return float(net.mean() / downside * np.sqrt(periods_per_year)
+                 - max(0., (changes.mean() - 0.05) * 3))

@@ -1,5 +1,5 @@
-Save after training:
-1. HMM parameters   A, μ, Σ, π
-2. Scaler           training mean and standard deviation
-3. Regime mapping   raw state id -> logical state id
-4. Last α           current state probability for the next bar
+Forbidden:
+All OOS data -> predict_proba() -> regimes for every date at once
+
+Allowed:
+Yesterday's α + today's feature row -> step_forward() -> today's regime probability

@@ -1,6 +1,6 @@
-if pnl_pct <= self.hard_stop_threshold:           
-    return TradingSignal(
-        action=SignalAction.SELL,
-        reason=f"hard stop {pnl_pct*100:.1f}%",
-        metadata={"sell_type": "hard_stop"},
-    )
+def hard_stop(pnl_pct, threshold=-0.02):
+    if not np.isfinite([pnl_pct, threshold]).all() or not -1 < threshold < 0:
+        raise ValueError("finite P&L and negative fractional threshold required")
+    if pnl_pct <= threshold:
+        return Signal(-1, metadata={"sell_type": "hard_stop"})
+    return None

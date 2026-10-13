@@ -1,3 +1,0 @@
-
-srm = sc.inverse_transform(m.means_)[:, idx]   # causal
-# m.predict(Xs)   # look-ahead bias

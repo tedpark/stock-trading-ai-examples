@@ -1,19 +1,7 @@
-for bar_idx in range(train_bars, len(df_5m)):
-    x_row    = feat_df.iloc[bar_idx]
-    prev_ret = log_returns[bar_idx - 1] if bar_idx > 0 else None
-
-    e_sym, sub, v_long, v_short, n_voted = ensemble.step(
-        x_row, actual_ret=prev_ret,
-        regime_state=layer_a.dominant_state,
-    )
-
-    
-    regime_mult = _REGIME_A_SCALE.get(layer_a.dominant_state, 1.0)
-    signal      = e_sym * regime_mult
-
-    
-    vote_ratio = v_long / n_voted if n_voted > 0 else 0.5
-    if vote_ratio < VOTE_THRESH and vote_ratio > (1 - VOTE_THRESH):
-        signal = 0.0
-
-    positions[bar_idx] = signal
+def blend_votes(forecast, regime_scale, long_votes, total_votes, vote_threshold=0.6):
+    if (not np.isfinite([forecast, regime_scale, long_votes, total_votes, vote_threshold]).all()
+            or not 0 <= long_votes <= total_votes or not 0.5 <= vote_threshold <= 1
+            or regime_scale < 0):
+        raise ValueError("invalid forecast or votes")
+    ratio = long_votes / total_votes if total_votes else 0.5
+    return 0.0 if 1 - vote_threshold < ratio < vote_threshold else forecast * regime_scale

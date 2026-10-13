@@ -19,6 +19,9 @@ class RepositoryFirstTests(unittest.TestCase):
         for entry in self.entries:
             path=self.repo/entry['source'];path.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(sync_book.ROOT/entry['source'],path)
+        shutil.copytree(sync_book.ROOT/'commands',self.repo/'commands')
+        shutil.copytree(sync_book.ROOT/'examples_payloads',self.repo/'examples_payloads')
+        shutil.copyfile(sync_book.ROOT/'command_contract.json',self.repo/'command_contract.json')
         for folder in sync_book.EDITIONS.values():
             (self.book/folder).mkdir(parents=True)
             for chapter in {e['chapter'] for e in self.entries}:

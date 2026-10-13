@@ -1,8 +1,0 @@
-# Signed return-tail values; negate them for loss VaR/CVaR.
-ordered = np.sort(np.asarray(bar_returns, dtype=float))
-if not len(ordered) or not np.isfinite(ordered).all():
-    raise ValueError("finite nonempty returns required")
-mass = 0.05 * len(ordered)
-whole = int(mass)
-var = ordered[max(0, int(np.ceil(mass)) - 1)]
-cvar = (ordered[:whole].sum() + (mass - whole) * ordered[whole]) / mass

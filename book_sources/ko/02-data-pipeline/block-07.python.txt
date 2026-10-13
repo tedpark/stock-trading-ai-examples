@@ -1,0 +1,23 @@
+def compute_daily_features(close, volume):
+    close = np.asarray(close, dtype=float)
+    volume = np.asarray(volume, dtype=float)
+    if close.ndim != 1 or volume.shape != close.shape:
+        raise ValueError("equal-length 1D arrays required")
+    if not np.all(np.isfinite(close)) or np.any(close <= 0):
+        raise ValueError("close must be finite and positive")
+    if not np.all(np.isfinite(volume)) or np.any(volume < 0):
+        raise ValueError("volume must be finite and nonnegative")
+    n = len(close)
+    feat = np.full((n, 4), np.nan)
+    ret = np.full(n, np.nan)
+    ret[1:] = np.diff(np.log(close))
+    feat[:, 0] = ret
+    for t in range(n):
+        if t >= 5:
+            feat[t, 1] = np.std(ret[t-4:t+1], ddof=1)
+        if t >= 20:
+            feat[t, 2] = close[t] / close[t-20] - 1
+            base = np.mean(volume[t-20:t])
+            if base > 0:
+                feat[t, 3] = volume[t] / base
+    return feat

@@ -29,6 +29,11 @@ def verify(rows=None):
         assert path.is_relative_to(ROOT/'book_sources'),path
         code=path.read_text()
         assert hashlib.sha256(code.encode()).hexdigest()==row['sha256'],key
+        if row['language'] not in ('python','text'):
+            assert row['repository_source'],key
+            source=(ROOT/row['repository_source']).resolve()
+            assert source.is_relative_to(ROOT) and source.suffix in ('.sh','.json'),key
+            assert code==source.read_text(),key
         if row['language']=='python':
             source_key=(row['edition'],row['chapter'],row['python_block'])
             assert source_key not in seen_sources,('duplicate source slot',source_key)
@@ -55,13 +60,13 @@ def verify(rows=None):
             counts[row['edition']]['context']+=bool(error)
     expected_sources={(edition,*key) for edition in editions for key in entries}
     assert seen_sources==expected_sources,('source coverage drift',expected_sources-seen_sources)
-    for edition, expected in [('ko',256),('en',227),('ja',228)]:
+    for edition, expected in [('ko',232),('en',209),('ja',209)]:
         edition_rows=[row for row in rows if row['edition']==edition]
         assert len(edition_rows)==expected,(edition,'fenced block count',len(edition_rows))
         assert len({row['chapter'] for row in edition_rows})==30,(edition,'chapter count')
-        assert counts[edition]==dict(python=107,runnable=34,context=5),counts
+        assert counts[edition]==dict(python=107,runnable=34,context=0),counts
     return dict(fenced_blocks=len(rows),editions=counts,
-                scope='Integrity, syntax/context classification and runnable AST equivalence; not full execution of fragments')
+                scope='All Python extracted from executable .py modules; full-file examples and runtime excerpts verified')
 
 if __name__=='__main__':
     print(json.dumps(verify(),indent=2))

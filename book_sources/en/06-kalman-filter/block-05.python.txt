@@ -2,6 +2,6 @@ def _build_z_series(spreads, window=60):
     s = pd.Series(spreads)
     roll_mu = s.rolling(window).mean().shift(1)        
     roll_sd = s.rolling(window).std(ddof=0).shift(1)
-    z = ((s - roll_mu) / roll_sd).values
+    z = ((s - roll_mu) / roll_sd).to_numpy(copy=True)
     z[~np.isfinite(z)] = np.nan
     return z

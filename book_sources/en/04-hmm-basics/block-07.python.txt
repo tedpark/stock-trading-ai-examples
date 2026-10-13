@@ -1,17 +1,9 @@
-def _update_hmm(self, bar_idx: int) -> None:
-    for sym in self._symbols:
-        hmm = self._hmms[sym]
-
-        need_fit = (hmm.model is None
-                    or bar_idx - hmm._last_fit_idx >= HMM_REFIT_DAYS)
-
-        if need_fit and bar_idx >= HMM_MIN_DAYS:
-            feat_train = self._features[sym][:bar_idx]      
-            if hmm.fit(feat_train):
-                hmm._last_fit_idx = bar_idx
-
-        if hmm.model is not None:
-            recent = self._features[sym][max(0, bar_idx - 30): bar_idx]
-            probs = hmm.predict_proba(recent)
-            if probs is not None and len(probs) > 0:
-                self._regime_probs[sym] = probs[-1]
+def regime_signal(probabilities, z, entry_z=1.5, short_entry_z=2.0):
+    p = np.asarray(probabilities, dtype=float)
+    if p.shape != (3,) or not np.isfinite(p).all() or (p < 0).any() or not np.isclose(p.sum(), 1):
+        raise ValueError("three normalized probabilities required")
+    if not np.isfinite([z, entry_z, short_entry_z]).all() or min(entry_z, short_entry_z) <= 0:
+        raise ValueError("finite z and positive entry thresholds required")
+    if p[0] < 0.3 or p[2] > 0.4:
+        return 0
+    return 1 if z < -entry_z else (-1 if z > short_entry_z else 0)

@@ -1,7 +1,40 @@
-def compile_jit(self):
-    """Return a JIT-compiled inference copy."""
-    import copy
-    inference_model = copy.deepcopy(self).eval()
-    scripted = torch.jit.script(inference_model)
-    scripted = torch.jit.freeze(scripted)
-    return scripted
+class SACServingState:
+    """CPU deterministic-action adapter; loader validates model/schema metadata."""
+    def __init__(self, checkpoint_path, loader, state_dim=11):
+        self.state_dim = state_dim
+        self.loader = loader
+        self.lock = asyncio.Lock()
+        self.reload_lock = asyncio.Lock()
+        self.actor = self._prepare(checkpoint_path)
+        self.checkpoint_path = checkpoint_path
+
+    def _infer(self, actor, state):
+        tensor = torch.as_tensor(state, dtype=torch.float32)
+        if tensor.shape != (self.state_dim,) or not torch.isfinite(tensor).all():
+            raise ValueError("finite state with saved feature dimension required")
+        with torch.inference_mode():
+            output = actor(tensor.unsqueeze(0))
+        if not isinstance(output, torch.Tensor) or output.shape != (1, 1):
+            raise ValueError("adapter must return one deterministic action")
+        value = float(output.item())
+        if not torch.isfinite(output).all() or not -1 <= value <= 1:
+            raise ValueError("finite action in [-1, 1] required")
+        return value
+
+    def _prepare(self, path):
+        candidate = self.loader(path).to("cpu").eval()
+        self._infer(candidate, [0.0] * self.state_dim)
+        return candidate
+
+    async def reload(self, checkpoint_path):
+        async with self.reload_lock:
+            candidate = await asyncio.to_thread(self._prepare, checkpoint_path)
+            async with self.lock:
+                self.actor = candidate
+                self.checkpoint_path = checkpoint_path
+
+    async def predict(self, state: list[float]) -> int:
+        async with self.lock:
+            actor = self.actor
+        value = await asyncio.to_thread(self._infer, actor, state)
+        return 1 if value > 0.3 else (-1 if value < -0.3 else 0)

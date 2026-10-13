@@ -1,8 +1,0 @@
-# .env (실거래 예시)
-IBKR_HOST=127.0.0.1
-IBKR_PORT=4003          # 프로젝트 커스텀 예시: 실제 Gateway 설정과 계좌 유형을 함께 확인
-IBKR_CLIENT_ID=1
-MONGODB_URI=<YOUR_MONGODB_URI>
-
-# 페이퍼 트레이딩 (개발/테스트)
-IBKR_PORT=4004          # 프로젝트 커스텀 예시: Paper 전용 설정인지 반드시 확인

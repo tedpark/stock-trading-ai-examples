@@ -1,0 +1,6 @@
+def model(today_features):
+    """Deterministic teaching rule, not a learned price predictor."""
+    row = np.asarray(today_features, dtype=float)
+    if row.ndim != 1 or not len(row) or not np.isfinite(row).all():
+        raise ValueError("finite feature vector required")
+    return "hold" if row[0] >= 0 else "cash"

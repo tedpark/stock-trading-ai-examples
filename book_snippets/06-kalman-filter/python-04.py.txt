@@ -1,8 +1,0 @@
-@register_signal("kalman_self_mr")
-class KalmanSelfMRSignal(SignalGenerator):
-    def initialize(self, data):
-        for sym in self._symbols:
-            log_p = np.log(np.maximum(self._close[sym], 1e-10))
-            innov = _kalman_innovations(log_p, self._kalman_delta, self._kalman_obs)
-            self._spreads[sym]  = innov
-            self._z_series[sym] = _build_z_series(innov, self._z_window)
