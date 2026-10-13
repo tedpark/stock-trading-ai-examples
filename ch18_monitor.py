@@ -14,10 +14,11 @@ def monitor(pnl, starting_equity=1000.0, mdd_limit=0.08):
         raise ValueError("finite PnL and positive starting equity required")
     equity, peak, mdd, returns = starting_equity, starting_equity, 0.0, []
     for amount in pnl:
-        returns.append(amount / equity)
+        period_return = amount / equity
         equity += amount
-        if equity <= 0:
-            raise ValueError("insolvent equity path")
+        if not isfinite(period_return) or not isfinite(equity) or equity <= 0:
+            raise ValueError("nonfinite or insolvent equity path")
+        returns.append(period_return)
         peak = max(peak, equity)
         mdd = max(mdd, 1 - equity / peak)
     sigma = stdev(returns) if len(returns) > 1 else 0.0

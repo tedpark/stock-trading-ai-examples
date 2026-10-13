@@ -104,7 +104,13 @@ def create_app(home=None,tracking_uri=None):
         path=home/'models'/found['id']/'model.joblib'
         try:
             bundle=joblib.load(path)  # Only load files produced by this service.
-        except (OSError, EOFError, ValueError) as exc:
+            required={'model','scaler','columns','order','trained_through','schema_version'}
+            if (not isinstance(bundle,dict) or not required <= bundle.keys()
+                    or bundle['schema_version'] != 1):
+                raise ValueError('unsupported saved model schema')
+        # Deserializers raise different exceptions for truncation/version mismatch.
+        # This handler covers only local artifact loading, not inference errors.
+        except Exception as exc:
             raise HTTPException(503, 'saved model unavailable; create a new run') from exc
         try:
             bars=frame(request.bars)

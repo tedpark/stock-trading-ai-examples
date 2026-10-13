@@ -16,10 +16,11 @@ def combine_two_layers(probabilities, models, half_kelly=0.5):
     if any(not isfinite(m["weight"]) or not 0 <= m["p_up"] <= 1 or m["weight"] < 0
            for m in active):
         raise ValueError("invalid model probability or weight")
-    weight = sum(m["weight"] for m in active)
-    if weight <= 0:
+    scale = max(m["weight"] for m in active)
+    if scale == 0:
         return 0.0, 0.0
-    p_up = sum(m["p_up"] * m["weight"] for m in active) / weight
+    weights = [m["weight"] / scale for m in active]
+    p_up = sum(m["p_up"] * w for m, w in zip(active, weights)) / sum(weights)
     size = min(1.0, max(0.0, 2 * p_up - 1) * half_kelly)
     return p_up, size
 
