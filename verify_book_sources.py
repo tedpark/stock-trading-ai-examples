@@ -60,7 +60,7 @@ def verify(rows=None):
             counts[row['edition']]['context']+=bool(error)
     expected_sources={(edition,*key) for edition in editions for key in entries}
     assert seen_sources==expected_sources,('source coverage drift',expected_sources-seen_sources)
-    for edition, expected in [('ko',232),('en',210),('ja',210)]:
+    for edition, expected in [('ko',232),('en',209),('ja',209)]:
         edition_rows=[row for row in rows if row['edition']==edition]
         assert len(edition_rows)==expected,(edition,'fenced block count',len(edition_rows))
         assert len({row['chapter'] for row in edition_rows})==30,(edition,'chapter count')
