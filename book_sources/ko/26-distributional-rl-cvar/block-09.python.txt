@@ -1,4 +1,4 @@
-from math import isfinite
+from math import fsum, isfinite
 
 
 def cvar_size(quantiles, alpha=0.2, loss_budget=0.175):
@@ -13,10 +13,23 @@ def cvar_size(quantiles, alpha=0.2, loss_budget=0.175):
         raise ValueError("invalid quantiles or risk budget")
     ordered = sorted(quantiles)
     mass = alpha * len(ordered)
-    whole = int(mass)
-    # Weight the boundary bin fractionally so the tail has exactly alpha mass.
-    boundary = (mass - whole) * ordered[whole] if whole < len(ordered) else 0.0
-    cvar = (sum(ordered[:whole]) + boundary) / mass
+    if mass <= 1:
+        # Any tail inside the first equal-mass bin has that bin's return.
+        # Avoid multiplying and dividing by a potentially subnormal tail mass.
+        cvar = ordered[0]
+    else:
+        whole = int(mass)
+        # Normalize returns before averaging: even a finite mean near the
+        # float limit can overflow when rounded partial sums are accumulated.
+        scale = max(abs(value) for value in ordered[:whole + (mass > whole)])
+        if scale == 0:
+            cvar = 0.0
+        else:
+            terms = [(value / scale) / mass for value in ordered[:whole]]
+            if mass > whole:
+                terms.append(((mass - whole) / mass) * (ordered[whole] / scale))
+            # A weighted mean cannot leave the normalized [-1, 1] interval.
+            cvar = max(-1.0, min(1.0, fsum(terms))) * scale
     loss = max(0.0, -cvar)
     size = min(1.0, loss_budget / loss) if loss else 1.0
     return cvar, size
